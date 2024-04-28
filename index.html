@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasty</title>
+    <!-- css files -->
+    <link rel="stylesheet" href="./assets/css/public.css" />
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+
+  <body>
+    <div id="sign-in-panel" class="panel-pop"></div>
+    <div class="not-log-in">
+      <div class="header">
+        <div class="main-container header-container">
+          <div class="logo-image">
+            <a href="index.html" title="tasty">
+              <img
+                width="132"
+                height="45"
+                src="./assets/images/logo.svg"
+                alt=""
+              />
+            </a>
+          </div>
+
+          <div class="right-header">
+            <button class="sign-up" id="show_login">Sign In</button>
+            <button class="sign-in" id="show_register">Sign Up</button>
+
+            <div class="user_pirc">
+              <img src="assets/images/brooke-lark-250695-350x250.jpg" alt="" />
+              <div class="name">username</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro">
+        <div class="main-container">
+          <div class="intro-content">
+            <h3 class="intro-title">Share & grow the world's knowledge!</h3>
+            <p class="intro-detail">
+              We want to connect the people who have knowledge to the people who
+              need it, to bring together people with different perspectives so
+              they can understand each other better, and to empower everyone to
+              share their knowledge.
+            </p>
+          </div>
+          <button class="create-acct" id="show_register2">
+            Create A New Account
+          </button>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="main-container">
+          <!-- side bar -->
+          <div class="side-bar-l">
+            <ul>
+              <li>
+                <a href="#" class="side-bar-active">
+                  <i class="bi bi-card-list"></i>
+                  <span>Recipes</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="bi bi-piggy-bank-fill"></i>
+                  <span>Rewards</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="bi bi-people-fill"></i>
+                  <span>User Profile</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- recommdation section -->
+
+          <div class="main-inner">
+            <div class="search">
+              <form action="" class="recipe-search-form">
+                <input
+                  type="text"
+                  class="recipe-search-input"
+                  placeholder="Search..."
+                />
+                <button type="submit" class="recipe-search-btn">
+                  <i class="bi bi-search"></i>
+                </button>
+              </form>
+            </div>
+
+            <div class="recipe-section">
+              <div class="post-recipes">
+                <div id="recipe-demo" class="recipe-post-box">
+                  <div class="recipe-img-box">
+                    <a href="#"
+                      ><img
+                        src="./assets/images/jnews-demo-2-350x250.jpg"
+                        alt=""
+                        class="recipe-img"
+                    /></a>
+                  </div>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title">
+                      <a href="#">Love Real Food Savory Steel Cut Oatmeal</a>
+                    </h3>
+                    <div class="post-detail">
+                      by
+                      <span id="author-demo" class="post-author"
+                        ><a href="#">Margaery Tyrell</a></span
+                      >
+                      <span id="date-demo" class="post-date"
+                        >September 9, 2017</span
+                      >
+                    </div>
+                    <div id="recipe-detail-demo" class="recipe-detail">
+                      <a href="#"
+                        >Strech lining hemline above knee burgundy glossy silk
+                        complete hid zip little catches rayon. Tunic weaved
+                        strech calfskin spaghetti straps...</a
+                      >
+                    </div>
+                    <button class="continue-reading">CONTINUE READING</button>
+                  </div>
+                </div>
+                <div id="recipe-demo" class="recipe-post-box">
+                  <div class="recipe-img-box">
+                    <a href="#"
+                      ><img
+                        src="./assets/images/jnews-demo-2-350x250.jpg"
+                        alt=""
+                        class="recipe-img"
+                    /></a>
+                  </div>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title">
+                      <a href="#">Love Real Food Savory Steel Cut Oatmeal</a>
+                    </h3>
+                    <div class="post-detail">
+                      by
+                      <span id="author-demo" class="post-author"
+                        ><a href="#">Margaery Tyrell</a></span
+                      >
+                      <span id="date-demo" class="post-date"
+                        >September 9, 2017</span
+                      >
+                    </div>
+                    <div id="recipe-detail-demo" class="recipe-detail">
+                      <a href="#"
+                        >Strech lining hemline above knee burgundy glossy silk
+                        complete hid zip little catches rayon. Tunic weaved
+                        strech calfskin spaghetti straps...</a
+                      >
+                    </div>
+                    <button class="continue-reading">CONTINUE READING</button>
+                  </div>
+                </div>
+                <div id="recipe-demo" class="recipe-post-box">
+                  <div class="recipe-img-box">
+                    <a href="#"
+                      ><img
+                        src="./assets/images/jnews-demo-2-350x250.jpg"
+                        alt=""
+                        class="recipe-img"
+                    /></a>
+                  </div>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title">
+                      <a href="#">Love Real Food Savory Steel Cut Oatmeal</a>
+                    </h3>
+                    <div class="post-detail">
+                      by
+                      <span id="author-demo" class="post-author"
+                        ><a href="#">Margaery Tyrell</a></span
+                      >
+                      <span id="date-demo" class="post-date"
+                        >September 9, 2017</span
+                      >
+                    </div>
+                    <div id="recipe-detail-demo" class="recipe-detail">
+                      <a href="#"
+                        >Strech lining hemline above knee burgundy glossy silk
+                        complete hid zip little catches rayon. Tunic weaved
+                        strech calfskin spaghetti straps...</a
+                      >
+                    </div>
+                    <button class="continue-reading">CONTINUE READING</button>
+                  </div>
+                </div>
+                <div id="recipe-demo" class="recipe-post-box">
+                  <div class="recipe-img-box">
+                    <a href="#"
+                      ><img
+                        src="./assets/images/jnews-demo-2-350x250.jpg"
+                        alt=""
+                        class="recipe-img"
+                    /></a>
+                  </div>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title">
+                      <a href="#">Love Real Food Savory Steel Cut Oatmeal</a>
+                    </h3>
+                    <div class="post-detail">
+                      by
+                      <span id="author-demo" class="post-author"
+                        ><a href="#">Margaery Tyrell</a></span
+                      >
+                      <span id="date-demo" class="post-date"
+                        >September 9, 2017</span
+                      >
+                    </div>
+                    <div id="recipe-detail-demo" class="recipe-detail">
+                      <a href="#"
+                        >Strech lining hemline above knee burgundy glossy silk
+                        complete hid zip little catches rayon. Tunic weaved
+                        strech calfskin spaghetti straps...</a
+                      >
+                    </div>
+                    <button class="continue-reading">CONTINUE READING</button>
+                  </div>
+                </div>
+                <div id="recipe-demo" class="recipe-post-box">
+                  <div class="recipe-img-box">
+                    <a href="#"
+                      ><img
+                        src="./assets/images/jnews-demo-2-350x250.jpg"
+                        alt=""
+                        class="recipe-img"
+                    /></a>
+                  </div>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title">
+                      <a href="#">Love Real Food Savory Steel Cut Oatmeal</a>
+                    </h3>
+                    <div class="post-detail">
+                      by
+                      <span id="author-demo" class="post-author"
+                        ><a href="#">Margaery Tyrell</a></span
+                      >
+                      <span id="date-demo" class="post-date"
+                        >September 9, 2017</span
+                      >
+                    </div>
+                    <div id="recipe-detail-demo" class="recipe-detail">
+                      <a href="#"
+                        >Strech lining hemline above knee burgundy glossy silk
+                        complete hid zip little catches rayon. Tunic weaved
+                        strech calfskin spaghetti straps...</a
+                      >
+                    </div>
+                    <button class="continue-reading">CONTINUE READING</button>
+                  </div>
+                </div>
+                <div id="recipe-demo" class="recipe-post-box">
+                  <div class="recipe-img-box">
+                    <a href="#"
+                      ><img
+                        src="./assets/images/jnews-demo-2-350x250.jpg"
+                        alt=""
+                        class="recipe-img"
+                    /></a>
+                  </div>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title">
+                      <a href="#">Love Real Food Savory Steel Cut Oatmeal</a>
+                    </h3>
+                    <div class="post-detail">
+                      by
+                      <span id="author-demo" class="post-author"
+                        ><a href="#">Margaery Tyrell</a></span
+                      >
+                      <span id="date-demo" class="post-date"
+                        >September 9, 2017</span
+                      >
+                    </div>
+                    <div id="recipe-detail-demo" class="recipe-detail">
+                      <a href="#"
+                        >Strech lining hemline above knee burgundy glossy silk
+                        complete hid zip little catches rayon. Tunic weaved
+                        strech calfskin spaghetti straps...</a
+                      >
+                    </div>
+                    <button class="continue-reading">CONTINUE READING</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="pagination">
+              <div class="pagination-box">
+                <a href="#">
+                  <span> < </span>
+                </a>
+                <a href="#"><span class="pagination-active">1</span></a>
+                <a href="#"><span>2</span></a>
+                <a href="#"><span>3</span></a>
+                <a href="#"><span>4</span></a>
+                <a href="#"><span>></span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="main-right">
+            <div class="share">
+              <button id="openShi">Share A Recipe</button>
+            </div>
+
+            <!-- popular recipes -->
+
+            <div class="popular">
+              <div class="popular-bar">
+                <i class="bi bi-person-hearts"></i>
+                <span>Popular</span>
+              </div>
+              <div class="popular-top-box">
+                <div id="popular-top-demo" class="popular-top-img">
+                  <a href="#">
+                    <img
+                      src="./assets/images/brooke-lark-250695-350x250.jpg"
+                      alt=""
+                    />
+                  </a>
+                </div>
+                <div class="popular-top-detail">
+                  <div class="popular-num">01</div>
+                  <div class="popular-top-title">
+                    <a href="#">New Recipe Pasta with Creamy Kale Sauce</a>
+                  </div>
+                </div>
+                <div class="popular-com-view">
+                  <span class="com">
+                    <i class="bi bi-chat-fill"></i>
+                    <span id="comment-num" class="comment-num">346 </span
+                    >Comments
+                  </span>
+                  <span class="view">
+                    <i class="bi bi-eye-fill"></i>
+                    <span id="view-num" class="view-num">14</span>k Views
+                  </span>
+                </div>
+              </div>
+              <div class="popular-item">
+                <ul>
+                  <li>
+                    <div class="popular-item-detail">
+                      <div class="popular-num">02</div>
+                      <div class="popular-item-title">
+                        <a href="#">Green Bean Salad with Almonds & Feta</a>
+                      </div>
+                    </div>
+                    <div class="popular-com-view">
+                      <span class="com">
+                        <i class="bi bi-chat-fill"></i>
+                        <span id="comment-num" class="comment-num"> 213 </span
+                        >Comments
+                      </span>
+                      <span class="view">
+                        <i class="bi bi-eye-fill"></i>
+                        <span id="view-num" class="view-num"> 13</span>k Views
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="popular-item">
+                <ul>
+                  <li>
+                    <div class="popular-item-detail">
+                      <div class="popular-num">03</div>
+                      <div class="popular-item-title">
+                        <a href="#">Steak & Baso Butter Lobster Sandwich</a>
+                      </div>
+                    </div>
+                    <div class="popular-com-view">
+                      <span class="com">
+                        <i class="bi bi-chat-fill"></i>
+                        <span id="comment-num" class="comment-num"> 186 </span
+                        >Comments
+                      </span>
+                      <span class="view">
+                        <i class="bi bi-eye-fill"></i>
+                        <span id="view-num" class="view-num"> 11</span>k Views
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="popular-item">
+                <ul>
+                  <li>
+                    <div class="popular-item-detail">
+                      <div class="popular-num">04</div>
+                      <div class="popular-item-title">
+                        <a href="#">Spicy Crispy Pomegranate Chicken</a>
+                      </div>
+                    </div>
+                    <div class="popular-com-view">
+                      <span class="com">
+                        <i class="bi bi-chat-fill"></i>
+                        <span id="comment-num" class="comment-num"> 157 </span
+                        >Comments
+                      </span>
+                      <span class="view">
+                        <i class="bi bi-eye-fill"></i>
+                        <span id="view-num" class="view-num"> 11</span>k Views
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="popular-item">
+                <ul>
+                  <li>
+                    <div class="popular-item-detail">
+                      <div class="popular-num">05</div>
+                      <div class="popular-item-title">
+                        <a href="#">Love Real Food Savory Steel Cut Oatmeal</a>
+                      </div>
+                    </div>
+                    <div class="popular-com-view">
+                      <span class="com">
+                        <i class="bi bi-chat-fill"></i>
+                        <span id="comment-num" class="comment-num"> 120 </span
+                        >Comments
+                      </span>
+                      <span class="view">
+                        <i class="bi bi-eye-fill"></i>
+                        <span id="view-num" class="view-num"> 9</span>k Views
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="popular-item">
+                <ul>
+                  <li>
+                    <div class="popular-item-detail">
+                      <div class="popular-num">06</div>
+                      <div class="popular-item-title">
+                        <a href="#">Fresh Vegan Granola Bites Recipe</a>
+                      </div>
+                    </div>
+                    <div class="popular-com-view">
+                      <span class="com">
+                        <i class="bi bi-chat-fill"></i>
+                        <span id="comment-num" class="comment-num"> 113 </span
+                        >Comments
+                      </span>
+                      <span class="view">
+                        <i class="bi bi-eye-fill"></i>
+                        <span id="view-num" class="view-num"> 9</span>k Views
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 登录 注册 -->
+    <section class="login_box" id="login">
+      <div class="con">
+        <!-- 关闭按钮 -->
+        <div class="close">
+          <?xml version="1.0" encoding="UTF-8"?><svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 8L40 40"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 40L40 8"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="tit">Sign In</div>
+        <form action="">
+          <ul>
+            <li class="subtit">Username *</li>
+            <li><input class="input_x" type="text" /></li>
+            <li class="subtit">Password *</li>
+            <li><input class="input_x" type="text" /></li>
+            <li class="s">
+              <div><input type="checkbox" checked />Remember Me!</div>
+              <a href="">Forgot Password?</a>
+            </li>
+            <button class="btn_x">Login</button>
+          </ul>
+        </form>
+      </div>
+    </section>
+    <section class="login_box" id="register">
+      <div class="con">
+        <div class="close">
+          <?xml version="1.0" encoding="UTF-8"?><svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 8L40 40"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 40L40 8"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="tit">Sign Up</div>
+        <form action="">
+          <ul>
+            <li class="subtit">Username *</li>
+            <li><input class="input_x" type="text" /></li>
+            <li class="subtit">Password *</li>
+            <li><input class="input_x" type="text" /></li>
+            <li class="s">
+              <div>
+                <!-- <input type="checkbox" checked>Remember Me! -->
+              </div>
+              <a href="">Having an account?</a>
+            </li>
+            <button class="btn_x">Sign Up</button>
+          </ul>
+        </form>
+      </div>
+    </section>
+    <script>
+      const login_box = document.querySelector("#login");
+
+      const close = login_box.querySelector(".close");
+
+      const con = document.querySelector(".con");
+
+      close.onclick = function () {
+        // login_box.style.display = 'none';
+        login_box.classList.add("show");
+      };
+
+      // con.onclick = function (e) {
+      //   e.stopPropagation();
+      // }
+
+      close.onclick = function () {
+        // login_box.style.display = 'none';
+        login_box.classList.remove("show");
+      };
+
+      // window.onclick = function (e) {
+      //   if (e.target == login_box) {
+      //     login_box.style.display = 'none';
+      //   }
+      // }
+
+      document.querySelector("#show_login").onclick = function () {
+        //   login_box.style.display = 'block';
+        login_box.classList.add("show");
+      };
+
+      // document.querySelector('.register').onclick = function () {
+      //   login_box.style.display = 'block';
+      // }
+
+      const register = document.querySelector("#register");
+
+      const close2 = register.querySelector(".close");
+
+      const con2 = document.querySelector(".con");
+
+      close2.onclick = function () {
+        // register.style.display = 'none';
+        register.classList.add("show");
+      };
+
+      con2.onclick = function (e) {
+        e.stopPropagation();
+      };
+
+      close2.onclick = function () {
+        // register.style.display = 'none';
+        register.classList.remove("show");
+      };
+      document.querySelector("#show_register").onclick = function () {
+        //   login_box.style.display = 'block';
+        register.classList.add("show");
+      };
+      document.querySelector("#show_register2").onclick = function () {
+        //   register.style.display = 'block';
+        register.classList.add("show");
+      };
+    </script>
+    <!-- Recipe input -->
+    <section class="recipe_box">
+      <div class="wrap">
+        <div class="close_svg">
+          <?xml version="1.0" encoding="UTF-8"?><svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 8L40 40"
+              stroke="#000"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 40L40 8"
+              stroke="#000"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="title">Share A Recipe</div>
+        <ul>
+          <li>
+            <span class="tit">Title</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Ingredient1</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Image URL</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Ingredient2</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Servings</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Ingredient3</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Prep time</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Ingredient4</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Cooking time</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Ingredient5</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Calories</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li>
+            <span class="tit">Ingredient6</span>
+            <input type="text" class="input_x" />
+          </li>
+          <li class="con">
+            <span class="tit">Content</span>
+            <textarea
+              class="input_x"
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+            ></textarea>
+          </li>
+        </ul>
+
+        <button class="btn_x">UPLOAD</button>
+      </div>
+    </section>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
