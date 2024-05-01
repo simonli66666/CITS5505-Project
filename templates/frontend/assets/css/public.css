@@ -1,0 +1,25 @@
+:root {
+  --color: #fd7c47;
+  --color2: #0066ff;
+  --bg: var(--color);
+}
+
+.input_x {
+  height: 2.3rem;
+  border: 1px solid rgb(233, 233, 233);
+  padding-left: 0.5rem;
+}
+.input_x:focus {
+  outline: none;
+  border: 1px solid #fd7c47;
+}
+
+.btn_x {
+  height: 2.3rem;
+  background-color: var(--color);
+  color: #fff;
+  box-shadow: 3px 3px 5px #878686;
+}
+.btn_x:hover {
+  background-color: #0066ff;
+}/*# sourceMappingURL=public.css.map */
