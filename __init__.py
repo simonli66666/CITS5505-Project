@@ -2,6 +2,8 @@ from flask import Flask, render_template
 
 def create_app(config_name=None):
     app = Flask('bbs')
+    app = Flask(__name__, static_folder='static')
+
 
     @app.route('/')
     def index():
