@@ -76,3 +76,37 @@ document.querySelector("#show_register2").onclick = function () {
 // recipeClose.addEventListener("click", () => {
 //   recipe_box.classList.remove("show");
 // });
+
+//Login form verification error message pops up
+let ERROR = ``;
+const loginBt = document.querySelector("#login .btn_x");
+const registerBt = document.querySelector("#register .btn_x");
+
+loginBt.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const inputAll = document.querySelectorAll("#login input");
+  const name = inputAll[0].value;
+  const password = inputAll[1].value;
+  if (!password || !name) {
+    document.querySelector("#login .message_box").classList.add("show");
+    // document.querySelector('#login .message_box').innerHTML = `sb`
+    return;
+  }
+  console.log(document.querySelector("#show_login"));
+  document.querySelector("#login").classList.remove("show");
+  document.querySelector("#show_login").style.display = "none";
+  document.querySelector("#show_register").style.display = "none";
+  document.querySelector(".right-header .user_pirc").style.display = "flex";
+});
+registerBt.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const inputAll = document.querySelectorAll("#register input");
+  const name = inputAll[0].value;
+  const password = inputAll[1].value;
+  if (!password || !name) {
+    document.querySelector("#register .message_box").classList.add("show");
+    // document.querySelector('#register .message_box').innerHTML = `sb`
+  }
+});

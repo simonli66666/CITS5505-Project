@@ -71,6 +71,22 @@
   width: 100%;
 }
 
+/* login error message */
+.message_box {
+  white-space: nowrap;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.429);
+  line-height: 2.2em;
+  padding: 8px;
+  display: none;
+}
+.message_box.show {
+  display: block;
+}
+.message_box .t {
+  font-weight: bold;
+}
+
 .side-bar-l,
 .main-right {
   position: sticky;
@@ -170,4 +186,20 @@
   width: 100px;
   display: block;
   margin-top: 20px;
+}
+
+/* login error message */
+.message_box {
+  white-space: nowrap;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.429);
+  line-height: 2.2em;
+  padding: 8px;
+  display: none;
+}
+.message_box.show {
+  display: block;
+}
+.message_box .t {
+  font-weight: bold;
 }
