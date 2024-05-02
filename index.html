@@ -32,7 +32,7 @@
           </div>
 
           <div class="right-header">
-            <button class="sign-up" id="show_login">Sign In</button>
+            <button class="sign-up show_login">Sign In</button>
             <button class="sign-in" id="show_register">Sign Up</button>
 
             <div class="user_pirc">
@@ -72,13 +72,13 @@
                 </a>
               </li>
               <li>
-                <a href="#">
-                  <i class="bi bi-piggy-bank-fill"></i>
-                  <span>Rewards</span>
+                <a href="#" class="show_login">
+                  <i class="bi bi-patch-check-fill"></i>
+                  <span>badges</span>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a href="#" class="show_login">
                   <i class="bi bi-people-fill"></i>
                   <span>User Profile</span>
                 </a>
@@ -315,7 +315,7 @@
 
           <div class="main-right">
             <div class="share">
-              <button id="openShi">Share A Recipe</button>
+              <button id="openShi" class="show_login">Share A Recipe</button>
             </div>
 
             <!-- popular recipes -->
@@ -473,10 +473,10 @@
       </div>
     </div>
 
-    <!-- 登录 注册 -->
+    <!-- login/signup -->
     <section class="login_box" id="login">
       <div class="con">
-        <!-- 关闭按钮 -->
+        <!-- close button -->
         <div class="close">
           <?xml version="1.0" encoding="UTF-8"?><svg
             width="24"
@@ -561,70 +561,6 @@
         </form>
       </div>
     </section>
-    <script>
-      const login_box = document.querySelector("#login");
-
-      const close = login_box.querySelector(".close");
-
-      const con = document.querySelector(".con");
-
-      close.onclick = function () {
-        // login_box.style.display = 'none';
-        login_box.classList.add("show");
-      };
-
-      // con.onclick = function (e) {
-      //   e.stopPropagation();
-      // }
-
-      close.onclick = function () {
-        // login_box.style.display = 'none';
-        login_box.classList.remove("show");
-      };
-
-      // window.onclick = function (e) {
-      //   if (e.target == login_box) {
-      //     login_box.style.display = 'none';
-      //   }
-      // }
-
-      document.querySelector("#show_login").onclick = function () {
-        //   login_box.style.display = 'block';
-        login_box.classList.add("show");
-      };
-
-      // document.querySelector('.register').onclick = function () {
-      //   login_box.style.display = 'block';
-      // }
-
-      const register = document.querySelector("#register");
-
-      const close2 = register.querySelector(".close");
-
-      const con2 = document.querySelector(".con");
-
-      close2.onclick = function () {
-        // register.style.display = 'none';
-        register.classList.add("show");
-      };
-
-      con2.onclick = function (e) {
-        e.stopPropagation();
-      };
-
-      close2.onclick = function () {
-        // register.style.display = 'none';
-        register.classList.remove("show");
-      };
-      document.querySelector("#show_register").onclick = function () {
-        //   login_box.style.display = 'block';
-        register.classList.add("show");
-      };
-      document.querySelector("#show_register2").onclick = function () {
-        //   register.style.display = 'block';
-        register.classList.add("show");
-      };
-    </script>
     <!-- Recipe input -->
     <section class="recipe_box">
       <div class="wrap">
