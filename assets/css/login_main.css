@@ -361,3 +361,355 @@
   margin-bottom: 12px;
   height: 5em;
 }
+
+.rewards {
+  padding: 20px;
+}
+.rewards .head {
+  margin-bottom: 12px;
+  color: #777676;
+  line-height: 1.5em;
+}
+.rewards .head .t {
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+.rewards .head .t img {
+  height: 20px;
+}
+.rewards ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.rewards .item {
+  border: 1px solid #ccc;
+  padding: 12px;
+  width: calc(33.3333333333% - 10px);
+  margin-bottom: 15px;
+  margin-right: 15px;
+}
+.rewards .item:nth-child(3n) {
+  margin-right: 0;
+}
+.rewards .item .t {
+  display: flex;
+  align-items: center;
+}
+.rewards .item .t img {
+  height: 20px;
+}
+.rewards .item .t .tit {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 8px;
+}
+.rewards .item .t .subtit {
+  color: #777676;
+}
+.rewards .item .ms {
+  height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.rewards .pm .item {
+  display: flex;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 0;
+  margin-right: 0 !important;
+}
+.rewards .pm .item .l {
+  width: 500px;
+  border-right: 1px solid #ccc;
+  padding: 20px 10px;
+}
+.rewards .pm .item .l .d {
+  display: flex;
+  align-items: center;
+}
+.rewards .pm .item .l .icon {
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 5px;
+  margin-bottom: 5px;
+}
+.rewards .pm .item .l img {
+  height: 20px;
+}
+.rewards .pm .item .l .num {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 8px;
+}
+.rewards .pm .item .l .ms {
+  color: #777676;
+  height: auto;
+}
+.rewards .pm .item .r {
+  color: #777676;
+  padding: 20px;
+  line-height: 1.5em;
+}
+
+.my_box {
+  background-image: url("../images/hero-doodles-new.svg");
+  text-align: left;
+}
+.my_box .container {
+  padding-top: 170px;
+}
+.my_box img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid #fff;
+}
+.my_box .name {
+  font-weight: bold;
+  margin: 0 8px;
+  font-size: 18px;
+}
+.my_box .icon {
+  background-color: var(--color);
+  color: #fff;
+  padding: 2px 10px;
+  font-size: 14px;
+}
+
+.mys_box {
+  background: transparent;
+}
+.mys_box .nav {
+  background-color: #fff;
+  display: flex;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+.mys_box .nav li {
+  margin: 0 20px;
+  line-height: 5em;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 3px solid #fff;
+}
+.mys_box .nav li.active {
+  border-bottom: 3px solid var(--color);
+}
+.mys_box .nav li:hover {
+  border-bottom: 3px solid var(--color);
+}
+.mys_box .nav_box {
+  display: none;
+  background-color: #fff;
+  padding: 30px;
+  padding-top: 40px;
+}
+.mys_box .nav_box.active {
+  display: block;
+}
+
+.mys_box .nav_box .personal_signature {
+  text-align: center;
+  color: #707885;
+  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.mys_box .nav_box .userInfo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.mys_box .nav_box .userInfo .info-item {
+  display: inline-block;
+  margin: 0 8px;
+  color: #707885;
+}
+
+.mys_box .nav_box .userInfo .info-item .ms {
+  margin-left: 4px;
+}
+
+.mys_box .nav_box .edit-info {
+  text-align: right;
+  margin: 30px 0;
+}
+
+.mys_box .nav_box .edit-info .edit-btn {
+  background-color: white;
+  padding: 5px 13px;
+  font-size: 14px;
+  color: #fd7c47;
+  border: 1px solid #fd7c47;
+}
+
+.mys_box .nav_box .edit-info .edit-btn:hover {
+  background-color: #fd7c47;
+  color: white;
+}
+
+.mys_box .nav_box .edit-info .edit-btn .ed {
+  margin-left: 5px;
+}
+.mys_box .nav_box .userInfo .r {
+  text-align: right;
+}
+.mys_box .nav_box .userInfo .r button {
+  padding: 0 10px;
+}
+.mys_box .nav_box .userInfo .r .c {
+  display: none;
+}
+.mys_box .nav_box .userInfo .item {
+  margin-bottom: 20px;
+  line-height: 1.8em;
+}
+
+.mys_box .nav_box .user-info-display {
+  display: block;
+}
+.mys_box .nav_box .userInfo .item .tit {
+  font-weight: bold;
+}
+.mys_box .nav_box .userInfo .item .input_x {
+  display: none;
+}
+
+.mys_box .nav_box .box1 {
+  display: flex;
+  justify-content: space-between;
+}
+.mys_box .nav_box .box1 .item {
+  width: 22%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #eee;
+  padding: 20px 8px;
+  cursor: pointer;
+}
+
+.mys_box .nav_box .box1 .item .r {
+  margin-left: 18px;
+}
+
+.mys_box .nav_box .box1 .item .r .num {
+  font-weight: bold;
+  font-size: 20px;
+}
+.mys_box .nav_box .box1 .item .r .tit {
+  color: #777676;
+}
+.mys_box #user-box .user-info-edit {
+  display: none;
+}
+
+.mys_box #user-box .user-info-edit .genderDiv {
+  display: flex;
+  width: 230px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.mys_box #user-box .user-info-edit .genderDiv .gd {
+  width: 100px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid rgb(233, 233, 233);
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.mys_box #user-box .user-info-edit .genderDiv .gd .icon {
+  font-size: 20px;
+  font-weight: bold;
+  color: #979ca2;
+}
+
+.mys_box #user-box .user-info-edit .genderDiv .gd span {
+  font-size: 12px;
+  font-weight: 700;
+  color: #979ca2;
+}
+
+.gd_selected {
+  background-color: #ffead8 !important;
+  border: 1px solid #ffa558 !important;
+}
+
+.icon_selected {
+  color: #ffa558 !important;
+}
+
+.span_selected {
+  color: #ffa558 !important;
+}
+
+.mys_box #user-box .user-info-edit #userinfoForm input {
+  width: 180px;
+  height: 30px;
+  padding: 0 7px;
+  color: #878686;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.mys_box #user-box .user-info-edit #userinfoForm input:focus {
+  outline: none;
+  border: 2px solid #fd7c47;
+}
+
+.mys_box #user-box .user-info-edit #userinfoForm #signature {
+  width: 500px;
+  height: 200px;
+  padding: 5px 10px;
+  color: #878686;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.mys_box #user-box .user-info-edit #userinfoForm #signature:focus {
+  outline: none;
+  border: 2px solid #fd7c47;
+}
+
+.mys_box #user-box .user-info-edit #userinfoForm .save-btn {
+  background-color: white;
+  padding: 5px 13px;
+  font-size: 14px;
+  color: #fd7c47;
+  border: 1px solid #fd7c47;
+}
+
+.mys_box #user-box .user-info-edit #userinfoForm .save-btn:hover {
+  background-color: #fd7c47;
+  color: white;
+}
+
+.mys_box .nav_box .pl .item {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+  padding: 15px 0;
+  position: relative;
+}
+.mys_box .nav_box .pl .item .tit {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 70%;
+}
+.mys_box .nav_box .pl .item .date {
+  color: #777676;
+  position: absolute;
+  right: 0;
+}

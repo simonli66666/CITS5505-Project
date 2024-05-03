@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <title>Tasty</title>
     <!-- css files -->
     <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link rel="stylesheet" href="./assets/css/login_main.css" />
+    <link rel="stylesheet" href="assets/css/login_main.css" />
   </head>
 
   <body>
@@ -31,7 +31,7 @@
           </div>
 
           <div class="right-header">
-            <a href="./user.html" class="user">
+            <a href="#" class="user">
               <div class="user_pirc">
                 <img src="assets/images/13_Food_Servant-512.webp" alt="" />
                 <div class="name">Liz</div>
@@ -47,19 +47,19 @@
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="./login.html" class="side-bar-active">
+                <a href="./login.html" class="">
                   <i class="bi bi-card-list"></i>
                   <span>Recipes</span>
                 </a>
               </li>
               <li>
-                <a href="./Badges.html" class="show_login">
+                <a href="./Rewards.html" class="side-bar-active">
                   <i class="bi bi-award-fill"></i>
                   <span>Badges</span>
                 </a>
               </li>
               <li>
-                <a href="./user.html" class="show_login">
+                <a href="./user.html">
                   <i class="bi bi-people-fill"></i>
                   <span>User Profile</span>
                 </a>
@@ -67,260 +67,173 @@
             </ul>
           </div>
 
-          <!-- recommdation section -->
+          <!-- points system -->
 
-          <div class="main-inner">
-            <div class="search">
-              <form action="" class="recipe-search-form">
-                <input
-                  type="text"
-                  class="recipe-search-input"
-                  placeholder="Search..."
-                />
-                <button type="submit" class="recipe-search-btn">
-                  <i class="bi bi-search"></i>
-                </button>
-              </form>
-            </div>
-
-            <div class="recipe-section">
-              <div class="post-recipes">
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
+          <div class="main-inner rewards">
+            <div class="head">
+              <div class="t">
+                <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                Points System
               </div>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam
+                labore, reprehenderit ut deleniti omnis nisi quaerat assumenda
+                neque eaque incidunt, rem eos nostrum. Ratione recusandae soluta
+                eligendi deserunt error et!
+              </p>
             </div>
 
-            <div class="pagination">
-              <div class="pagination-box">
-                <a href="#">
-                  <span> < </span>
-                </a>
-                <a href="#"><span class="pagination-active">1</span></a>
-                <a href="#"><span>2</span></a>
-                <a href="#"><span>3</span></a>
-                <a href="#"><span>4</span></a>
-                <a href="#"><span>></span></a>
+            <ul style="margin-bottom: 50px">
+              <li class="item">
+                <div class="t">
+                  <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                  <span class="tit">20</span>
+                  <span class="subtit">Points</span>
+                </div>
+                <div class="ms">For signning up.</div>
+              </li>
+              <li class="item">
+                <div class="t">
+                  <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                  <span class="tit">20</span>
+                  <span class="subtit">Points</span>
+                </div>
+                <div class="ms">For becoming popular recipes.</div>
+              </li>
+              <li class="item">
+                <div class="t">
+                  <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                  <span class="tit">5</span>
+                  <span class="subtit">Points</span>
+                </div>
+                <div class="ms">For posting a new recipe.</div>
+              </li>
+              <li class="item">
+                <div class="t">
+                  <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                  <span class="tit">2</span>
+                  <span class="subtit">Points</span>
+                </div>
+                <div class="ms">For getting a favourite.</div>
+              </li>
+              <li class="item">
+                <div class="t">
+                  <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                  <span class="tit">2</span>
+                  <span class="subtit">Points</span>
+                </div>
+                <div class="ms">For posting a comment.</div>
+              </li>
+              <li class="item">
+                <div class="t">
+                  <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                  <span class="tit">2</span>
+                  <span class="subtit">Points</span>
+                </div>
+                <div class="ms">For getting a comment.</div>
+              </li>
+            </ul>
+
+            <div class="head" style="margin-top: 20px">
+              <div class="t">
+                <i class="bi bi-award-fill" style="color: #fd7c47"></i>
+                Badges System
               </div>
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam
+                labore, reprehenderit ut deleniti omnis nisi quaerat assumenda
+                neque eaque incidunt, rem eos nostrum. Ratione recusandae soluta
+                eligendi deserunt error et!
+              </p>
             </div>
+
+            <ul class="pm">
+              <li class="item">
+                <div class="l">
+                  <div>
+                    <div class="icon" style="background: #000">
+                      Tasting Novice
+                    </div>
+                  </div>
+                  <div class="d">
+                    <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                    <span class="num">10</span>
+                    <span class="ms">Points</span>
+                  </div>
+                </div>
+                <div class="r">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Recusandae ex voluptatum quia id quam repudiandae fugit
+                  corrupti error, quibusdam cupiditate asperiores aliquid velit
+                  rerum animi reiciendis similique dolores unde sit?
+                </div>
+              </li>
+              <li class="item">
+                <div class="l">
+                  <div>
+                    <div class="icon" style="background: #3f0edf">
+                      Culinary Apprentice
+                    </div>
+                  </div>
+                  <div class="d">
+                    <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                    <span class="num">10</span>
+                    <span class="ms">Points</span>
+                  </div>
+                </div>
+                <div class="r">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Recusandae ex voluptatum quia id quam repudiandae fugit
+                  corrupti error, quibusdam cupiditate asperiores aliquid velit
+                  rerum animi reiciendis similique dolores unde sit?
+                </div>
+              </li>
+              <li class="item">
+                <div class="l">
+                  <div>
+                    <div class="icon" style="background: #50da19">
+                      Gastronomic Explorer
+                    </div>
+                  </div>
+                  <div class="d">
+                    <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                    <span class="num">10</span>
+                    <span class="ms">Points</span>
+                  </div>
+                </div>
+                <div class="r">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Recusandae ex voluptatum quia id quam repudiandae fugit
+                  corrupti error, quibusdam cupiditate asperiores aliquid velit
+                  rerum animi reiciendis similique dolores unde sit?
+                </div>
+              </li>
+              <li class="item">
+                <div class="l">
+                  <div>
+                    <div class="icon" style="background: #d27373">
+                      Culinary Master
+                    </div>
+                  </div>
+                  <div class="d">
+                    <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
+                    <span class="num">10</span>
+                    <span class="ms">Points</span>
+                  </div>
+                </div>
+                <div class="r">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Recusandae ex voluptatum quia id quam repudiandae fugit
+                  corrupti error, quibusdam cupiditate asperiores aliquid velit
+                  rerum animi reiciendis similique dolores unde sit?
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div class="main-right">
             <div class="share">
-              <button id="openShi" class="show_login">Share A Recipe</button>
+              <button id="openShi">Share A Recipe</button>
             </div>
 
             <!-- popular recipes -->
@@ -490,7 +403,7 @@
       </div>
     </div>
 
-    <!-- Recipe input -->
+    <!-- recipe input box -->
     <section class="recipe_box">
       <div class="wrap">
         <div class="close_svg">
