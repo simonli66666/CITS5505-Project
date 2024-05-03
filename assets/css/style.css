@@ -49,6 +49,7 @@ a {
 
 .right-header {
   float: right;
+  margin-right: 5rem;
 
   height: 6rem;
 }
