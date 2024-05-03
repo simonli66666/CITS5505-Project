@@ -364,6 +364,7 @@
 
 .rewards {
   padding: 20px;
+  height: 1100px;
 }
 .rewards .head {
   margin-bottom: 12px;
@@ -510,6 +511,7 @@
   background-color: #fff;
   padding: 30px;
   padding-top: 40px;
+  height: 1000px;
 }
 .mys_box .nav_box.active {
   display: block;

@@ -480,3 +480,16 @@ a {
   color: #fd7c47;
   text-decoration: none;
 }
+
+.footer {
+  background-color: #fff;
+  height: 150px;
+  border-top: 1px solid rgba(233, 233, 233);
+  padding-top: 100px;
+}
+
+.footer .copy {
+  text-align: center;
+  font-size: 14px;
+  color: #a0a0a0;
+}

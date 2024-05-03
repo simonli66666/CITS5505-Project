@@ -60,10 +60,10 @@ document.querySelector("#show_register").onclick = function () {
   //   login_box.style.display = 'block';
   register.classList.add("show");
 };
-document.querySelector("#show_register2").onclick = function () {
-  //   register.style.display = 'block';
-  register.classList.add("show");
-};
+// document.querySelector("#show_register2").onclick = function () {
+//   //   register.style.display = 'block';
+//   register.classList.add("show");
+// };
 
 //click Share A Recipe open the recipe input box
 
