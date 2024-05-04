@@ -32,14 +32,18 @@ def register():
         password = request.form['password']
         # 检查用户名是否已存在
         if User.query.filter_by(username=username).first():
-            flash('Username already exists!')
-            return redirect(url_for('index'))
+            flash('Username already exists!', 'error')
+            
+            """ return render_template('index.html') """
+            
+            return render_template('index.html', error=True, username=username)
         new_user = User(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()
-        flash('User created successfully!')
+        flash('User created successfully!','success')
         return redirect(url_for('login'))
-    return render_template('index.html') 
+    return render_template('index.html', error=False) 
+
 
 
 # 登录路由

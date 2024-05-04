@@ -16,6 +16,26 @@
   </head>
 
   <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        {% if category == 'success' %}
+          <div id="success-message" class="alert alert-success flash-message">{{ message }}</div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      {% if category == 'error' %}
+        <div id="error-message" class="alert alert-danger flash-message">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
     <div id="sign-in-panel" class="panel-pop"></div>
     <div class="not-log-in">
       <div class="header">
@@ -133,7 +153,7 @@
                         strech calfskin spaghetti straps...</a
                       >
                     </div>
-                    <button class="continue-reading">CONTINUEeeeeee READING</button>
+                    <button class="continue-reading">CONTINUE READING</button>
                   </div>
                 </div>
                 <div id="recipe-demo" class="recipe-post-box">
@@ -507,13 +527,7 @@
 
 
         <form method="post" action="/login">
-          {% with messages = get_flashed_messages() %}
-          {% if messages %}
-              {% for message in messages %}
-                  <div>{{ message }}</div>
-              {% endfor %}
-          {% endif %}
-          {% endwith %} 
+ 
         <div class="message_box">
             <span class="t">ERROR:</span>
             Please insert your name.            
@@ -524,7 +538,7 @@
             <li class="subtit">Password *</li>
             <li><input class="input_x" type="password" name="password" required/></li>
             <li class="s">
-              <div><input type="111checkbox" checked />Remember Me!</div>
+              <div><input type="checkbox" checked />Remember Me!</div>
               <a href="">Forgot Password?</a>
             </li>
             <button class="btn_x" type="submit">Login</button>
@@ -532,6 +546,7 @@
         </form>
       </div>
     </section>
+
 
     <section class="login_box" id="register">
       <div class="con">
@@ -564,13 +579,8 @@
 
 
         <form action="/register1" method="post" >
-          {% with messages = get_flashed_messages() %}
-          {% if messages %}
-              {% for message in messages %}
-                  <div>{{ message }}</div>
-              {% endfor %}
-          {% endif %}
-          {% endwith %} 
+
+ 
 
           <div class="message_box">
             <span class="t">ERROR:</span>
@@ -590,7 +600,9 @@
             </li>
             <button class="btn_x"type="submit">Sign Up</button>
           </ul>
+          
         </form>
+        
         
       </div>
     </section>

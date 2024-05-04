@@ -145,3 +145,22 @@ registerBt.addEventListener("click", (event) => {
   }
   // 如果验证通过，不需要阻止表单提交，因此不调用 event.preventDefault();
 });
+
+window.onload = function() {
+  setTimeout(function() {
+    const messages = document.querySelectorAll('.flash-message');
+    messages.forEach(function(message) {
+      message.style.opacity = '0';
+      setTimeout(function() {
+        message.style.display = 'none';
+      }, 600); // 额外的延迟以允许淡出效果
+    });
+  }, 4000); // 4000 毫秒 = 4 秒
+};
+
+/* window.onload = function() {
+  var errorPresent = {{ error|tojson }};
+  if (errorPresent) {
+      document.getElementById('registerModal').style.display = 'block';
+  }
+}; */
