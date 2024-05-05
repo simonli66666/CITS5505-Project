@@ -54,18 +54,31 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(username=username, password=password).first()
         if user:
-            flash('Logged in successfully!')
+            flash('Logged in successfully!','success')
             return render_template('login.html', user=user)  # Pass user data to login.html if needed
         else:
-            flash('Invalid username or password!')
+            flash('Invalid username or password!','error')
     return render_template('index.html')
 
 
 
- # 帖子详情页面
-@app.route('/posts_details')
-def posts_details():
-    return render_template('postsDetails.html')
+@app.route('/badges')
+def badges():
+    return render_template('Badges.html')
+
+@app.route('/postsDetails_notlogin')
+def postsDetails_notlogin():
+    return render_template('postsDetails_notlogin.html')
+
+@app.route('/recipes')
+def recipes():
+    return render_template('login.html')
+
+@app.route('/user_profile')
+def user_profile():
+    return render_template('user.html')
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
