@@ -822,5 +822,28 @@
 .nav_box .pl li {
   border-bottom: 1px solid #ccc;
   padding-bottom: 20px;
+  margin-bottom: 40px;
+  margin-top: 60px;
+}
+
+.nav_box .pl .comment_name{
+  margin-top: 30px;
+}
+
+.nav_box .pl .date{
   margin-bottom: 20px;
+}
+
+.intro.posts-details {
+  position: relative; /* 设置相对定位，用于定位子元素 */
+}
+
+.back-button {
+  position: absolute; /* 绝对定位 */
+  top: 30px; /* 距顶部20px */
+  left: 400px; /* 距左侧20px */
+  background-color: transparent; /* 按钮背景色 */
+  text-decoration: none; /* 去掉下划线 */
+  color: #ff9500; /* 文字颜色 */
+  font-weight: bold; /* 字体加粗 */
 }
