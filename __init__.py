@@ -1,7 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for, flash
 from bbs.extensions import db
-
 from bbs.models import *
+from bbs.setting import *
+import click
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+
 
 
 
@@ -12,23 +15,21 @@ def create_app(config_name=None):
 
     register_error_handlers(app)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-    app.config['SECRET_KEY'] = 'your_secret_key'
-
-    db.init_app(app)
-
-    with app.app_context():
-        db.create_all()
-
+    app.config['SECRET_KEY'] = 'admin'
     @app.route('/')
     def index():
         return render_template('frontend/index.html')
+    
+    login_manager = LoginManager(app)
+    login_manager.login_view = 'index'  # 未登录时重定向到的视图函数
+    login_manager.login_message_category = 'info'
     
     # 注册路由
     @app.route('/register1', methods=['GET', 'POST'])
     def register():
         if request.method == 'POST':
             username = request.form['username']
+            nickname = request.form['nickname']
             password = request.form['password']
             # 检查用户名是否已存在
             if User.query.filter_by(username=username).first():
@@ -37,7 +38,7 @@ def create_app(config_name=None):
                 """ return render_template('index.html') """
                 
                 return render_template('frontend/index.html', error=True, username=username)
-            new_user = User(username=username, password=password)
+            new_user = User(username=username,nickname=nickname, password=password)
             db.session.add(new_user)
             db.session.commit()
             flash('User created successfully!','success')
@@ -54,6 +55,7 @@ def create_app(config_name=None):
             password = request.form['password']
             user = User.query.filter_by(username=username, password=password).first()
             if user:
+                login_user(user)
                 flash('Logged in successfully!')
                 return render_template('frontend/login.html', user=user)  # Pass user data to login.html if needed
             else:
@@ -70,7 +72,13 @@ def create_app(config_name=None):
    
 
     register_error_handlers(app)
-
+    app.config.from_object(DevelopmentConfig)
+    register_extensions(app)
+    register_cmd(app)
+    # Flask-Login 用户加载器
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
     return app
 
 def register_error_handlers(app: Flask):
@@ -91,9 +99,15 @@ def register_error_handlers(app: Flask):
         return render_template('error/500.html'), 500
 
 
-if __name__ == '__main__':
-    app = create_app()
-    app.run(host='0.0.0.0', port=8080)
+def register_extensions(app: Flask):
+    db.init_app(app)
 
 
-
+def register_cmd(app: Flask):
+    @app.cli.command()
+    def admin():
+        click.confirm('这个操作会清空整个数据库,要继续吗?', abort=True)
+        db.drop_all()
+        click.echo('清空数据库完成!')
+        db.create_all()
+        click.echo('数据库初始化完成!')

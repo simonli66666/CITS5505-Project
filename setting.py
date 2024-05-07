@@ -16,8 +16,8 @@ class BaseConfig(object):
     DATABASE_PORT = os.getenv('DATABASE_PORT')
 
 class DevelopmentConfig(BaseConfig):
-    # 使用 SQLite，数据库文件名为 bbs.db，存放在项目根目录下
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'users.db')
+    # 使用 SQLite，数据库文件名为 users.db，存放在项目根目录下
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'bbs/users.db')
     
     # 配置 Redis，这里假设 Redis 服务器运行在本机，默认端口 6379
     REDIS_URL = "redis://localhost:6379"

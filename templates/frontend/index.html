@@ -37,7 +37,7 @@
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="index.html" title="tasty">
+            <a href="/" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -518,7 +518,11 @@
           </svg>
         </div>
         <div class="tit">Sign In</div>
-        <form action="">
+        <form action="/login" method="post">
+          <div class="message_box">
+            <span class="t">ERROR:</span>
+            Please insert your name.
+          </div>
           <ul>
             <li class="subtit">Username *</li>
             <li><input class="input_x" type="text" name="username" required/></li>
@@ -560,6 +564,7 @@
           </svg>
         </div>
         <div class="tit">Sign Up</div>
+
         <form action="/register1" method="post" >
           <div class="message_box">
             <span class="t">ERROR:</span>
