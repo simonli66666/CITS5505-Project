@@ -23,6 +23,11 @@ def create_app(config_name=None):
     login_manager = LoginManager(app)
     login_manager.login_view = 'index'  # 未登录时重定向到的视图函数
     login_manager.login_message_category = 'info'
+    # Flask-Login 用户加载器
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+    
     
     # 注册路由
     @app.route('/register1', methods=['GET', 'POST'])
@@ -55,15 +60,21 @@ def create_app(config_name=None):
             password = request.form['password']
             user = User.query.filter_by(username=username, password=password).first()
             if user:
-                login_user(user)
-                flash('Logged in successfully!')
-                return render_template('frontend/login.html', user=user)  # Pass user data to login.html if needed
+                # login_user(user)
+            
+                flash('Logged in successfully!', 'success')
+                return render_template('frontend/login.html')
             else:
-                flash('Invalid username or password!')
+                flash('Invalid username or password!', 'error')
         return render_template('frontend/index.html')
 
 
-
+    
+    @app.route('/recipes')
+    @login_required
+    def recipes():
+        return render_template('frontend/login.html')
+    
     # 帖子详情页面
     @app.route('/posts_details')
     def posts_details():
@@ -75,10 +86,6 @@ def create_app(config_name=None):
     app.config.from_object(DevelopmentConfig)
     register_extensions(app)
     register_cmd(app)
-    # Flask-Login 用户加载器
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
     return app
 
 def register_error_handlers(app: Flask):

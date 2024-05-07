@@ -15,16 +15,19 @@
   visibility: hidden;
   opacity: 0;
 }
+
 .login_box.show {
   visibility: visible;
   opacity: 1;
   display: flex !important;
 }
+
 .login_box .con {
   width: 500px;
   background-color: #fff;
   position: relative;
 }
+
 .login_box .con .close {
   position: absolute;
   top: -30px;
@@ -32,6 +35,7 @@
   z-index: 999;
   opacity: 1;
 }
+
 .login_box .con .tit {
   height: 150px;
   line-height: 150px;
@@ -41,34 +45,59 @@
   text-align: center;
   font-weight: bold;
 }
+
 .login_box .con form {
   padding: 50px;
 }
+
 .login_box .con form .subtit {
   color: #777676;
   font-size: 16px;
   margin-top: 8px;
 }
+
 .login_box .con form input {
   width: 100%;
 }
+
 .login_box .con form .s {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 8px;
 }
+
 .login_box .con form .s > div {
   display: flex;
   align-items: center;
   width: 50%;
 }
+
 .login_box .con form .s > div input {
   width: auto;
   margin-right: 8px;
 }
+
 .login_box .con form button {
   width: 100%;
+}
+
+/* login error message */
+.message_box {
+  white-space: nowrap;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.429);
+  line-height: 2.2em;
+  padding: 8px;
+  display: none;
+}
+
+.message_box.show {
+  display: block;
+}
+
+.message_box .t {
+  font-weight: bold;
 }
 
 .side-bar-l,
@@ -94,6 +123,7 @@
   align-items: center;
   display: none;
 }
+
 .right-header .user_pirc img {
   border-radius: 50%;
   display: block;
@@ -120,54 +150,141 @@
   opacity: 0;
   transition: all 0.4s;
 }
+
 .recipe_box.show {
   visibility: visible;
   opacity: 1;
   display: flex !important;
 }
+
 .recipe_box .close_svg {
   text-align: right;
 }
+
 .recipe_box .close_svg svg {
   cursor: pointer;
 }
+
 .recipe_box .title {
   font-size: 20px;
   margin-bottom: 12px;
 }
+
 .recipe_box .wrap {
   background-color: #fff;
   width: 800px;
   padding: 50px;
 }
+
 .recipe_box .wrap ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
 .recipe_box .wrap ul li {
   width: calc(50% - 30px);
   margin-bottom: 8px;
   display: flex;
   align-items: center;
 }
+
 .recipe_box .wrap ul li.con {
   width: 100% !important;
 }
+
 .recipe_box .wrap ul li.con .input_x {
   width: 90%;
   height: 6em;
   padding: 8px;
 }
+
 .recipe_box .wrap ul li input {
   width: 70%;
 }
+
 .recipe_box .wrap ul li span {
   flex: 1;
 }
+
 .recipe_box .wrap .btn_x {
   margin: auto;
   width: 100px;
   display: block;
   margin-top: 20px;
+}
+
+/* login error message */
+.message_box {
+  display: none;
+  white-space: nowrap;
+  color: red;
+  background-color: rgba(255, 0, 0, 0.429);
+  line-height: 2.2em;
+  padding: 8px;
+}
+
+.message_box.show {
+  display: block;
+}
+
+.message_box .t {
+  font-weight: bold;
+}
+
+@media all and (max-width: 1140px) {
+  body {
+    background-color: #e8e8e8;
+  }
+
+  .header {
+    padding: 0 20px;
+    background-color: #fff;
+  }
+
+  .intro {
+    background-color: #fff;
+  }
+
+  .main-container {
+    width: auto;
+  }
+
+  .side-bar-l {
+    position: relative;
+  }
+
+  .side-bar-l ul {
+    display: flex;
+    padding-left: 20px;
+    padding-top: 0;
+  }
+
+  .side-bar-l ul li {
+    margin-right: 20px;
+  }
+
+  .main-content .main-container {
+    width: 100%;
+    position: relative;
+  }
+
+  .main-content .main-container > div {
+    float: none !important;
+  }
+
+  .main-content .main-container .main-inner {
+    margin: auto;
+    width: 95%;
+  }
+
+  .main-right {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+  }
+
+  .main-right .popular {
+    display: none;
+  }
 }
