@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+
 
 app = Flask(__name__)
 
@@ -8,8 +10,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY'] = 'your_secret_key'
 db = SQLAlchemy(app)
 
+login_manager = LoginManager(app)
+login_manager.login_view = 'index'  # 未登录时重定向到的视图函数
+login_manager.login_message_category = 'info'
+
 # 用户模型定义
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
@@ -19,9 +25,21 @@ class User(db.Model):
 def create_tables():
     db.create_all()
     
+    
+# Flask-Login 用户加载器
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+    
 # 首页路由
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+@app.route('/index1')
+def index1():
     return render_template('index.html')
 
 # 注册路由
@@ -33,16 +51,13 @@ def register():
         # 检查用户名是否已存在
         if User.query.filter_by(username=username).first():
             flash('Username already exists!', 'error')
-            
-            """ return render_template('index.html') """
-            
             return render_template('index.html', error=True, username=username)
         new_user = User(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()
-        flash('User created successfully!','success')
+        flash('User created successfully!', 'success')
         return redirect(url_for('login'))
-    return render_template('index.html', error=False) 
+    return render_template('index.html', error=False)
 
 
 
@@ -54,35 +69,45 @@ def login():
         password = request.form['password']
         user = User.query.filter_by(username=username, password=password).first()
         if user:
-            flash('Logged in successfully!','success')
-            return render_template('login.html', user=user)  # Pass user data to login.html if needed
+            login_user(user)  # 使用 Flask-Login 登录用户
+            flash('Logged in successfully!', 'success')
+            return redirect(url_for('recipes'))  # 重定向到登录后页面
         else:
-            flash('Invalid username or password!','error')
+            flash('Invalid username or password!', 'error')
     return render_template('index.html')
 
 
+# 注销路由
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('You have been logged out!', 'success')
+    return redirect(url_for('login'))
 
+# 需要登录的受保护页面
 @app.route('/badges')
+@login_required
 def badges():
     return render_template('Badges.html')
 
 @app.route('/postsDetails_notlogin')
+@login_required
 def postsDetails_notlogin():
     return render_template('postsDetails_notlogin.html')
 
 @app.route('/recipes')
+@login_required
 def recipes():
     return render_template('login.html')
 
 @app.route('/user_profile')
+@login_required
 def user_profile():
     return render_template('user.html')
 
-
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
-    
     
     
 """     

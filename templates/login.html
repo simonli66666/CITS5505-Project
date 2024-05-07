@@ -31,7 +31,7 @@
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="index.html" title="tasty">
+            <a href="{{ url_for('index1') }}" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -42,15 +42,17 @@
           </div>
 
           <div class="right-header">
-            <a href="templates/user.html" class="user">
+            <a href="{{ url_for('user_profile') }}" class="user">
               <div class="user_pirc">
                 <img src="static/images/13_Food_Servant-512.webp" alt="" />
-                <div class="name">Liz</div>
+                <div class="name">{{ current_user.username }}</div>
               </div>
             </a>
           </div>
         </div>
       </div>
+
+    
 
       <div class="main-content">
         <div class="main-container">
