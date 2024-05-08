@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+""" from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
@@ -106,8 +106,20 @@ def recipes():
 def user_profile():
     return render_template('user.html')
 
+@app.route('/postsDetails')
+@login_required
+def postsDetails():
+    return render_template('postsDetails.html')
+
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080)  """
+    
+    
+    
+    
+    
     
     
 """     

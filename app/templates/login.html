@@ -31,7 +31,7 @@
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="{{ url_for('index1') }}" title="tasty">
+            <a href="{{ url_for('routes.index1') }}" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -41,8 +41,10 @@
             </a>
           </div>
 
+      
+
           <div class="right-header">
-            <a href="{{ url_for('user_profile') }}" class="user">
+            <a href="{{ url_for('routes.user_profile') }}" class="user">
               <div class="user_pirc">
                 <img src="static/images/13_Food_Servant-512.webp" alt="" />
                 <div class="name">{{ current_user.username }}</div>
@@ -60,19 +62,19 @@
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="{{ url_for('recipes') }}" class="side-bar-active">
+                <a href="{{ url_for('routes.recipes') }}" class="side-bar-active">
                     <i class="bi bi-card-list"></i>
                     <span>Recipes</span>
                 </a>
             </li>
               <li>
-                <a href="{{ url_for('badges') }}" class="show_login">
+                <a href="{{ url_for('routes.badges') }}" class="show_login">
                   <i class="bi bi-award-fill"></i>
                   <span>Badges</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('user_profile') }}" class="show_login">
+                <a href="{{ url_for('routes.user_profile') }}" class="show_login">
                   <i class="bi bi-people-fill"></i>
                   <span>User Profile</span>
                 </a>
@@ -100,7 +102,7 @@
               <div class="post-recipes">
                 <div id="recipe-demo" class="recipe-post-box">
                   <div class="recipe-img-box">
-                    <a href="templates/postsDetails.html"
+                    <a href="{{ url_for('routes.postsDetails') }}"
                       ><img
                         src="./static/images/jnews-demo-2-350x250.jpg"
                         alt=""
@@ -109,34 +111,34 @@
                   </div>
                   <div class="recipe-content">
                     <h3 class="recipe-title">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Love Real Food Savory Steel Cut Oatmeal</a
                       >
                     </h3>
                     <div class="post-detail">
                       by
                       <span id="author-demo" class="post-author"
-                        ><a href="templates/postsDetails.html">Margaery Tyrell</a></span
+                        ><a href="{{ url_for('routes.postsDetails') }}">Margaery Tyrell</a></span
                       >
                       <span id="date-demo" class="post-date"
                         >September 9, 2017</span
                       >
                     </div>
                     <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Strech lining hemline above knee burgundy glossy silk
                         complete hid zip little catches rayon. Tunic weaved
                         strech calfskin spaghetti straps...</a
                       >
                     </div>
                     <button class="continue-reading">
-                      <a href="templates/postsDetails.html">CONTINUE READING</a>
+                      <a href="{{ url_for('routes.postsDetails') }}">CONTINUE READING</a>
                     </button>
                   </div>
                 </div>
                 <div id="recipe-demo" class="recipe-post-box">
                   <div class="recipe-img-box">
-                    <a href="templates/postsDetails.html"
+                    <a href="{{ url_for('routes.postsDetails') }}"
                       ><img
                         src="./static/images/jnews-demo-2-350x250.jpg"
                         alt=""
@@ -145,34 +147,34 @@
                   </div>
                   <div class="recipe-content">
                     <h3 class="recipe-title">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Love Real Food Savory Steel Cut Oatmeal</a
                       >
                     </h3>
                     <div class="post-detail">
                       by
                       <span id="author-demo" class="post-author"
-                        ><a href="templates/postsDetails.html">Margaery Tyrell</a></span
+                        ><a href="{{ url_for('routes.postsDetails') }}">Margaery Tyrell</a></span
                       >
                       <span id="date-demo" class="post-date"
                         >September 9, 2017</span
                       >
                     </div>
                     <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Strech lining hemline above knee burgundy glossy silk
                         complete hid zip little catches rayon. Tunic weaved
                         strech calfskin spaghetti straps...</a
                       >
                     </div>
                     <button class="continue-reading">
-                      <a href="templates/postsDetails.html">CONTINUE READING</a>
+                      <a href="{{ url_for('routes.postsDetails') }}">CONTINUE READING</a>
                     </button>
                   </div>
                 </div>
                 <div id="recipe-demo" class="recipe-post-box">
                   <div class="recipe-img-box">
-                    <a href="templates/postsDetails.html"
+                    <a href="{{ url_for('routes.postsDetails') }}"
                       ><img
                         src="./static/images/jnews-demo-2-350x250.jpg"
                         alt=""
@@ -181,34 +183,34 @@
                   </div>
                   <div class="recipe-content">
                     <h3 class="recipe-title">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Love Real Food Savory Steel Cut Oatmeal</a
                       >
                     </h3>
                     <div class="post-detail">
                       by
                       <span id="author-demo" class="post-author"
-                        ><a href="templates/postsDetails.html">Margaery Tyrell</a></span
+                        ><a href="{{ url_for('routes.postsDetails') }}">Margaery Tyrell</a></span
                       >
                       <span id="date-demo" class="post-date"
                         >September 9, 2017</span
                       >
                     </div>
                     <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Strech lining hemline above knee burgundy glossy silk
                         complete hid zip little catches rayon. Tunic weaved
                         strech calfskin spaghetti straps...</a
                       >
                     </div>
                     <button class="continue-reading">
-                      <a href="templates/postsDetails.html">CONTINUE READING</a>
+                      <a href="{{ url_for('routes.postsDetails') }}">CONTINUE READING</a>
                     </button>
                   </div>
                 </div>
                 <div id="recipe-demo" class="recipe-post-box">
                   <div class="recipe-img-box">
-                    <a href="templates/postsDetails.html"
+                    <a href="{{ url_for('routes.postsDetails') }}"
                       ><img
                         src="./static/images/jnews-demo-2-350x250.jpg"
                         alt=""
@@ -217,34 +219,34 @@
                   </div>
                   <div class="recipe-content">
                     <h3 class="recipe-title">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Love Real Food Savory Steel Cut Oatmeal</a
                       >
                     </h3>
                     <div class="post-detail">
                       by
                       <span id="author-demo" class="post-author"
-                        ><a href="templates/postsDetails.html">Margaery Tyrell</a></span
+                        ><a href="{{ url_for('routes.postsDetails') }}">Margaery Tyrell</a></span
                       >
                       <span id="date-demo" class="post-date"
                         >September 9, 2017</span
                       >
                     </div>
                     <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Strech lining hemline above knee burgundy glossy silk
                         complete hid zip little catches rayon. Tunic weaved
                         strech calfskin spaghetti straps...</a
                       >
                     </div>
                     <button class="continue-reading">
-                      <a href="templates/postsDetails.html">CONTINUE READING</a>
+                      <a href="{{ url_for('routes.postsDetails') }}">CONTINUE READING</a>
                     </button>
                   </div>
                 </div>
                 <div id="recipe-demo" class="recipe-post-box">
                   <div class="recipe-img-box">
-                    <a href="templates/postsDetails.html"
+                    <a href="{{ url_for('routes.postsDetails') }}"
                       ><img
                         src="./static/images/jnews-demo-2-350x250.jpg"
                         alt=""
@@ -253,34 +255,34 @@
                   </div>
                   <div class="recipe-content">
                     <h3 class="recipe-title">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Love Real Food Savory Steel Cut Oatmeal</a
                       >
                     </h3>
                     <div class="post-detail">
                       by
                       <span id="author-demo" class="post-author"
-                        ><a href="templates/postsDetails.html">Margaery Tyrell</a></span
+                        ><a href="{{ url_for('routes.postsDetails') }}">Margaery Tyrell</a></span
                       >
                       <span id="date-demo" class="post-date"
                         >September 9, 2017</span
                       >
                     </div>
                     <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Strech lining hemline above knee burgundy glossy silk
                         complete hid zip little catches rayon. Tunic weaved
                         strech calfskin spaghetti straps...</a
                       >
                     </div>
                     <button class="continue-reading">
-                      <a href="templates/postsDetails.html">CONTINUE READING</a>
+                      <a href="{{ url_for('routes.postsDetails') }}">CONTINUE READING</a>
                     </button>
                   </div>
                 </div>
                 <div id="recipe-demo" class="recipe-post-box">
                   <div class="recipe-img-box">
-                    <a href="templates/postsDetails.html"
+                    <a href="{{ url_for('routes.postsDetails') }}"
                       ><img
                         src="./static/images/jnews-demo-2-350x250.jpg"
                         alt=""
@@ -289,28 +291,28 @@
                   </div>
                   <div class="recipe-content">
                     <h3 class="recipe-title">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Love Real Food Savory Steel Cut Oatmeal</a
                       >
                     </h3>
                     <div class="post-detail">
                       by
                       <span id="author-demo" class="post-author"
-                        ><a href="templates/postsDetails.html">Margaery Tyrell</a></span
+                        ><a href="{{ url_for('routes.postsDetails') }}">Margaery Tyrell</a></span
                       >
                       <span id="date-demo" class="post-date"
                         >September 9, 2017</span
                       >
                     </div>
                     <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="templates/postsDetails.html"
+                      <a href="{{ url_for('routes.postsDetails') }}"
                         >Strech lining hemline above knee burgundy glossy silk
                         complete hid zip little catches rayon. Tunic weaved
                         strech calfskin spaghetti straps...</a
                       >
                     </div>
                     <button class="continue-reading">
-                      <a href="templates/postsDetails.html">CONTINUE READING</a>
+                      <a href="{{ url_for('routes.postsDetails') }}">CONTINUE READING</a>
                     </button>
                   </div>
                 </div>
@@ -345,7 +347,7 @@
               </div>
               <div class="popular-top-box">
                 <div id="popular-top-demo" class="popular-top-img">
-                  <a href="templates/postsDetails.html">
+                  <a href="{{ url_for('routes.postsDetails') }}">
                     <img
                       src="./static/images/brooke-lark-250695-350x250.jpg"
                       alt=""
@@ -355,7 +357,7 @@
                 <div class="popular-top-detail">
                   <div class="popular-num">01</div>
                   <div class="popular-top-title">
-                    <a href="templates/postsDetails.html"
+                    <a href="{{ url_for('routes.postsDetails') }}"
                       >New Recipe Pasta with Creamy Kale Sauce</a
                     >
                   </div>
@@ -378,7 +380,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">02</div>
                       <div class="popular-item-title">
-                        <a href="templates/postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Green Bean Salad with Almonds & Feta</a
                         >
                       </div>
@@ -403,7 +405,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">03</div>
                       <div class="popular-item-title">
-                        <a href="templates/postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Steak & Baso Butter Lobster Sandwich</a
                         >
                       </div>
@@ -428,7 +430,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">04</div>
                       <div class="popular-item-title">
-                        <a href="templates/postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Spicy Crispy Pomegranate Chicken</a
                         >
                       </div>
@@ -453,7 +455,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">05</div>
                       <div class="popular-item-title">
-                        <a href="templates/postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Love Real Food Savory Steel Cut Oatmeal</a
                         >
                       </div>
@@ -478,7 +480,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">06</div>
                       <div class="popular-item-title">
-                        <a href="templates/postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Fresh Vegan Granola Bites Recipe</a
                         >
                       </div>
@@ -530,60 +532,66 @@
             />
           </svg>
         </div>
+
+
+        <form method="post" action="{{ url_for('routes.share_recipe') }}">
+
+
         <div class="title">Share A Recipe</div>
         <ul>
           <li>
             <span class="tit">Title</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='title' required />
           </li>
           <li>
             <span class="tit">Ingredient1</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='ingredient1' />
           </li>
           <li>
             <span class="tit">Image URL</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='image_url' />
           </li>
           <li>
             <span class="tit">Ingredient2</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='ingredient2' />
           </li>
           <li>
             <span class="tit">Servings</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='servings' required />
           </li>
           <li>
             <span class="tit">Ingredient3</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='ingredient3'  />
           </li>
           <li>
             <span class="tit">Prep time</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x" ,name='prep_time' required />
           </li>
           <li>
             <span class="tit">Ingredient4</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x" , name='ingredient4' />
           </li>
           <li>
             <span class="tit">Cooking time</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='cooking_time' required  />
           </li>
           <li>
             <span class="tit">Ingredient5</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='ingredient5'  />
           </li>
           <li>
             <span class="tit">Calories</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name='calories' required />
           </li>
           <li>
             <span class="tit">Ingredient6</span>
-            <input type="text" class="input_x" />
+            <input type="text" class="input_x", name = 'ingredient6' />
           </li>
           <li class="con">
             <span class="tit">Content</span>
             <textarea
               class="input_x"
+              name = 'content'
               name=""
               id=""
               cols="30"
@@ -593,6 +601,9 @@
         </ul>
 
         <button class="btn_x">UPLOAD</button>
+      </form>
+
+
       </div>
     </section>
 

@@ -20,7 +20,7 @@
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="{{ url_for('index1') }}" title="tasty">
+            <a href="{{ url_for('routes.index1') }}" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -31,7 +31,7 @@
           </div>
 
           <div class="right-header">
-            <a href="{{ url_for('user_profile') }}" class="user">
+            <a href="{{ url_for('routes.user_profile') }}" class="user">
               <div class="user_pirc">
                 <img src="static/images/13_Food_Servant-512.webp" alt="" />
                 <div class="name">{{ current_user.username }}</div>
@@ -41,25 +41,27 @@
         </div>
       </div>
 
+      
+
       <div class="main-content">
         <div class="main-container">
           <!-- side bar -->
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="{{ url_for('recipes') }}" class="">
+                <a href="{{ url_for('routes.recipes') }}" class="">
                   <i class="bi bi-card-list"></i>
                   <span>Recipes</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('badges') }}" class="side-bar-active">
+                <a href="{{ url_for('routes.badges') }}" class="side-bar-active">
                   <i class="bi bi-award-fill"></i>
                   <span>Badges</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('user_profile') }}">
+                <a href="{{ url_for('routes.user_profile') }}">
                   <i class="bi bi-people-fill"></i>
                   <span>User Profile</span>
                 </a>
@@ -245,7 +247,7 @@
               </div>
               <div class="popular-top-box">
                 <div id="popular-top-demo" class="popular-top-img">
-                  <a href="./postsDetails.html">
+                  <a href="{{ url_for('routes.postsDetails') }}">
                     <img
                       src="./static/images/brooke-lark-250695-350x250.jpg"
                       alt=""
@@ -255,7 +257,7 @@
                 <div class="popular-top-detail">
                   <div class="popular-num">01</div>
                   <div class="popular-top-title">
-                    <a href="./postsDetails.html"
+                    <a href="{{ url_for('routes.postsDetails') }}"
                       >New Recipe Pasta with Creamy Kale Sauce</a
                     >
                   </div>
@@ -278,7 +280,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">02</div>
                       <div class="popular-item-title">
-                        <a href="./postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Green Bean Salad with Almonds & Feta</a
                         >
                       </div>
@@ -303,7 +305,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">03</div>
                       <div class="popular-item-title">
-                        <a href="./postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Steak & Baso Butter Lobster Sandwich</a
                         >
                       </div>
@@ -328,7 +330,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">04</div>
                       <div class="popular-item-title">
-                        <a href="./postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Spicy Crispy Pomegranate Chicken</a
                         >
                       </div>
@@ -353,7 +355,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">05</div>
                       <div class="popular-item-title">
-                        <a href="./postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Love Real Food Savory Steel Cut Oatmeal</a
                         >
                       </div>
@@ -378,7 +380,7 @@
                     <div class="popular-item-detail">
                       <div class="popular-num">06</div>
                       <div class="popular-item-title">
-                        <a href="./postsDetails.html"
+                        <a href="{{ url_for('routes.postsDetails') }}"
                           >Fresh Vegan Granola Bites Recipe</a
                         >
                       </div>

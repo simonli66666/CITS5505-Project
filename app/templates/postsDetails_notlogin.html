@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" href="./static/css/style.css" />
     <link rel="stylesheet" href="./static/css/login_main.css" />
+    <link rel="stylesheet" href="./static/css/main.css" />
   </head>
 
   <body>
@@ -20,7 +21,7 @@
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="{{ url_for('index1') }}" title="tasty">
+            <a href="index.html" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -31,12 +32,8 @@
           </div>
 
           <div class="right-header">
-            <a href="{{ url_for('user_profile') }}" class="user">
-              <div class="user_pirc">
-                <img src="static/images/13_Food_Servant-512.webp" alt="" />
-                <div class="name">{{ current_user.username }}</div>
-              </div>
-            </a>
+            <button class="sign-up show_login">Sign In</button>
+            <button class="sign-in" id="show_register">Sign Up</button>
           </div>
         </div>
       </div>
@@ -59,19 +56,19 @@
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="./login.html" class="side-bar-active">
+                <a href="{{ url_for('routes.index1') }}" class="side-bar-active">
                   <i class="bi bi-card-list"></i>
                   <span>Recipes</span>
                 </a>
               </li>
               <li>
-                <a href="./Badges.html">
+                <a href="#" class="show_login">
                   <i class="bi bi-award-fill"></i>
                   <span>Badges</span>
                 </a>
               </li>
               <li>
-                <a href="{{ url_for('user_profile') }}">
+                <a href="#" class="show_login">
                   <i class="bi bi-people-fill"></i>
                   <span>User Profile</span>
                 </a>
@@ -335,7 +332,9 @@
                   </div>
                 </li>
               </ul>
-              <button class="btn_x" id="comment">Leave A Comment</button>
+              <button class="btn_x show_login" id="comment">
+                Leave A Comment
+              </button>
 
               <div class="submit-tj" id="comment2">
                 <form action="">
@@ -352,18 +351,18 @@
             </div>
           </div>
 
-          <script>
-            const comment = document.querySelector("#comment");
-            const comment2 = document.querySelector("#comment2");
-            comment.addEventListener("click", () => {
-              comment2.classList.add("show");
-              comment.style.display = "none";
-            });
-          </script>
+          <!-- <script>
+            // const comment = document.querySelector("#comment");
+            // const comment2 = document.querySelector("#comment2");
+            // comment.addEventListener("click", () => {
+            //   comment2.classList.add("show");
+            //   comment.style.display = "none";
+            // });
+          </script> -->
 
           <div class="main-right">
             <div class="share">
-              <button id="openShi">Share A Recipe</button>
+              <button id="openShi" class="show_login">Share A Recipe</button>
             </div>
 
             <!-- popular recipes -->
@@ -537,6 +536,104 @@
       </div>
     </div>
 
+    <!-- Sign up/ Log in  -->
+    <section class="login_box" id="login">
+      <div class="con">
+        <!-- close button -->
+        <div class="close">
+          <?xml version="1.0" encoding="UTF-8"?><svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 8L40 40"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 40L40 8"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="tit">Sign In</div>
+        <form action="">
+          <div class="message_box">
+            <span class="t">ERROR:</span>
+            Please insert your name.
+          </div>
+          <ul>
+            <li class="subtit"><label for="username">Username *</label></li>
+            <li><input name="username" class="input_x" type="text" /></li>
+            <li class="subtit"><label for="password">Password *</label></li>
+            <li><input name="password" class="input_x" type="password" /></li>
+            <li class="s">
+              <div><input type="checkbox" checked />Remember Me!</div>
+              <a href="">Forgot Password?</a>
+            </li>
+            <li><button class="btn_x">Login</button></li>
+          </ul>
+        </form>
+      </div>
+    </section>
+    <section class="login_box" id="register">
+      <div class="con">
+        <!-- close button -->
+        <div class="close">
+          <?xml version="1.0" encoding="UTF-8"?><svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 8L40 40"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 40L40 8"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="tit">Sign Up</div>
+        <form action="">
+          <div class="message_box">
+            <span class="t">ERROR:</span>
+            Please insert your name.
+          </div>
+          <ul>
+            <li class="subtit"><label for="username">Username *</label></li>
+            <li><input class="input_x" type="text" name="username" /></li>
+            <li class="subtit"><label for="password">Password *</label></li>
+            <li><input class="input_x" type="text" name="password" /></li>
+            <li class="s">
+              <div>
+                <!-- <input type="checkbox" checked>Remember Me! -->
+              </div>
+              <a href="">Having an account?</a>
+            </li>
+            <li><button class="btn_x">Sign Up</button></li>
+          </ul>
+        </form>
+      </div>
+    </section>
+
     <section class="recipe_box">
       <div class="wrap">
         <div class="close_svg">
@@ -629,6 +726,6 @@
       </div>
     </section>
 
-    <script src="./static/js/login_main.js"></script>
+    <script src="./static/js/main.js"></script>
   </body>
 </html>
