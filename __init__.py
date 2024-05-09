@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app
 from bbs.extensions import db
 from bbs.models import *
 from bbs.setting import *
@@ -18,7 +18,11 @@ app.config['SECRET_KEY'] = 'admin'
 
 @app.route('/')
 def index():
-    return render_template('frontend/index.html')
+    page = request.args.get('page', 1, type=int)
+    per_page = current_app.config.get('BBS_PER_PAGE', 10)
+    pagination = Post.query.order_by(Post.update_time.desc()).paginate(page=page, per_page=per_page)
+    latest = pagination.items
+    return render_template('frontend/index.html', latest=latest, pagination=pagination)
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'index'  # 未登录时重定向到的视图函数
@@ -87,16 +91,20 @@ def share():
         calories = request.form['calories']
         content = request.form['content']
        
-        # 检查用户名是否已存在
         
-        new_post = Post(title=title,image=image, ingredient1=ingredient1,ingredient2=ingredient2, ingredient3=ingredient3, ingredient4=ingredient4, ingredient5=ingredient5, ingredient6=ingredient6,servings= servings, prep_time=prep_time, cooking_time=cooking_time, calories=calories, content=content)
-        db.session.add(new_post)
+        post = Post(title=title,image=image, ingredient1=ingredient1,ingredient2=ingredient2, ingredient3=ingredient3, ingredient4=ingredient4, ingredient5=ingredient5, ingredient6=ingredient6,servings= servings, prep_time=prep_time, cooking_time=cooking_time, calories=calories, content=content, author_id=current_user.id )
+        db.session.add(post)
         db.session.commit()
         flash('Recipt posted successfully!','success')
-        return redirect(url_for('recipes'))
+        return redirect(url_for('recipes', post_id=post.id))
     return render_template('frontend/login.html', error=False)
 
-
+@app.route('/test')
+def test():
+    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    posts = pagination.items
+    return render_template('frontend/test.html', posts=posts, pagination=pagination)
 
 @app.route('/recipes')
 @login_required
