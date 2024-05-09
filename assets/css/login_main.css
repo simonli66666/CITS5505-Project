@@ -835,15 +835,37 @@
 }
 
 .intro.posts-details {
-  position: relative; /* 设置相对定位，用于定位子元素 */
+  position: relative; 
 }
 
 .back-button {
-  position: absolute; /* 绝对定位 */
-  top: 30px; /* 距顶部20px */
-  left: 400px; /* 距左侧20px */
-  background-color: transparent; /* 按钮背景色 */
-  text-decoration: none; /* 去掉下划线 */
-  color: #ff9500; /* 文字颜色 */
-  font-weight: bold; /* 字体加粗 */
+  position: absolute; 
+  top: 30px; 
+  left: 400px; 
+  background-color: transparent; 
+  text-decoration: none; 
+  color: #ff9500;
+  font-weight: bold; 
+  font-size:20px;
 }
+
+
+.button-container {
+  display: flex;  
+  justify-content: center;  
+  width: 100%;  
+}
+
+.like-button {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  background-color: transparent;
+  border: none;
+  color: #ff9500;
+  cursor: pointer;
+  font-size: 22px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
