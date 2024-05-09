@@ -20,7 +20,7 @@
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="index.html" title="tasty">
+            <a href="/recipes" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -31,10 +31,10 @@
           </div>
 
           <div class="right-header">
-            <a href="./user.html" class="user">
+            <a href="/user" class="user">
               <div class="user_pirc">
                 <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
-                <div class="name">Liz</div>
+                <div class="name">{{ current_user.nickname }}</div>
               </div>
             </a>
           </div>
@@ -47,19 +47,19 @@
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="/login" class="side-bar-active">
+                <a href="/recipes" class="side-bar-active">
                   <i class="bi bi-card-list"></i>
                   <span>Recipes</span>
                 </a>
               </li>
               <li>
-                <a href="./Badges.html" class="show_login">
+                <a href="/badges" class="show_login">
                   <i class="bi bi-award-fill"></i>
                   <span>Badges</span>
                 </a>
               </li>
               <li>
-                <a href="./user.html" class="show_login">
+                <a href="/user" class="show_login">
                   <i class="bi bi-people-fill"></i>
                   <span>User Profile</span>
                 </a>
@@ -522,57 +522,63 @@
           </svg>
         </div>
         <div class="title">Share A Recipe</div>
+        <form action="/share" method="post" >
+          <div class="message_box">
+            <span class="t">ERROR:</span>
+            Please insert your content.
+          </div>
         <ul>
           <li>
             <span class="tit">Title</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="text" name="title" required/></li>
           </li>
           <li>
             <span class="tit">Ingredient1</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="text" name="ingredient1" required/></li>
           </li>
           <li>
             <span class="tit">Image URL</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="text" name="image" required/></li>
           </li>
           <li>
             <span class="tit">Ingredient2</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="text" name="ingredient2" /></li>
           </li>
           <li>
             <span class="tit">Servings</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="number" name="servings" required step="1" /></li>
           </li>
           <li>
             <span class="tit">Ingredient3</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="text" name="ingredient3" /></li>
           </li>
           <li>
             <span class="tit">Prep time</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="number" name="prep_time" required step="0.1" /></li>
           </li>
           <li>
             <span class="tit">Ingredient4</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="text" name="ingredient4" /></li>
           </li>
           <li>
             <span class="tit">Cooking time</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="number" name="cooking_time" required step="0.1" /></li>
           </li>
           <li>
             <span class="tit">Ingredient5</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="text" name="ingredient5" /></li>
           </li>
           <li>
             <span class="tit">Calories</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="number" name="calories" required step="1" /></li>
           </li>
           <li>
             <span class="tit">Ingredient6</span>
-            <input type="text" class="input_x" />
+            <li><input class="input_x" type="text" name="ingredient6" /></li>
           </li>
           <li class="con">
             <span class="tit">Content</span>
+            <li><input class="input_x" type="text" name="content" /></li>
             <textarea
               class="input_x"
               name=""
@@ -583,10 +589,10 @@
           </li>
         </ul>
 
-        <button class="btn_x">UPLOAD</button>
+        <button class="btn_x" type="submit">UPLOAD</button>
       </div>
     </section>
 
-    <script src="./assets/js/login_main.js"></script>
+    <script src="{{ url_for('static', filename='assets/js/login_main.js') }}"></script>
   </body>
 </html>
