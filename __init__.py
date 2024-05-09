@@ -18,11 +18,10 @@ app.config['SECRET_KEY'] = 'admin'
 
 @app.route('/')
 def index():
-    page = request.args.get('page', 1, type=int)
-    per_page = current_app.config.get('BBS_PER_PAGE', 10)
-    pagination = Post.query.order_by(Post.update_time.desc()).paginate(page=page, per_page=per_page)
-    latest = pagination.items
-    return render_template('frontend/index.html', latest=latest, pagination=pagination)
+    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    posts = pagination.items
+    return render_template('frontend/index.html', posts=posts, pagination=pagination)
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'index'  # 未登录时重定向到的视图函数
@@ -109,7 +108,10 @@ def test():
 @app.route('/recipes')
 @login_required
 def recipes():
-    return render_template('frontend/login.html')
+    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    posts = pagination.items
+    return render_template('frontend/login.html', posts=posts, pagination=pagination)
 
 @app.route('/user')
 @login_required
