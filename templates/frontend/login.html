@@ -528,66 +528,73 @@
             Please insert your content.
           </div>
         <ul>
+          <li class="long">
+            <span class="tit long-tit">Title</span>
+            <input class="input_x" type="text" name="title" required/>
+          </li>
+
+          <li class="long">
+            <span class="tit long-tit">Image URL</span>
+            <input class="input_x" type="text" name="image" required/>
+          </li>
+
           <li>
-            <span class="tit">Title</span>
-            <li><input class="input_x" type="text" name="title" required/></li>
+            <span class="tit">Servings</span>
+            <input class="input_x" type="number" name="servings" required step="1" />
+          </li>
+
+          <li>
+            <span class="tit">Prep time</span>
+            <input class="input_x" type="number" name="prep_time" required step="0.1" />
+          </li>
+
+          <li>
+            <span class="tit">Cooking time</span>
+            <input class="input_x" type="number" name="cooking_time" required step="0.1" />
+          </li>
+
+          <li>
+            <span class="tit">Calories</span>
+            <input class="input_x" type="number" name="calories" required step="1" />
           </li>
           <li>
             <span class="tit">Ingredient1</span>
-            <li><input class="input_x" type="text" name="ingredient1" required/></li>
-          </li>
-          <li>
-            <span class="tit">Image URL</span>
-            <li><input class="input_x" type="text" name="image" required/></li>
+            <input class="input_x" type="text" name="ingredient1" required/>
           </li>
           <li>
             <span class="tit">Ingredient2</span>
-            <li><input class="input_x" type="text" name="ingredient2" /></li>
-          </li>
-          <li>
-            <span class="tit">Servings</span>
-            <li><input class="input_x" type="number" name="servings" required step="1" /></li>
+            <input class="input_x" type="text" name="ingredient2" />
           </li>
           <li>
             <span class="tit">Ingredient3</span>
-            <li><input class="input_x" type="text" name="ingredient3" /></li>
-          </li>
-          <li>
-            <span class="tit">Prep time</span>
-            <li><input class="input_x" type="number" name="prep_time" required step="0.1" /></li>
+            <input class="input_x" type="text" name="ingredient3" />
           </li>
           <li>
             <span class="tit">Ingredient4</span>
-            <li><input class="input_x" type="text" name="ingredient4" /></li>
-          </li>
-          <li>
-            <span class="tit">Cooking time</span>
-            <li><input class="input_x" type="number" name="cooking_time" required step="0.1" /></li>
+            <input class="input_x" type="text" name="ingredient4" />
           </li>
           <li>
             <span class="tit">Ingredient5</span>
-            <li><input class="input_x" type="text" name="ingredient5" /></li>
-          </li>
-          <li>
-            <span class="tit">Calories</span>
-            <li><input class="input_x" type="number" name="calories" required step="1" /></li>
+            <input class="input_x" type="text" name="ingredient5" />
           </li>
           <li>
             <span class="tit">Ingredient6</span>
-            <li><input class="input_x" type="text" name="ingredient6" /></li>
+            <input class="input_x" type="text" name="ingredient6" />
           </li>
+
           <li class="con">
             <span class="tit">Content</span>
-            <li><input class="input_x" type="text" name="content" />
-              <textarea
+            <textarea
               class="input_x"
-              name=""
-              id=""
+              name="content"
+              type="text"
+              required
               cols="30"
               rows="10"
-            ></textarea></li>
-            
+            ></textarea>
           </li>
+            
+
         </ul>
 
         <button class="btn_x" type="submit">UPLOAD</button>

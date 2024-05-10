@@ -13,7 +13,6 @@
   </head>
 
   <body>
-    
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
@@ -33,6 +32,8 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
+
+
     <div id="sign-in-panel" class="panel-pop"></div>
     <div class="not-log-in">
       <div class="header">
@@ -619,64 +620,73 @@
         </div>
         <div class="title">Share A Recipe</div>
         <ul>
+          <li class="long">
+            <span class="tit long-tit">Title</span>
+            <input class="input_x" type="text" name="title" required/>
+          </li>
+
+          <li class="long">
+            <span class="tit long-tit">Image URL</span>
+            <input class="input_x" type="text" name="image" required/>
+          </li>
+
           <li>
-            <span class="tit">Title</span>
-            <input type="text" class="input_x" />
+            <span class="tit">Servings</span>
+            <input class="input_x" type="number" name="servings" required step="1" />
+          </li>
+
+          <li>
+            <span class="tit">Prep time</span>
+            <input class="input_x" type="number" name="prep_time" required step="0.1" />
+          </li>
+
+          <li>
+            <span class="tit">Cooking time</span>
+            <input class="input_x" type="number" name="cooking_time" required step="0.1" />
+          </li>
+
+          <li>
+            <span class="tit">Calories</span>
+            <input class="input_x" type="number" name="calories" required step="1" />
           </li>
           <li>
             <span class="tit">Ingredient1</span>
-            <input type="text" class="input_x" />
-          </li>
-          <li>
-            <span class="tit">Image URL</span>
-            <input type="text" class="input_x" />
+            <input class="input_x" type="text" name="ingredient1" required/>
           </li>
           <li>
             <span class="tit">Ingredient2</span>
-            <input type="text" class="input_x" />
-          </li>
-          <li>
-            <span class="tit">Servings</span>
-            <input type="text" class="input_x" />
+            <input class="input_x" type="text" name="ingredient2" />
           </li>
           <li>
             <span class="tit">Ingredient3</span>
-            <input type="text" class="input_x" />
-          </li>
-          <li>
-            <span class="tit">Prep time</span>
-            <input type="text" class="input_x" />
+            <input class="input_x" type="text" name="ingredient3" />
           </li>
           <li>
             <span class="tit">Ingredient4</span>
-            <input type="text" class="input_x" />
-          </li>
-          <li>
-            <span class="tit">Cooking time</span>
-            <input type="text" class="input_x" />
+            <input class="input_x" type="text" name="ingredient4" />
           </li>
           <li>
             <span class="tit">Ingredient5</span>
-            <input type="text" class="input_x" />
-          </li>
-          <li>
-            <span class="tit">Calories</span>
-            <input type="text" class="input_x" />
+            <input class="input_x" type="text" name="ingredient5" />
           </li>
           <li>
             <span class="tit">Ingredient6</span>
-            <input type="text" class="input_x" />
+            <input class="input_x" type="text" name="ingredient6" />
           </li>
+
           <li class="con">
             <span class="tit">Content</span>
             <textarea
               class="input_x"
-              name=""
-              id=""
+              name="content"
+              type="text"
+              required
               cols="30"
               rows="10"
             ></textarea>
           </li>
+            
+
         </ul>
 
         <button class="btn_x">UPLOAD</button>
@@ -684,5 +694,23 @@
     </section>
 
     <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+  <script>
+    const targetNode = document.body;
+    const config = { childList: true, subtree: true };
+    const callback = function(mutationsList, observer) {
+      const flashMessages = document.querySelectorAll('.flash-message');
+      flashMessages.forEach(flashMessage => {
+        setTimeout(() => {
+                    flashMessage.remove();
+                }, 2000);
+    });
+
+
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+
+
+</script>
   </body>
 </html>
