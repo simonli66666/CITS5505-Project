@@ -1,4 +1,5 @@
 import datetime
+from sqlalchemy.ext.hybrid import hybrid_property
 
 from bbs.extensions import db
 from flask_login import UserMixin
@@ -43,3 +44,11 @@ class Post(db.Model):
      
      # 用户关系
      user = db.relationship('User', back_populates='posts')
+
+     @hybrid_property
+     def score(self):
+        return 2 * self.comment_num + self.likes
+
+     @score.expression
+     def score(cls):
+        return 2 * cls.comment_num + cls.likes

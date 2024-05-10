@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, current_app
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app, g
 from bbs.extensions import db
 from bbs.models import *
 from bbs.setting import *
@@ -15,6 +15,13 @@ app = Flask(__name__, static_folder='static')
 
 
 app.config['SECRET_KEY'] = 'admin'
+
+from flask import g
+
+@app.context_processor
+def inject_popular_posts():
+    popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
+    return dict(popular_posts=popular_posts)
 
 @app.route('/')
 def index():
