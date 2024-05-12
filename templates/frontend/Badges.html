@@ -238,165 +238,63 @@
 
             <!-- popular recipes -->
 
-            <div class="popular">
+            <div class="popular popular-posts">
               <div class="popular-bar">
                 <i class="bi bi-person-hearts"></i>
                 <span>Popular</span>
               </div>
-              <div class="popular-top-box">
-                <div id="popular-top-demo" class="popular-top-img">
-                  <a href="./postsDetails.html">
-                    <img
-                      src="./assets/images/brooke-lark-250695-350x250.jpg"
-                      alt=""
-                    />
-                  </a>
-                </div>
-                <div class="popular-top-detail">
-                  <div class="popular-num">01</div>
-                  <div class="popular-top-title">
-                    <a href="./postsDetails.html"
-                      >New Recipe Pasta with Creamy Kale Sauce</a
-                    >
+              {% for post in popular_posts %}
+                {% if loop.index == 1 %}
+                <div class="popular-top-box">
+                  <div id="popular-top-demo" class="popular-top-img">
+                    <a href="#">
+                      <img src="{{ post.image }}" alt="Top Post Image">
+                    </a>
+                  </div>
+                  <div class="popular-top-detail">
+                    <div class="popular-num">{{ loop.index }}</div>
+                    <div class="popular-top-title">
+                      <a href="#">{{ post.title }}</a>
+                    </div>
+                  </div>
+
+                  <div class="popular-com-view">
+                    <span class="com">
+                      <i class="bi bi-chat-fill"></i>
+                      <span class="comment-num">{{ post.comment_num }}</span> Comments
+                    </span>
+                    <span class="view">
+                      <i class="bi bi-eye-fill"></i>
+                      <span class="view-num">{{ post.read_times }}</span>k Views
+                    </span>
                   </div>
                 </div>
-                <div class="popular-com-view">
-                  <span class="com">
-                    <i class="bi bi-chat-fill"></i>
-                    <span id="comment-num" class="comment-num">346 </span
-                    >Comments
-                  </span>
-                  <span class="view">
-                    <i class="bi bi-eye-fill"></i>
-                    <span id="view-num" class="view-num">14</span>k Views
-                  </span>
+                {% else %}
+                <div class="popular-item">
+                  <ul>
+                    <li>
+                      <div class="popular-item-detail">
+                        <div class="popular-num">{{ loop.index }}</div>
+                        <div class="popular-item-title">
+                          <a href="#">{{ post.title }}</a>
+                        </div>
+                      </div>
+                      <div class="popular-com-view">
+                        <span class="com">
+                          <i class="bi bi-chat-fill"></i>
+                          <span id="comment-num" class="comment-num"> {{ post.comment_num }} </span
+                          > Comments
+                        </span>
+                        <span class="view">
+                          <i class="bi bi-eye-fill"></i>
+                          <span id="view-num" class="view-num"> {{ post.read_times }}</span>k Views
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">02</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Green Bean Salad with Almonds & Feta</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 213 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 13</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">03</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Steak & Baso Butter Lobster Sandwich</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 186 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 11</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">04</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Spicy Crispy Pomegranate Chicken</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 157 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 11</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">05</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Love Real Food Savory Steel Cut Oatmeal</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 120 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 9</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">06</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Fresh Vegan Granola Bites Recipe</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 113 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 9</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                {% endif %}
+              {% endfor %}
             </div>
           </div>
         </div>
