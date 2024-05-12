@@ -2,7 +2,13 @@ import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
 
 from bbs.extensions import db
+from bbs.extensions import event
 from flask_login import UserMixin
+
+likes_table = db.Table('likes',
+    db.Column('user_id', db.Integer, db.ForeignKey('t_user.id'), primary_key=True),
+    db.Column('post_id', db.Integer, db.ForeignKey('t_post.id'), primary_key=True)
+)
 
 class User(db.Model, UserMixin):
     __tablename__ = 't_user'
@@ -12,13 +18,25 @@ class User(db.Model, UserMixin):
     nickname = db.Column(db.String(40), nullable=False, unique=True, comment='user nick name')
     password = db.Column(db.String(256), comment='user password')
     create_time = db.Column(db.DATETIME, default=datetime.datetime.now)
-
+    gender = db.Column(db.String(6))  # "male" or "female"
+    age = db.Column(db.Integer)
+    mobile = db.Column(db.String(15))
+    email = db.Column(db.String(120))
+    signature = db.Column(db.Text)
+    post_num = db.Column(db.INTEGER, default=0, comment='Number of posts made by the user')
+    badges = db.Column(db.INTEGER, default=20)
+    like_num = db.Column(db.INTEGER, default=0)
+    selflike_num = db.Column(db.INTEGER, default=0)
     posts = db.relationship('Post', back_populates='user')
+    liked_posts = db.relationship('Post', secondary=likes_table, 
+                                  backref=db.backref('likers', lazy='dynamic'), 
+                                  lazy='dynamic')
+    selfcomment_num = db.Column(db.INTEGER, default=0)
 
 class Post(db.Model):
      __tablename__ = 't_post'
 
-     id = db.Column(db.INTEGER, primary_key=True, autoincrement=True, index=True)
+     id = db.Column(db.INTEGER, primary_key=True, autoincrement=True, index=True)    
      title = db.Column(db.String(100), index=True, nullable=False)
      image = db.Column(db.String(255), nullable=True)
      ingredient1 = db.Column(db.TEXT, nullable=False)
@@ -52,3 +70,31 @@ class Post(db.Model):
      @score.expression
      def score(cls):
         return 2 * cls.comment_num + cls.likes
+     
+
+     
+@event.listens_for(Post, 'after_insert')
+def increment_post_num(mapper, connection, target):
+    user = db.session.query(User).get(target.author_id)
+    if user:
+        user.post_num += 1
+        db.session.commit()
+
+@event.listens_for(Post, 'after_delete')
+def decrement_post_num(mapper, connection, target):
+    user = db.session.query(User).get(target.author_id)
+    if user:
+        user.post_num -= 1
+        db.session.commit()
+
+@event.listens_for(Post.likes, 'set')
+def update_total_likes(target, value, oldvalue, initiator):
+    if value != oldvalue:  # Check if the likes have actually changed
+        user = db.session.query(User).get(target.author_id)
+        if user:
+            # Adjust the user's like_num only if the old value is set (i.e., not None or similar)
+            if oldvalue is not None:
+                user.like_num += (value - oldvalue)
+            else:
+                user.like_num += value
+            db.session.commit()

@@ -85,235 +85,47 @@
 
             <div class="recipe-section">
               <div class="post-recipes">
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
+              {% for post in posts %}
+                  <div class="recipe-post-box">
+                      <div class="recipe-img-box">
+                          <a href="#"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
+                      </div>
+                      <div class="recipe-content">
+                          <h3 class="recipe-title"><a href="#">{{ post.title }}</a></h3>
+                          <div class="post-detail">
+                              by
+                              <span class="post-author"><a href="#">{{ post.user.nickname }}</a></span>
+                              <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
+                          </div>
+                          <div class="recipe-detail">
+                              <a href="#">{{ post.content|truncate(250, True) }}</a>
+                          </div>
+                          <button class="continue-reading">CONTINUE READING</button>
+                      </div>
                   </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
-                <div id="recipe-demo" class="recipe-post-box">
-                  <div class="recipe-img-box">
-                    <a href="./postsDetails.html"
-                      ><img
-                        src="./assets/images/jnews-demo-2-350x250.jpg"
-                        alt=""
-                        class="recipe-img"
-                    /></a>
-                  </div>
-                  <div class="recipe-content">
-                    <h3 class="recipe-title">
-                      <a href="./postsDetails.html"
-                        >Love Real Food Savory Steel Cut Oatmeal</a
-                      >
-                    </h3>
-                    <div class="post-detail">
-                      by
-                      <span id="author-demo" class="post-author"
-                        ><a href="./postsDetails.html">Margaery Tyrell</a></span
-                      >
-                      <span id="date-demo" class="post-date"
-                        >September 9, 2017</span
-                      >
-                    </div>
-                    <div id="recipe-detail-demo" class="recipe-detail">
-                      <a href="./postsDetails.html"
-                        >Strech lining hemline above knee burgundy glossy silk
-                        complete hid zip little catches rayon. Tunic weaved
-                        strech calfskin spaghetti straps...</a
-                      >
-                    </div>
-                    <button class="continue-reading">
-                      <a href="./postsDetails.html">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </div>
+              {% endfor %}
               </div>
             </div>
 
             <div class="pagination">
               <div class="pagination-box">
-                <a href="#">
-                  <span> < </span>
-                </a>
-                <a href="#"><span class="pagination-active">1</span></a>
-                <a href="#"><span>2</span></a>
-                <a href="#"><span>3</span></a>
-                <a href="#"><span>4</span></a>
-                <a href="#"><span>></span></a>
+              {% if pagination.has_prev %}
+                  <a href="{{ url_for('index', page=pagination.prev_num) }}"><span><  Previous</span></a>
+              {% endif %}
+              {% for page_num in pagination.iter_pages() %}
+                  {% if page_num %}
+                      {% if page_num != pagination.page %}
+                          <a href="{{ url_for('index', page=page_num) }}"> <span>{{ page_num }}</span></a>
+                      {% else %}
+                          <a href="#"><span class="pagination-active">{{ page_num }}</span></a>
+                      {% endif %}
+                  {% else %}
+                      <a href="#"> <span>...</span></a>
+                  {% endif %}
+              {% endfor %}
+              {% if pagination.has_next %}
+                  <a href="{{ url_for('index', page=pagination.next_num) }}"> <span>Next  ></span> </a>
+              {% endif %}
               </div>
             </div>
           </div>
@@ -325,169 +137,68 @@
 
             <!-- popular recipes -->
 
-            <div class="popular">
+            <div class="popular popular-posts">
               <div class="popular-bar">
                 <i class="bi bi-person-hearts"></i>
                 <span>Popular</span>
               </div>
-              <div class="popular-top-box">
-                <div id="popular-top-demo" class="popular-top-img">
-                  <a href="./postsDetails.html">
-                    <img
-                      src="./assets/images/brooke-lark-250695-350x250.jpg"
-                      alt=""
-                    />
-                  </a>
-                </div>
-                <div class="popular-top-detail">
-                  <div class="popular-num">01</div>
-                  <div class="popular-top-title">
-                    <a href="./postsDetails.html"
-                      >New Recipe Pasta with Creamy Kale Sauce</a
-                    >
+              {% for post in popular_posts %}
+                {% if loop.index == 1 %}
+                <div class="popular-top-box">
+                  <div id="popular-top-demo" class="popular-top-img">
+                    <a href="#">
+                      <img src="{{ post.image }}" alt="Top Post Image">
+                    </a>
+                  </div>
+                  <div class="popular-top-detail">
+                    <div class="popular-num">{{ loop.index }}</div>
+                    <div class="popular-top-title">
+                      <a href="#">{{ post.title }}</a>
+                    </div>
+                  </div>
+
+                  <div class="popular-com-view">
+                    <span class="com">
+                      <i class="bi bi-chat-fill"></i>
+                      <span class="comment-num">{{ post.comment_num }}</span> Comments
+                    </span>
+                    <span class="view">
+                      <i class="bi bi-eye-fill"></i>
+                      <span class="view-num">{{ post.read_times }}</span>k Views
+                    </span>
                   </div>
                 </div>
-                <div class="popular-com-view">
-                  <span class="com">
-                    <i class="bi bi-chat-fill"></i>
-                    <span id="comment-num" class="comment-num">346 </span
-                    >Comments
-                  </span>
-                  <span class="view">
-                    <i class="bi bi-eye-fill"></i>
-                    <span id="view-num" class="view-num">14</span>k Views
-                  </span>
+                {% else %}
+                <div class="popular-item">
+                  <ul>
+                    <li>
+                      <div class="popular-item-detail">
+                        <div class="popular-num">{{ loop.index }}</div>
+                        <div class="popular-item-title">
+                          <a href="#">{{ post.title }}</a>
+                        </div>
+                      </div>
+                      <div class="popular-com-view">
+                        <span class="com">
+                          <i class="bi bi-chat-fill"></i>
+                          <span id="comment-num" class="comment-num"> {{ post.comment_num }} </span
+                          > Comments
+                        </span>
+                        <span class="view">
+                          <i class="bi bi-eye-fill"></i>
+                          <span id="view-num" class="view-num"> {{ post.read_times }}</span>k Views
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
                 </div>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">02</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Green Bean Salad with Almonds & Feta</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 213 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 13</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">03</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Steak & Baso Butter Lobster Sandwich</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 186 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 11</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">04</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Spicy Crispy Pomegranate Chicken</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 157 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 11</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">05</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Love Real Food Savory Steel Cut Oatmeal</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 120 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 9</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div class="popular-item">
-                <ul>
-                  <li>
-                    <div class="popular-item-detail">
-                      <div class="popular-num">06</div>
-                      <div class="popular-item-title">
-                        <a href="./postsDetails.html"
-                          >Fresh Vegan Granola Bites Recipe</a
-                        >
-                      </div>
-                    </div>
-                    <div class="popular-com-view">
-                      <span class="com">
-                        <i class="bi bi-chat-fill"></i>
-                        <span id="comment-num" class="comment-num"> 113 </span
-                        >Comments
-                      </span>
-                      <span class="view">
-                        <i class="bi bi-eye-fill"></i>
-                        <span id="view-num" class="view-num"> 9</span>k Views
-                      </span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+                {% endif %}
+              {% endfor %}
             </div>
           </div>
         </div>
       </div>
+    </div>
 
       <div class="footer">
         <div class="copy">© 2024 Liz. All Rights Reserved</div>

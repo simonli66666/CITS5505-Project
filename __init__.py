@@ -4,6 +4,10 @@ from bbs.models import *
 from bbs.setting import *
 import click
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_migrate import Migrate
+from alembic import op
+import sqlalchemy as sa
+from flask import g
 
 
 
@@ -16,7 +20,6 @@ app = Flask(__name__, static_folder='static')
 
 app.config['SECRET_KEY'] = 'admin'
 
-from flask import g
 
 @app.context_processor
 def inject_popular_posts():
@@ -132,6 +135,28 @@ def posts_details():
 
 
 
+@app.route('/edit-user-info',  methods=['POST','GET'])
+@login_required
+def edit_user_info():
+    if request.method == 'POST':
+        user = current_user
+        try:
+            user.gender = request.form.get('gender')
+            user.age = int(request.form.get('age', 0))
+            user.mobile = request.form.get('mobile')
+            user.email = request.form.get('email')
+            user.signature = request.form.get('signature')
+
+            db.session.commit()
+            flash('Profile updated successfully!', 'success')
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            flash('Failed to update profile.', 'error')
+            print("Error:", e)
+    return redirect(url_for('user'))  # 重定向到用户资料页面
+
+    
+
 @app.route('/badges')
 @login_required
 def badges():
@@ -174,3 +199,4 @@ register_error_handlers(app)
 app.config.from_object(DevelopmentConfig)
 register_extensions(app)
 register_cmd(app)
+migrate = Migrate(app, db)
