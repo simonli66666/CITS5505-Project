@@ -31,7 +31,7 @@
           </div>
 
           <div class="right-header">
-            <a href="./user.html" class="user">
+            <a href="/user" class="user">
               <div class="user_pirc">
                 <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
                 <div class="name">{{ current_user.nickname }}</div>
@@ -141,8 +141,8 @@
                       style="color: #fd7c47"
                     ></i>
                     <div class="r">
-                      <div class="num">6</div>
-                      <div class="tit">{{ current_user.selfcomment_num }}</div>
+                      <div class="num">{{ current_user.selfcomment_num }}</div>
+                      <div class="tit">Comments</div>
                     </div>
                   </div>
                   <div class="item">
@@ -375,7 +375,7 @@
                     </span>
                     <span class="view">
                       <i class="bi bi-eye-fill"></i>
-                      <span class="view-num">{{ post.read_times }}</span>k Views
+                      <span class="view-num">{{ post.read_times }}</span> Views
                     </span>
                   </div>
                 </div>
@@ -397,7 +397,7 @@
                         </span>
                         <span class="view">
                           <i class="bi bi-eye-fill"></i>
-                          <span id="view-num" class="view-num"> {{ post.read_times }}</span>k Views
+                          <span id="view-num" class="view-num"> {{ post.read_times }}</span> Views
                         </span>
                       </div>
                     </li>

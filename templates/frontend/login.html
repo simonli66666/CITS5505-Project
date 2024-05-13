@@ -88,19 +88,19 @@
               {% for post in posts %}
                   <div class="recipe-post-box">
                       <div class="recipe-img-box">
-                          <a href="#"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
+                          <a href="{{ url_for('read', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
                       </div>
                       <div class="recipe-content">
-                          <h3 class="recipe-title"><a href="#">{{ post.title }}</a></h3>
+                          <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
                           <div class="post-detail">
                               by
                               <span class="post-author"><a href="#">{{ post.user.nickname }}</a></span>
                               <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
                           </div>
                           <div class="recipe-detail">
-                              <a href="#">{{ post.content|truncate(250, True) }}</a>
+                              <a href="{{ url_for('read', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
                           </div>
-                          <button class="continue-reading">CONTINUE READING</button>
+                          <button class="continue-reading"><a href="{{ url_for('read', post_id=post.id) }}">CONTINUE READING</a></button>
                       </div>
                   </div>
               {% endfor %}
@@ -146,14 +146,14 @@
                 {% if loop.index == 1 %}
                 <div class="popular-top-box">
                   <div id="popular-top-demo" class="popular-top-img">
-                    <a href="#">
+                    <a href="{{ url_for('read', post_id=post.id) }}">
                       <img src="{{ post.image }}" alt="Top Post Image">
                     </a>
                   </div>
                   <div class="popular-top-detail">
                     <div class="popular-num">{{ loop.index }}</div>
                     <div class="popular-top-title">
-                      <a href="#">{{ post.title }}</a>
+                      <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
                     </div>
                   </div>
 
@@ -164,7 +164,7 @@
                     </span>
                     <span class="view">
                       <i class="bi bi-eye-fill"></i>
-                      <span class="view-num">{{ post.read_times }}</span>k Views
+                      <span class="view-num">{{ post.read_times }}</span> Views
                     </span>
                   </div>
                 </div>
@@ -175,7 +175,7 @@
                       <div class="popular-item-detail">
                         <div class="popular-num">{{ loop.index }}</div>
                         <div class="popular-item-title">
-                          <a href="#">{{ post.title }}</a>
+                          <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
                         </div>
                       </div>
                       <div class="popular-com-view">
@@ -186,7 +186,7 @@
                         </span>
                         <span class="view">
                           <i class="bi bi-eye-fill"></i>
-                          <span id="view-num" class="view-num"> {{ post.read_times }}</span>k Views
+                          <span id="view-num" class="view-num"> {{ post.read_times }}</span> Views
                         </span>
                       </div>
                     </li>

@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, current_app, g
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app, g, jsonify
 from bbs.extensions import db
-from bbs.models import *
 from bbs.setting import *
+from bbs.models import *
+
 import click
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_migrate import Migrate
@@ -19,7 +20,6 @@ app = Flask(__name__, static_folder='static')
 
 
 app.config['SECRET_KEY'] = 'admin'
-
 
 @app.context_processor
 def inject_popular_posts():
@@ -129,11 +129,33 @@ def user():
     return render_template('frontend/user.html')
 
 # 帖子详情页面
-@app.route('/posts_details')
-def posts_details():
-    return render_template('frontend/postsDetails.html')
+@app.route('/read/<post_id>/', methods=['GET'])
+def read(post_id):
+    post = Post.query.get_or_404(post_id)
+    post.read_times += 1  # 增加阅读次数
+    db.session.commit()   # 提交数据库更改
+    return render_template('frontend/postsDetails.html', post=post)
 
+@app.route('/like/<int:post_id>/', methods=['POST'])
+@login_required
+def like(post_id):
+    success, message, is_liked = post_like(post_id)
+    return jsonify(success=success, message=message, isLiked=is_liked)
 
+def post_like(post_id):
+    post = Post.query.get_or_404(post_id)
+    c = Like.query.filter_by(user_id=current_user.id, post_id=post_id).first()
+    if c:
+        post.likes_num -= 1
+        db.session.delete(c)
+        db.session.commit()
+        return True, "You have unliked the post.", False
+    else:
+        post.likes_num += 1
+        c = Like(user_id=current_user.id, post_id=post_id)
+        db.session.add(c)
+        db.session.commit()
+        return True, "You have liked the post.", True
 
 @app.route('/edit-user-info',  methods=['POST','GET'])
 @login_required

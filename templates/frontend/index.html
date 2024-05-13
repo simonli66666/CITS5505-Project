@@ -201,7 +201,7 @@
                     </span>
                     <span class="view">
                       <i class="bi bi-eye-fill"></i>
-                      <span class="view-num">{{ post.read_times }}</span>k Views
+                      <span class="view-num">{{ post.read_times }}</span> Views
                     </span>
                   </div>
                 </div>
@@ -223,7 +223,7 @@
                         </span>
                         <span class="view">
                           <i class="bi bi-eye-fill"></i>
-                          <span id="view-num" class="view-num"> {{ post.read_times }}</span>k Views
+                          <span id="view-num" class="view-num"> {{ post.read_times }}</span> Views
                         </span>
                       </div>
                     </li>
@@ -440,23 +440,6 @@
     </section>
 
     <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
-  <script>
-    const targetNode = document.body;
-    const config = { childList: true, subtree: true };
-    const callback = function(mutationsList, observer) {
-      const flashMessages = document.querySelectorAll('.flash-message');
-      flashMessages.forEach(flashMessage => {
-        setTimeout(() => {
-                    flashMessage.remove();
-                }, 2000);
-    });
-
-
-    };
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
-
-
-</script>
+ 
   </body>
 </html>

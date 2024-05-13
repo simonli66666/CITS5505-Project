@@ -29,9 +29,10 @@ class User(db.Model, UserMixin):
     selflike_num = db.Column(db.INTEGER, default=0)
     posts = db.relationship('Post', back_populates='user')
     liked_posts = db.relationship('Post', secondary=likes_table, 
-                                  backref=db.backref('likers', lazy='dynamic'), 
+                                   back_populates='likers',  
                                   lazy='dynamic')
     selfcomment_num = db.Column(db.INTEGER, default=0)
+    user_likes = db.relationship('Like', back_populates='user', lazy='dynamic')
 
 class Post(db.Model):
      __tablename__ = 't_post'
@@ -54,7 +55,7 @@ class Post(db.Model):
      update_time = db.Column(db.DateTime, default=datetime.datetime.now)
      read_times = db.Column(db.INTEGER, default=0)
      # 用户对帖子的操作
-     likes = db.Column(db.INTEGER, default=0, comment='like post persons')
+     likes_num = db.Column(db.INTEGER, default=0, comment='like post persons')
      comment_num = db.Column(db.INTEGER, default=0, comment='comment numbers')
      
      # 外键id
@@ -62,16 +63,28 @@ class Post(db.Model):
      
      # 用户关系
      user = db.relationship('User', back_populates='posts')
-
+     likes = db.relationship('Like', back_populates='post', lazy='dynamic')
+     likers = db.relationship('User', secondary=likes_table, back_populates='liked_posts', lazy='dynamic')
      @hybrid_property
      def score(self):
-        return 2 * self.comment_num + self.likes
+        return 2 * self.comment_num + self.likes_num
 
      @score.expression
      def score(cls):
-        return 2 * cls.comment_num + cls.likes
+        return 2 * cls.comment_num + cls.likes_num
      
 
+
+class Like(db.Model):
+    __tablename__ = 't_like'
+
+    id = db.Column(db.INTEGER, primary_key=True, autoincrement=True)
+    
+    timestamps = db.Column(db.DateTime, default=datetime.datetime.now)
+    user_id = db.Column(db.INTEGER, db.ForeignKey('t_user.id'))
+    post_id = db.Column(db.INTEGER, db.ForeignKey('t_post.id'))
+    user = db.relationship('User', back_populates='user_likes', lazy='joined')
+    post = db.relationship('Post', back_populates='likes', lazy='joined')
      
 @event.listens_for(Post, 'after_insert')
 def increment_post_num(mapper, connection, target):

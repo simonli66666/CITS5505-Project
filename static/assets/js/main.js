@@ -52,3 +52,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
   loginCloseBtn.addEventListener("click", () => toggleDisplay(loginBox, false));
   registerCloseBtn.addEventListener("click", () => toggleDisplay(registerBox, false));
+
+
+  const targetNode = document.body;
+    const config = { childList: true, subtree: true };
+    const callback = function(mutationsList, observer) {
+      const flashMessages = document.querySelectorAll('.flash-message');
+      flashMessages.forEach(flashMessage => {
+        setTimeout(() => {
+                    flashMessage.remove();
+                }, 2000);
+    });
+
+
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
