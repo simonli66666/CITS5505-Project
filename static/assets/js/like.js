@@ -1,10 +1,9 @@
-<script>
 function toggleLike(postId) {
+    var likeButton = document.querySelector(`#like-icon-${postId}`);
     fetch(`/like/${postId}/`, { method: 'POST' })
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            var likeButton = document.querySelector('.like-button i');
             if (data.isLiked) {
                 likeButton.classList.remove('bi-heart');
                 likeButton.classList.add('bi-heart-fill');
@@ -16,6 +15,4 @@ function toggleLike(postId) {
         }
     })
     .catch(error => console.error('Error:', error));
-
 }
-</script>

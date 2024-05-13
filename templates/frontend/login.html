@@ -110,12 +110,12 @@
             <div class="pagination">
               <div class="pagination-box">
               {% if pagination.has_prev %}
-                  <a href="{{ url_for('index', page=pagination.prev_num) }}"><span><  Previous</span></a>
+                  <a href="{{ url_for('recipes', page=pagination.prev_num) }}"><span><  Previous</span></a>
               {% endif %}
               {% for page_num in pagination.iter_pages() %}
                   {% if page_num %}
                       {% if page_num != pagination.page %}
-                          <a href="{{ url_for('index', page=page_num) }}"> <span>{{ page_num }}</span></a>
+                          <a href="{{ url_for('recipes', page=page_num) }}"> <span>{{ page_num }}</span></a>
                       {% else %}
                           <a href="#"><span class="pagination-active">{{ page_num }}</span></a>
                       {% endif %}
@@ -124,7 +124,7 @@
                   {% endif %}
               {% endfor %}
               {% if pagination.has_next %}
-                  <a href="{{ url_for('index', page=pagination.next_num) }}"> <span>Next  ></span> </a>
+                  <a href="{{ url_for('recipes', page=pagination.next_num) }}"> <span>Next  ></span> </a>
               {% endif %}
               </div>
             </div>

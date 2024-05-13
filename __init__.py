@@ -118,6 +118,7 @@ def test():
 @app.route('/recipes')
 @login_required
 def recipes():
+    
     page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
     posts = pagination.items
@@ -135,6 +136,13 @@ def read(post_id):
     post.read_times += 1  # 增加阅读次数
     db.session.commit()   # 提交数据库更改
     return render_template('frontend/postsDetails.html', post=post)
+
+@app.route('/read2/<post_id>/', methods=['GET'])
+def read2(post_id):
+    post = Post.query.get_or_404(post_id)
+    post.read_times += 1  # 增加阅读次数
+    db.session.commit()   # 提交数据库更改
+    return render_template('frontend/postsDetails_notlogin.html', post=post)
 
 @app.route('/like/<int:post_id>/', methods=['POST'])
 @login_required

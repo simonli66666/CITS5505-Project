@@ -125,19 +125,19 @@
               {% for post in posts %}
                   <div class="recipe-post-box">
                       <div class="recipe-img-box">
-                          <a href="#"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
+                          <a href="{{ url_for('read2', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
                       </div>
                       <div class="recipe-content">
-                          <h3 class="recipe-title"><a href="#">{{ post.title }}</a></h3>
+                          <h3 class="recipe-title"><a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a></h3>
                           <div class="post-detail">
                               by
                               <span class="post-author"><a href="#">{{ post.user.nickname }}</a></span>
                               <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
                           </div>
                           <div class="recipe-detail">
-                              <a href="#">{{ post.content|truncate(250, True) }}</a>
+                              <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
                           </div>
-                          <button class="continue-reading">CONTINUE READING</button>
+                          <button class="continue-reading"><a href="{{ url_for('read2', post_id=post.id) }}">CONTINUE READING</a></button>
                       </div>
                   </div>
               {% endfor %}

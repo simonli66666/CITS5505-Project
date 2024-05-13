@@ -54,7 +54,7 @@
         </div>
         <div class="button-container">
           <button class="like-button" onclick="toggleLike({{ post.id }})">
-            <i class="bi {{ 'bi-heart-fill' if current_user_has_liked else 'bi-heart' }}"></i>{{ post.likes_num }} Like 
+            <i class="bi {{ 'bi-heart-fill' if current_user_has_liked else 'bi-heart' }}" id="like-icon-{{ post.id }}"></i>{{ post.likes_num }} Like
           </button>
         </div>
       </div>
