@@ -148,7 +148,7 @@ def read(post_id):
     post = Post.query.get_or_404(post_id)
     post.read_times += 1  # 增加阅读次数
     db.session.commit()   # 提交数据库更改
-    return render_template('frontend/postsDetails.html', posts=posts, pagination=pagination)
+    return render_template('frontend/postsDetails.html',post=post,posts=posts, pagination=pagination)
 
 @app.route('/read2/<post_id>/', methods=['GET'])
 def read2(post_id):
@@ -158,7 +158,7 @@ def read2(post_id):
     post = Post.query.get_or_404(post_id)
     post.read_times += 1  # 增加阅读次数
     db.session.commit()   # 提交数据库更改
-    return render_template('frontend/postsDetails_notlogin.html',  posts=posts, pagination=pagination)
+    return render_template('frontend/postsDetails_notlogin.html', post=post, posts=posts, pagination=pagination)
 
 @app.route('/like/<int:post_id>/', methods=['POST'])
 @login_required
