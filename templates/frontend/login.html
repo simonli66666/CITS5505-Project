@@ -94,7 +94,7 @@
                           <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
                           <div class="post-detail">
                               by
-                              <span class="post-author"><a href="#">{{ post.user.nickname }}</a></span>
+                              <span class="post-author">{{ post.user.nickname }}</span>
                               <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
                           </div>
                           <div class="recipe-detail">

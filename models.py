@@ -1,8 +1,7 @@
 import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
 
-from bbs.extensions import db
-from bbs.extensions import event
+from bbs.extensions import *
 from flask_login import UserMixin
 
 likes_table = db.Table('likes',
@@ -14,9 +13,9 @@ class User(db.Model, UserMixin):
     __tablename__ = 't_user'
 
     id = db.Column(db.INTEGER, primary_key=True, nullable=False, index=True, autoincrement=True)
-    username = db.Column(db.String(40), nullable=False, index=True, unique=True, comment='user name')
-    nickname = db.Column(db.String(40), nullable=False, unique=True, comment='user nick name')
-    password = db.Column(db.String(256), comment='user password')
+    username = db.Column(db.String(40), nullable=False, index=True, unique=True )
+    nickname = db.Column(db.String(40), nullable=False, unique=True )
+    password = db.Column(db.String(256))
     create_time = db.Column(db.DATETIME, default=datetime.datetime.now)
     gender = db.Column(db.String(6))  # "male" or "female"
     age = db.Column(db.Integer)
@@ -24,16 +23,94 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120))
     signature = db.Column(db.Text)
     post_num = db.Column(db.INTEGER, default=0, comment='Number of posts made by the user')
-    badges = db.Column(db.INTEGER, default=20)
-    like_num = db.Column(db.INTEGER, default=0)
-    selflike_num = db.Column(db.INTEGER, default=0)
     posts = db.relationship('Post', back_populates='user')
     liked_posts = db.relationship('Post', secondary=likes_table, 
                                    back_populates='likers',  
                                   lazy='dynamic')
-    selfcomment_num = db.Column(db.INTEGER, default=0)
     user_likes = db.relationship('Like', back_populates='user', lazy='dynamic')
+    comments = db.relationship('Comments', back_populates='author')
+    @hybrid_property
+    def selfcomment_num(self):
+        return len(self.comments)
 
+    @selfcomment_num.expression
+    def selfcomment_num(cls):
+        return (
+            select([func.count(Comments.id)])
+            .where(Comments.author_id == cls.id)
+            .label("selfcomment_num")
+        )
+    @hybrid_property
+    def selflike_num(self):
+        return self.user_likes.count()
+
+    @selflike_num.expression
+    def selflike_num(cls):
+        return (
+            select([func.count(Like.id)])
+            .where(Like.user_id == cls.id)
+            .label("selflike_num")
+        )
+    @hybrid_property
+    def like_num(self):
+        return (
+            db.session.query(func.count(Like.id))
+            .join(Post, Like.post_id == Post.id)
+            .filter(Post.author_id == self.id)
+            .scalar()
+        )
+
+    @like_num.expression
+    def like_num(cls):
+        return (
+            select([func.count(Like.id)])
+            .join(Post, Like.post_id == Post.id)
+            .where(Post.author_id == cls.id)
+            .label("like_num")
+        )
+    @hybrid_property
+    def post_num(self):
+        return len(self.posts)
+
+    @post_num.expression
+    def post_num(cls):
+        return (
+            select([func.count(Post.id)])
+            .where(Post.author_id == cls.id)
+            .label("post_num")
+        )
+    @hybrid_property
+    def comment_num(self):
+        return (
+            db.session.query(func.count(Comments.id))
+            .join(Post, Comments.post_id == Post.id)
+            .filter(Post.author_id == self.id)
+            .scalar()
+        )
+
+    @comment_num.expression
+    def comment_num(cls):
+        return (
+            select([func.count(Comments.id)])
+            .join(Post, Comments.post_id == Post.id)
+            .where(Post.author_id == cls.id)
+            .label("comment_num")
+        )
+    
+    @hybrid_property
+    def badges(self):
+        return 20 + self.post_num * 5 + self.like_num * 2 + self.comment_num * 2 + self.selfcomment_num * 2
+
+    @badges.expression
+    def badges(cls):
+        return (
+            20 +
+            (select([func.count(Post.id)]) .where(Post.author_id == cls.id) * 5) +
+            (select([func.count(Like.id)]) .join(Post, Like.post_id == Post.id) .where(Post.author_id == cls.id) * 2) +
+            (select([func.count(Comments.id)]) .join(Post, Comments.post_id == Post.id) .where(Post.author_id == cls.id) * 2) +
+            (select([func.count(Comments.id)]) .where(Comments.author_id == cls.id) * 2)
+        )
+    
 class Post(db.Model):
      __tablename__ = 't_post'
 
@@ -65,6 +142,8 @@ class Post(db.Model):
      user = db.relationship('User', back_populates='posts')
      likes = db.relationship('Like', back_populates='post', lazy='dynamic')
      likers = db.relationship('User', secondary=likes_table, back_populates='liked_posts', lazy='dynamic')
+     comments = db.relationship('Comments', back_populates='post')
+
      @hybrid_property
      def score(self):
         return 2 * self.comment_num + self.likes_num
@@ -72,6 +151,8 @@ class Post(db.Model):
      @score.expression
      def score(cls):
         return 2 * cls.comment_num + cls.likes_num
+     
+     
      
 
 
@@ -86,28 +167,24 @@ class Like(db.Model):
     user = db.relationship('User', back_populates='user_likes', lazy='joined')
     post = db.relationship('Post', back_populates='likes', lazy='joined')
      
-@event.listens_for(Post, 'after_insert')
-def increment_post_num(mapper, connection, target):
-    user = db.session.query(User).get(target.author_id)
-    if user:
-        user.post_num += 1
-        db.session.commit()
 
-@event.listens_for(Post, 'after_delete')
-def decrement_post_num(mapper, connection, target):
-    user = db.session.query(User).get(target.author_id)
-    if user:
-        user.post_num -= 1
-        db.session.commit()
+class Comments(db.Model):
+    __tablename__ = 't_comments'
 
-@event.listens_for(Post.likes, 'set')
-def update_total_likes(target, value, oldvalue, initiator):
-    if value != oldvalue:  # Check if the likes have actually changed
-        user = db.session.query(User).get(target.author_id)
-        if user:
-            # Adjust the user's like_num only if the old value is set (i.e., not None or similar)
-            if oldvalue is not None:
-                user.like_num += (value - oldvalue)
-            else:
-                user.like_num += value
-            db.session.commit()
+    id = db.Column(db.INTEGER, primary_key=True, autoincrement=True)
+    body = db.Column(db.Text)
+    timestamps = db.Column(db.DATETIME, default=datetime.datetime.now)
+
+    author_id = db.Column(db.INTEGER, db.ForeignKey('t_user.id'))
+    post_id = db.Column(db.INTEGER, db.ForeignKey('t_post.id'))
+    replied_id = db.Column(db.INTEGER, db.ForeignKey('t_comments.id'))
+
+    post = db.relationship('Post', back_populates='comments')
+    author = db.relationship('User', back_populates='comments')
+    replies = db.relationship('Comments', back_populates='replied', cascade='all')
+    replied = db.relationship('Comments', back_populates='replies', remote_side=[id])
+
+
+
+
+

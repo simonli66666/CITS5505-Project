@@ -137,7 +137,28 @@ def recipes():
 @app.route('/user')
 @login_required
 def user():
-    return render_template('frontend/user.html')
+    user = current_user
+    
+    page = request.args.get('page', 1, type=int)
+
+    own_posts_pagination = Post.query.filter_by(author_id=user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    own_posts = own_posts_pagination.items
+    
+    liked_posts_pagination = Post.query.join(Like, Post.id == Like.post_id).filter(Like.user_id == user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    liked_posts = liked_posts_pagination.items
+    
+    commented_posts_pagination = Post.query.join(Comments, Post.id == Comments.post_id).filter(Comments.author_id == user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    commented_posts = commented_posts_pagination.items
+
+    return render_template(
+        'frontend/user.html', 
+        own_posts=own_posts, 
+        liked_posts=liked_posts, 
+        commented_posts=commented_posts, 
+        own_posts_pagination=own_posts_pagination, 
+        liked_posts_pagination=liked_posts_pagination, 
+        commented_posts_pagination=commented_posts_pagination
+    )
 
 # 帖子详情页面
 @app.route('/read/<post_id>/', methods=['GET'])
@@ -148,7 +169,9 @@ def read(post_id):
     post = Post.query.get_or_404(post_id)
     post.read_times += 1  # 增加阅读次数
     db.session.commit()   # 提交数据库更改
-    return render_template('frontend/postsDetails.html',post=post,posts=posts, pagination=pagination)
+    comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.timestamps.desc()).all() 
+
+    return render_template('frontend/postsDetails.html',post=post,posts=posts, pagination=pagination, comments=comments)
 
 @app.route('/read2/<post_id>/', methods=['GET'])
 def read2(post_id):
@@ -158,7 +181,9 @@ def read2(post_id):
     post = Post.query.get_or_404(post_id)
     post.read_times += 1  # 增加阅读次数
     db.session.commit()   # 提交数据库更改
-    return render_template('frontend/postsDetails_notlogin.html', post=post, posts=posts, pagination=pagination)
+    comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.timestamps.desc()).all() 
+
+    return render_template('frontend/postsDetails_notlogin.html', post=post, posts=posts, pagination=pagination, comments=comments)
 
 @app.route('/like/<int:post_id>/', methods=['POST'])
 @login_required
@@ -202,6 +227,26 @@ def edit_user_info():
     return redirect(url_for('user'))  # 重定向到用户资料页面
 
     
+@app.route('/post-comment/', methods=['POST'])
+@login_required
+def post_comment():
+    comment_content = request.form.get('commentContent')
+    post_id = request.form.get('postId')
+
+    post = Post.query.get_or_404(post_id)
+    com = Comments(body=comment_content, post_id=post_id, author_id=current_user.id)
+    
+    # # 如果评论帖子用户与发帖用户不为同一人则发送消息通知
+    # if current_user.id != post.author_id:
+    #     notice = Notification(target_id=post_id, target_name=post.title, send_user=current_user.username,
+    #                           receive_id=post.author_id, msg=comment_content)
+    #     db.session.add(notice)
+    
+    post.update_time = datetime.datetime.now()
+    db.session.add(com)
+    db.session.commit()
+
+    return jsonify({'tag': 1})
 
 @app.route('/badges')
 @login_required

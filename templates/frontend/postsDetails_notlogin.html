@@ -44,8 +44,7 @@
         </h1>
         <div class="b">
           <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
-          <a href="">{{ post.user.nickname }}</a>/ <span>{{ post.create_time }}</span>/
-          <a href="">{{ post.comment_num }} COMMENT</a>
+          {{ post.user.nickname }}/ <span>{{ post.create_time.strftime('%Y-%m-%d') }}</span>
         </div>
         <div class="button-container">
               <i class="bi bi-heart"></i> {{ post.likes_num }}Like
@@ -91,7 +90,7 @@
               />
 
               <h1>{{ post.title }}</h1>
-              <p>Recipe by {{ post.user }}</p>
+              <p>Recipe by {{ post.user.nickname }}</p>
               <div class="iconlist">
                 <div class="item">
                   <div>
@@ -292,80 +291,26 @@
             </div>
 
             <div class="pl">
-              <ul>
+              <ul class="comments-list">
+                {% for comment in comments %}
                 <li>
                   <div class="top">
-                    <img src="assets/images/13_Food_Servant-512.webp" alt="" />
+                    <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
                     <div class="right">
-                      <div class="comment_name">Bob</div>
-                      <div class="date">2024-4-29</div>
+                      <div class="comment_name">{{ comment.author.nickname }}</div>
+                      <div class="date">{{ comment.timestamps.strftime('%Y-%m-%d') }}</div>
                     </div>
                   </div>
                   <div class="c">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                    ducimus magnam dolorem, vel, at fuga libero est velit totam
-                    deleniti sequi, eum nisi dolorum a suscipit pariatur odit
-                    placeat! Incidunt!
+                    {{ comment.body }}
                   </div>
                 </li>
-                <li>
-                  <div class="top">
-                    <img src="assets/images/13_Food_Servant-512.webp" alt="" />
-                    <div class="right">
-                      <div class="comment_name">Annie</div>
-                      <div class="date">2024-4-29</div>
-                    </div>
-                  </div>
-                  <div class="c">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                    ducimus magnam dolorem, vel, at fuga libero est velit totam
-                    deleniti sequi, eum nisi dolorum a suscipit pariatur odit
-                    placeat! Incidunt!
-                  </div>
-                </li>
-                <li>
-                  <div class="top">
-                    <img src="assets/images/13_Food_Servant-512.webp" alt="" />
-                    <div class="right">
-                      <div class="comment_name">Jack</div>
-                      <div class="date">2024-4-29</div>
-                    </div>
-                  </div>
-                  <div class="c">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                    ducimus magnam dolorem, vel, at fuga libero est velit totam
-                    deleniti sequi, eum nisi dolorum a suscipit pariatur odit
-                    placeat! Incidunt!
-                  </div>
-                </li>
+                {% endfor %}
               </ul>
-              <button class="btn_x show_login" id="comment">
-                Leave A Comment
-              </button>
-
-              <div class="submit-tj" id="comment2">
-                <form action="">
-                  <textarea
-                    name=""
-                    id=""
-                    cols="30"
-                    rows="10"
-                    class="input_x"
-                  ></textarea>
-                  <button class="btn_x">Submit</button>
-                </form>
-              </div>
             </div>
           </div>
 
-          <!-- <script>
-            // const comment = document.querySelector("#comment");
-            // const comment2 = document.querySelector("#comment2");
-            // comment.addEventListener("click", () => {
-            //   comment2.classList.add("show");
-            //   comment.style.display = "none";
-            // });
-          </script> -->
+          
 
           <div class="main-right">
             <div class="share">
