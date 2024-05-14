@@ -25,7 +25,7 @@ app.config['SECRET_KEY'] = 'admin'
 def inject_popular_posts():
     popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
     return dict(popular_posts=popular_posts)
-
+# 主页路由
 @app.route('/')
 def index():
     page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
@@ -46,6 +46,9 @@ def load_user(user_id):
 # 注册路由
 @app.route('/register1', methods=['GET', 'POST'])
 def register():
+    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    posts = pagination.items
     if request.method == 'POST':
         username = request.form['username']
         nickname = request.form['nickname']
@@ -53,22 +56,26 @@ def register():
         # 检查用户名是否已存在
         if User.query.filter_by(username=username).first():
             flash('Username already exists!', 'error')
-            return render_template('frontend/index.html', error=True, username=username)
+            return render_template('frontend/index.html', error=True, username=username, posts=posts, pagination=pagination)
         if User.query.filter_by(nickname=nickname).first():
             flash('Username already exists!', 'error')
-            return render_template('frontend/index.html', error=True, nickname=nickname)
+            return render_template('frontend/index.html', error=True, nickname=nickname, posts=posts, pagination=pagination)
         new_user = User(username=username,nickname=nickname, password=password)
         db.session.add(new_user)
         db.session.commit()
         flash('User created successfully!','success')
         return redirect(url_for('login'))
-    return render_template('frontend/index.html', error=False) 
+    
+    return render_template('frontend/index.html', error=False, posts=posts, pagination=pagination) 
 
 
 
 # 登录路由
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    posts = pagination.items
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -80,11 +87,14 @@ def login():
             return redirect(url_for('recipes')) 
         else:
             flash('Invalid username or password!', 'error')
-    return render_template('frontend/index.html')
+    return render_template('frontend/index.html', posts=posts, pagination=pagination)
 
 # 发布菜单路由
 @app.route('/share', methods=['GET', 'POST'])
 def share():
+    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    posts = pagination.items
     if request.method == 'POST':
         title = request.form['title']
         image = request.form['image']
@@ -106,7 +116,7 @@ def share():
         db.session.commit()
         flash('Recipt posted successfully!','success')
         return redirect(url_for('recipes', post_id=post.id))
-    return render_template('frontend/login.html', error=False)
+    return render_template('frontend/login.html', error=False, posts=posts, pagination=pagination)
 
 @app.route('/test')
 def test():
@@ -132,17 +142,23 @@ def user():
 # 帖子详情页面
 @app.route('/read/<post_id>/', methods=['GET'])
 def read(post_id):
+    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    posts = pagination.items
     post = Post.query.get_or_404(post_id)
     post.read_times += 1  # 增加阅读次数
     db.session.commit()   # 提交数据库更改
-    return render_template('frontend/postsDetails.html', post=post)
+    return render_template('frontend/postsDetails.html', posts=posts, pagination=pagination)
 
 @app.route('/read2/<post_id>/', methods=['GET'])
 def read2(post_id):
+    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    posts = pagination.items
     post = Post.query.get_or_404(post_id)
     post.read_times += 1  # 增加阅读次数
     db.session.commit()   # 提交数据库更改
-    return render_template('frontend/postsDetails_notlogin.html', post=post)
+    return render_template('frontend/postsDetails_notlogin.html',  posts=posts, pagination=pagination)
 
 @app.route('/like/<int:post_id>/', methods=['POST'])
 @login_required
