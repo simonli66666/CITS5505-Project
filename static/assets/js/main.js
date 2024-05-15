@@ -68,3 +68,10 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     const observer = new MutationObserver(callback);
     observer.observe(targetNode, config);
+
+    document.querySelector('.recipe-search-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const query = document.querySelector('.recipe-search-input').value;
+        window.location.href = `/?search_query=${query}`;
+    });
+    

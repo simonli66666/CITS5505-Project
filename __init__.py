@@ -26,12 +26,30 @@ def inject_popular_posts():
     popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
     return dict(popular_posts=popular_posts)
 # 主页路由
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
-    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    search_query = request.form.get('search_query', '')
+    page = request.args.get('page', 1, type=int)
+
+    if search_query:
+        pagination = Post.query.join(User).filter(
+            or_(
+                Post.title.ilike(f'%{search_query}%'),
+                Post.content.ilike(f'%{search_query}%'),
+                User.nickname.ilike(f'%{search_query}%')
+            )
+        ).paginate(page=page, per_page=5, error_out=False)
+    else:
+        pagination = Post.query.order_by(Post.create_time.desc()).paginate(page=page, per_page=5, error_out=False)
+
     posts = pagination.items
-    return render_template('frontend/index.html', posts=posts, pagination=pagination)
+
+    if search_query and not posts:
+        flash('No results found for your search query.')
+
+    popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
+    return render_template('frontend/index.html', posts=posts, pagination=pagination, popular_posts=popular_posts, search_query=search_query)
+
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'index'  # 未登录时重定向到的视图函数
@@ -125,14 +143,35 @@ def test():
     posts = pagination.items
     return render_template('frontend/test.html', posts=posts, pagination=pagination)
 
-@app.route('/recipes')
+@app.route('/recipes', methods=['GET', 'POST'])
 @login_required
 def recipes():
-    
-    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
-    pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
+    search_query = request.form.get('search_query', '') if request.method == 'POST' else request.args.get('search_query', '')
+    page = request.args.get('page', 1, type=int)
+
+    if search_query:
+        pagination = Post.query.join(User).filter(
+            or_(
+                Post.title.ilike(f'%{search_query}%'),
+                Post.content.ilike(f'%{search_query}%'),
+                User.nickname.ilike(f'%{search_query}%')
+            )
+        ).paginate(page=page, per_page=5, error_out=False)
+    else:
+        pagination = Post.query.order_by(Post.create_time.desc()).paginate(page=page, per_page=5, error_out=False)
+
     posts = pagination.items
-    return render_template('frontend/login.html', posts=posts, pagination=pagination)
+
+    if search_query and not posts:
+        flash('No results found for your search query.')
+
+    popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
+
+    return render_template('frontend/login.html', posts=posts, pagination=pagination, popular_posts=popular_posts, search_query=search_query)
+
+
+
+
 
 @app.route('/user')
 @login_required

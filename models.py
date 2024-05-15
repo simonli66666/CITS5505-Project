@@ -146,11 +146,11 @@ class Post(db.Model):
 
      @hybrid_property
      def score(self):
-        return 2 * self.comment_num + self.likes_num
+        return self.read_times + 2 * self.likes_num
 
      @score.expression
      def score(cls):
-        return 2 * cls.comment_num + cls.likes_num
+        return cls.read_times + 2 * cls.likes_num
      
      
      

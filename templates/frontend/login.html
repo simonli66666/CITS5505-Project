@@ -71,11 +71,13 @@
 
           <div class="main-inner">
             <div class="search">
-              <form action="" class="recipe-search-form">
+              <form action="/recipes" method="post" class="recipe-search-form">
                 <input
                   type="text"
+                  name="search_query"
                   class="recipe-search-input"
                   placeholder="Search..."
+                  value="{{ search_query }}"
                 />
                 <button type="submit" class="recipe-search-btn">
                   <i class="bi bi-search"></i>
@@ -85,37 +87,41 @@
 
             <div class="recipe-section">
               <div class="post-recipes">
-              {% for post in posts %}
-                  <div class="recipe-post-box">
-                      <div class="recipe-img-box">
-                          <a href="{{ url_for('read', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
-                      </div>
-                      <div class="recipe-content">
-                          <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
-                          <div class="post-detail">
-                              by
-                              <span class="post-author">{{ post.user.nickname }}</span>
-                              <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
-                          </div>
-                          <div class="recipe-detail">
-                              <a href="{{ url_for('read', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
-                          </div>
-                          <button class="continue-reading"><a href="{{ url_for('read', post_id=post.id) }}">CONTINUE READING</a></button>
-                      </div>
-                  </div>
-              {% endfor %}
+                {% for post in posts %}
+                    <div class="recipe-post-box">
+                        <div class="recipe-img-box">
+                            <a href="{{ url_for('read', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
+                        </div>
+                        <div class="recipe-content">
+                            <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                            <div class="post-detail">
+                                by
+                                <span class="post-author">{{ post.user.nickname }}</span>
+                                <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
+                            </div>
+                            <div class="recipe-detail">
+                                <a href="{{ url_for('read', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
+                            </div>
+                            <button class="continue-reading"><a href="{{ url_for('read', post_id=post.id) }}">CONTINUE READING</a></button>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="no-results">No results found for your search query.</div>
+                    <a href="/recipes" class="back-button2">← Back</a>
+                {% endfor %}
               </div>
+            
             </div>
 
             <div class="pagination">
               <div class="pagination-box">
               {% if pagination.has_prev %}
-                  <a href="{{ url_for('recipes', page=pagination.prev_num) }}"><span><  Previous</span></a>
+                  <a href="{{ url_for('recipes', page=pagination.prev_num, search_query=search_query) }}"><span><  Previous</span></a>
               {% endif %}
               {% for page_num in pagination.iter_pages() %}
                   {% if page_num %}
                       {% if page_num != pagination.page %}
-                          <a href="{{ url_for('recipes', page=page_num) }}"> <span>{{ page_num }}</span></a>
+                          <a href="{{ url_for('recipes', page=page_num, search_query=search_query) }}"> <span>{{ page_num }}</span></a>
                       {% else %}
                           <a href="#"><span class="pagination-active">{{ page_num }}</span></a>
                       {% endif %}
@@ -124,10 +130,11 @@
                   {% endif %}
               {% endfor %}
               {% if pagination.has_next %}
-                  <a href="{{ url_for('recipes', page=pagination.next_num) }}"> <span>Next  ></span> </a>
+                  <a href="{{ url_for('recipes', page=pagination.next_num, search_query=search_query) }}"> <span>Next  ></span> </a>
               {% endif %}
               </div>
             </div>
+          
           </div>
 
           <div class="main-right">
@@ -160,7 +167,7 @@
                   <div class="popular-com-view">
                     <span class="com">
                       <i class="bi bi-chat-fill"></i>
-                      <span class="comment-num">{{ post.comment_num }}</span> Comments
+                      <span class="comment-num">{{ post.likes_num }}</span> Likes
                     </span>
                     <span class="view">
                       <i class="bi bi-eye-fill"></i>
@@ -181,8 +188,8 @@
                       <div class="popular-com-view">
                         <span class="com">
                           <i class="bi bi-chat-fill"></i>
-                          <span id="comment-num" class="comment-num"> {{ post.comment_num }} </span
-                          > Comments
+                          <span id="comment-num" class="comment-num"> {{ post.likes_num }} </span
+                          > Likes
                         </span>
                         <span class="view">
                           <i class="bi bi-eye-fill"></i>
