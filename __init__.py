@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, cur
 from bbs.extensions import db
 from bbs.setting import *
 from bbs.models import *
+from .forms import *
 
 import click
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -23,14 +24,22 @@ app.config['SECRET_KEY'] = 'admin'
 
 @app.context_processor
 def inject_popular_posts():
+    # Query the top 5 posts ordered by score in descending order
     popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
     return dict(popular_posts=popular_posts)
-# 主页路由
+
+# Route for the home page
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    # Instantiate registration and login forms
+    registration_form = RegistrationForm()
+    login_form = LoginForm()
+    # Get the search query from the form if provided
     search_query = request.form.get('search_query', '')
+    # Get the current page number, default to 1
     page = request.args.get('page', 1, type=int)
 
+    # If there's a search query, filter posts by title, content, or user's nickname
     if search_query:
         pagination = Post.query.join(User).filter(
             or_(
@@ -40,80 +49,92 @@ def index():
             )
         ).paginate(page=page, per_page=5, error_out=False)
     else:
+        # Otherwise, display the most recent posts
         pagination = Post.query.order_by(Post.create_time.desc()).paginate(page=page, per_page=5, error_out=False)
 
+    # Get the list of posts for the current page
     posts = pagination.items
 
+    # If there are no posts matching the search query, display a flash message
     if search_query and not posts:
         flash('No results found for your search query.')
 
+    # Query the top 5 posts ordered by score in descending order
     popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
-    return render_template('frontend/index.html', posts=posts, pagination=pagination, popular_posts=popular_posts, search_query=search_query)
+    return render_template('frontend/index.html', posts=posts, pagination=pagination, popular_posts=popular_posts, registration_form=registration_form, login_form=login_form, search_query=search_query)
 
-
+# Initialize the LoginManager for handling user sessions
 login_manager = LoginManager(app)
-login_manager.login_view = 'index'  # 未登录时重定向到的视图函数
+login_manager.login_view = 'index'  # Redirect to the home page if the user is not logged in
 login_manager.login_message_category = 'info'
 
-# Flask-Login 用户加载器
+# Flask-Login user loader callback
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
-# 注册路由
-@app.route('/register1', methods=['GET', 'POST'])
+# Route for user registration
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    # Instantiate registration and login forms
+    registration_form = RegistrationForm()
+    login_form = LoginForm()
+    # Get the current page number, default to 1
+    page = request.args.get('page', 1, type=int)
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
     posts = pagination.items
-    if request.method == 'POST':
-        username = request.form['username']
-        nickname = request.form['nickname']
-        password = request.form['password']
-        # 检查用户名是否已存在
-        if User.query.filter_by(username=username).first():
-            flash('Username already exists!', 'error')
-            return render_template('frontend/index.html', error=True, username=username, posts=posts, pagination=pagination)
-        if User.query.filter_by(nickname=nickname).first():
-            flash('Username already exists!', 'error')
-            return render_template('frontend/index.html', error=True, nickname=nickname, posts=posts, pagination=pagination)
-        new_user = User(username=username,nickname=nickname, password=password)
+
+    # If the registration form is submitted and validated
+    if registration_form.validate_on_submit():
+        username = registration_form.username.data
+        nickname = registration_form.nickname.data
+        password = registration_form.password.data
+        # Create a new user and save to the database
+        new_user = User(username=username, nickname=nickname, password=password)
         db.session.add(new_user)
         db.session.commit()
-        flash('User created successfully!','success')
+        flash('User created successfully!', 'success')
         return redirect(url_for('login'))
-    
-    return render_template('frontend/index.html', error=False, posts=posts, pagination=pagination) 
 
+    return render_template('frontend/index.html', registration_form=registration_form, login_form=login_form, error=False, posts=posts, pagination=pagination)
 
-
-# 登录路由
+# Route for user login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    # Instantiate login and registration forms
+    login_form = LoginForm()
+    registration_form = RegistrationForm()
+    # Get the current page number, default to 1
+    page = request.args.get('page', 1, type=int)
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
     posts = pagination.items
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+
+    # If the login form is submitted and validated
+    if login_form.validate_on_submit():
+        username = login_form.username.data
+        password = login_form.password.data
+        # Check if the user exists in the database
         user = User.query.filter_by(username=username, password=password).first()
         if user:
-            login_user(user)
-        
+            # Log the user in and redirect to the recipes page
+            login_user(user, remember=login_form.remember_me.data)
             flash('Logged in successfully!', 'success')
-            return redirect(url_for('recipes')) 
+            return redirect(url_for('recipes'))
         else:
             flash('Invalid username or password!', 'error')
-    return render_template('frontend/index.html', posts=posts, pagination=pagination)
 
-# 发布菜单路由
+    return render_template('frontend/index.html', login_form=login_form, registration_form=registration_form, posts=posts, pagination=pagination)
+
+# Route for sharing recipes
 @app.route('/share', methods=['GET', 'POST'])
 def share():
-    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    # Get the current page number, default to 1
+    page = request.args.get('page', 1, type=int)
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
     posts = pagination.items
+
     if request.method == 'POST':
+        # Get form data
         title = request.form['title']
         image = request.form['image']
         ingredient1 = request.form['ingredient1']
@@ -127,18 +148,28 @@ def share():
         cooking_time = request.form['cooking_time']
         calories = request.form['calories']
         content = request.form['content']
-       
         
-        post = Post(title=title,image=image, ingredient1=ingredient1,ingredient2=ingredient2, ingredient3=ingredient3, ingredient4=ingredient4, ingredient5=ingredient5, ingredient6=ingredient6,servings= servings, prep_time=prep_time, cooking_time=cooking_time, calories=calories, content=content, author_id=current_user.id )
+        # Create a new post and save to the database
+        post = Post(
+            title=title, image=image, ingredient1=ingredient1, ingredient2=ingredient2,
+            ingredient3=ingredient3, ingredient4=ingredient4, ingredient5=ingredient5,
+            ingredient6=ingredient6, servings=servings, prep_time=prep_time,
+            cooking_time=cooking_time, calories=calories, content=content,
+            author_id=current_user.id
+        )
         db.session.add(post)
         db.session.commit()
-        flash('Recipt posted successfully!','success')
+        flash('Recipe posted successfully!', 'success')
         return redirect(url_for('recipes', post_id=post.id))
+
     return render_template('frontend/login.html', error=False, posts=posts, pagination=pagination)
+
 
 @app.route('/test')
 def test():
-    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    # Get the current page number, default to 1
+    page = request.args.get('page', 1, type=int)
+    # Query and paginate posts, ordered by descending post ID
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
     posts = pagination.items
     return render_template('frontend/test.html', posts=posts, pagination=pagination)
@@ -146,9 +177,11 @@ def test():
 @app.route('/recipes', methods=['GET', 'POST'])
 @login_required
 def recipes():
+    # Get the search query from the form if it's a POST request, otherwise from the URL
     search_query = request.form.get('search_query', '') if request.method == 'POST' else request.args.get('search_query', '')
     page = request.args.get('page', 1, type=int)
 
+    # If there's a search query, filter posts by title, content, or user's nickname
     if search_query:
         pagination = Post.query.join(User).filter(
             or_(
@@ -158,34 +191,36 @@ def recipes():
             )
         ).paginate(page=page, per_page=5, error_out=False)
     else:
+        # Otherwise, display the most recent posts
         pagination = Post.query.order_by(Post.create_time.desc()).paginate(page=page, per_page=5, error_out=False)
 
     posts = pagination.items
 
+    # If there are no posts matching the search query, display a flash message
     if search_query and not posts:
         flash('No results found for your search query.')
 
+    # Query the top 5 posts ordered by score in descending order
     popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
 
     return render_template('frontend/login.html', posts=posts, pagination=pagination, popular_posts=popular_posts, search_query=search_query)
-
-
-
-
 
 @app.route('/user')
 @login_required
 def user():
     user = current_user
-    
+
     page = request.args.get('page', 1, type=int)
 
+    # Query and paginate the user's own posts
     own_posts_pagination = Post.query.filter_by(author_id=user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
     own_posts = own_posts_pagination.items
-    
+
+    # Query and paginate the posts liked by the user
     liked_posts_pagination = Post.query.join(Like, Post.id == Like.post_id).filter(Like.user_id == user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
     liked_posts = liked_posts_pagination.items
-    
+
+    # Query and paginate the posts commented on by the user
     commented_posts_pagination = Post.query.join(Comments, Post.id == Comments.post_id).filter(Comments.author_id == user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
     commented_posts = commented_posts_pagination.items
 
@@ -199,39 +234,47 @@ def user():
         commented_posts_pagination=commented_posts_pagination
     )
 
-# 帖子详情页面
+# Route for post details page
 @app.route('/read/<post_id>/', methods=['GET'])
 def read(post_id):
-    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    # Get the current page number, default to 1
+    page = request.args.get('page', 1, type=int)
+    # Query and paginate posts, ordered by descending post ID
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
     posts = pagination.items
+    # Query the post by ID, return 404 if not found
     post = Post.query.get_or_404(post_id)
-    post.read_times += 1  # 增加阅读次数
-    db.session.commit()   # 提交数据库更改
-    comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.timestamps.desc()).all() 
+    post.read_times += 1  # Increment read times
+    db.session.commit()   # Commit the change to the database
+    comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.timestamps.desc()).all()
 
-    return render_template('frontend/postsDetails.html',post=post,posts=posts, pagination=pagination, comments=comments)
+    return render_template('frontend/postsDetails.html', post=post, posts=posts, pagination=pagination, comments=comments)
 
 @app.route('/read2/<post_id>/', methods=['GET'])
 def read2(post_id):
-    page = request.args.get('page', 1, type=int)  # 获取当前页数，默认为第一页
+    # Get the current page number, default to 1
+    page = request.args.get('page', 1, type=int)
+    # Query and paginate posts, ordered by descending post ID
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
     posts = pagination.items
+    # Query the post by ID, return 404 if not found
     post = Post.query.get_or_404(post_id)
-    post.read_times += 1  # 增加阅读次数
-    db.session.commit()   # 提交数据库更改
-    comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.timestamps.desc()).all() 
+    post.read_times += 1  # Increment read times
+    db.session.commit()   # Commit the change to the database
+    comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.timestamps.desc()).all()
 
     return render_template('frontend/postsDetails_notlogin.html', post=post, posts=posts, pagination=pagination, comments=comments)
 
 @app.route('/like/<int:post_id>/', methods=['POST'])
 @login_required
 def like(post_id):
+    # Like or unlike a post and return the result as JSON
     success, message, is_liked = post_like(post_id)
     return jsonify(success=success, message=message, isLiked=is_liked)
 
 def post_like(post_id):
     post = Post.query.get_or_404(post_id)
+    # Check if the user has already liked the post
     c = Like.query.filter_by(user_id=current_user.id, post_id=post_id).first()
     if c:
         post.likes_num -= 1
@@ -245,12 +288,13 @@ def post_like(post_id):
         db.session.commit()
         return True, "You have liked the post.", True
 
-@app.route('/edit-user-info',  methods=['POST','GET'])
+@app.route('/edit-user-info', methods=['POST','GET'])
 @login_required
 def edit_user_info():
     if request.method == 'POST':
         user = current_user
         try:
+            # Update user information from form data
             user.gender = request.form.get('gender')
             user.age = int(request.form.get('age', 0))
             user.mobile = request.form.get('mobile')
@@ -263,9 +307,8 @@ def edit_user_info():
             db.session.rollback()
             flash('Failed to update profile.', 'error')
             print("Error:", e)
-    return redirect(url_for('user'))  # 重定向到用户资料页面
+    return redirect(url_for('user'))  # Redirect to user profile page
 
-    
 @app.route('/post-comment/', methods=['POST'])
 @login_required
 def post_comment():
@@ -275,7 +318,7 @@ def post_comment():
     post = Post.query.get_or_404(post_id)
     com = Comments(body=comment_content, post_id=post_id, author_id=current_user.id)
     
-    # # 如果评论帖子用户与发帖用户不为同一人则发送消息通知
+    # If the commenting user and the post author are different, send a notification
     # if current_user.id != post.author_id:
     #     notice = Notification(target_id=post_id, target_name=post.title, send_user=current_user.username,
     #                           receive_id=post.author_id, msg=comment_content)
@@ -309,24 +352,24 @@ def register_error_handlers(app: Flask):
     def server_error(e):
         return render_template('error/500.html'), 500
 
-
 def register_extensions(app: Flask):
     db.init_app(app)
-
 
 def register_cmd(app: Flask):
     @app.cli.command()
     def admin():
-        click.confirm('这个操作会清空整个数据库,要继续吗?', abort=True)
+        click.confirm('This operation will clear the entire database, do you want to continue?', abort=True)
         db.drop_all()
-        click.echo('清空数据库完成!')
+        click.echo('Database cleared!')
         db.create_all()
-        click.echo('数据库初始化完成!')
+        click.echo('Database initialized!')
 
-
-
+# Register error handlers
 register_error_handlers(app)
 app.config.from_object(DevelopmentConfig)
+# Register extensions
 register_extensions(app)
+# Register command-line commands
 register_cmd(app)
+# Initialize the migration tool
 migrate = Migrate(app, db)
