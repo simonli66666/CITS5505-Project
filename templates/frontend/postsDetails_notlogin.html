@@ -415,23 +415,26 @@
           </svg>
         </div>
         <div class="tit">Sign In</div>
-        <form action="/login" method="post">
+
+
+        <form action="{{ url_for('login') }}" method="post">
+          {{ login_form.hidden_tag() }}
           <div class="message_box">
-            <span class="t">ERROR:</span>
-            Please insert your name.
+              <span class="t">ERROR:</span>
+              Please insert your name.
           </div>
           <ul>
-            <li class="subtit">Username *</li>
-            <li><input class="input_x" type="text" name="username" required/></li>
-            <li class="subtit">Password *</li>
-            <li><input class="input_x" type="password" name="password" required/></li>
-            <li class="s">
-              <div><input type="checkbox" checked />Remember Me!</div>
-              <a href="">Forgot Password?</a>
-            </li>
-            <button class="btn_x" type="submit">Login</button>
+              <li class="subtit">Username *</li>
+              <li>{{ login_form.username(class="input_x") }}</li>
+              <li class="subtit">Password *</li>
+              <li>{{ login_form.password(class="input_x") }}</li>
+              <li class="s">
+                  <div><input type="checkbox" checked />Remember Me!</div>
+                  <a href="">Forgot Password?</a>
+              </li>
+              <li>{{ login_form.submit(class="btn_x") }}</li>
           </ul>
-        </form>
+      </form>
       </div>
     </section>
     <section class="login_box" id="register">
@@ -462,27 +465,23 @@
         </div>
         <div class="tit">Sign Up</div>
 
-        <form action="/register1" method="post" >
-          <div class="message_box">
-            <span class="t">ERROR:</span>
-            Please insert your name.
-          </div>
+        <form action="{{ url_for('register') }}" method="post">
+          {{ registration_form.hidden_tag() }}
           <ul>
-            <li class="subtit">Username *</li>
-            <li><input class="input_x" type="text" name="username" required/></li>
-            <li class="subtit">Nickname *</li>
-            <li><input class="input_x" type="text" name="nickname" required/></li>
-            <li class="subtit">Password *</li>
-            <li><input class="input_x" type="password" name="password" required/></li>
-            <li class="s">
-              <div>
-                <!-- <input type="checkbox" checked>Remember Me! -->
-              </div>
-              <a href="">Having an account?</a>
-            </li>
-            <button class="btn_x"type="submit">Sign Up</button>
+              <li class="subtit">Username *</li>
+              <li>{{ registration_form.username(class="input_x") }}</li>
+              <li class="subtit">Nickname *</li>
+              <li>{{ registration_form.nickname(class="input_x") }}</li>
+              <li class="subtit">Password *</li>
+              <li>{{ registration_form.password(class="input_x") }}</li>
+              <li class="s">
+                  <a href="">Having an account?</a>
+              </li>
+              <li>{{ registration_form.submit(class="btn_x") }}</li>
           </ul>
-        </form>
+      </form>
+
+
       </div>
     </section>
     

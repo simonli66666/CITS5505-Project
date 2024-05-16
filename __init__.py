@@ -177,6 +177,7 @@ def test():
 @app.route('/recipes', methods=['GET', 'POST'])
 @login_required
 def recipes():
+
     # Get the search query from the form if it's a POST request, otherwise from the URL
     search_query = request.form.get('search_query', '') if request.method == 'POST' else request.args.get('search_query', '')
     page = request.args.get('page', 1, type=int)
@@ -252,6 +253,8 @@ def read(post_id):
 
 @app.route('/read2/<post_id>/', methods=['GET'])
 def read2(post_id):
+    registration_form = RegistrationForm()
+    login_form = LoginForm()
     # Get the current page number, default to 1
     page = request.args.get('page', 1, type=int)
     # Query and paginate posts, ordered by descending post ID
@@ -263,7 +266,7 @@ def read2(post_id):
     db.session.commit()   # Commit the change to the database
     comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.timestamps.desc()).all()
 
-    return render_template('frontend/postsDetails_notlogin.html', post=post, posts=posts, pagination=pagination, comments=comments)
+    return render_template('frontend/postsDetails_notlogin.html', post=post, posts=posts, pagination=pagination, comments=comments,registration_form=registration_form, login_form=login_form)
 
 @app.route('/like/<int:post_id>/', methods=['POST'])
 @login_required
