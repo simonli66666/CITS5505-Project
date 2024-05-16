@@ -194,7 +194,7 @@
             <div class="popular-top-detail">
               <div class="popular-num">{{ loop.index }}</div>
               <div class="popular-top-title">
-                <a href="#">{{ post.title }}</a>
+                <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a>
               </div>
             </div>
 
@@ -216,7 +216,7 @@
                 <div class="popular-item-detail">
                   <div class="popular-num">{{ loop.index }}</div>
                   <div class="popular-item-title">
-                    <a href="#">{{ post.title }}</a>
+                    <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a>
                   </div>
                 </div>
                 <div class="popular-com-view">

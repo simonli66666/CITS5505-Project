@@ -335,14 +335,14 @@
                   <div class="popular-top-detail">
                     <div class="popular-num">{{ loop.index }}</div>
                     <div class="popular-top-title">
-                      <a href="#">{{ post.title }}</a>
+                      <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a>
                     </div>
                   </div>
 
                   <div class="popular-com-view">
                     <span class="com">
                       <i class="bi bi-chat-fill"></i>
-                      <span class="comment-num">{{ post.comment_num }}</span> Comments
+                      <span class="comment-num">{{ post.likes_num }}</span> Likes
                     </span>
                     <span class="view">
                       <i class="bi bi-eye-fill"></i>
@@ -357,14 +357,14 @@
                       <div class="popular-item-detail">
                         <div class="popular-num">{{ loop.index }}</div>
                         <div class="popular-item-title">
-                          <a href="#">{{ post.title }}</a>
+                          <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a>
                         </div>
                       </div>
                       <div class="popular-com-view">
                         <span class="com">
                           <i class="bi bi-chat-fill"></i>
-                          <span id="comment-num" class="comment-num"> {{ post.comment_num }} </span
-                          > Comments
+                          <span id="comment-num" class="comment-num"> {{ post.likes_num }} </span
+                          > Likes
                         </span>
                         <span class="view">
                           <i class="bi bi-eye-fill"></i>
