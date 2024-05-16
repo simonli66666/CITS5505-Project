@@ -1,4 +1,6 @@
-#!/Users/mac/Desktop/5505p/bbs/venv/bin/python3
+#!/bin/sh
+'''exec' "/Users/lixiheng/Desktop/IT S1/cits5505/bbs/venv/bin/python3.12" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys
