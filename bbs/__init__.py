@@ -342,3 +342,10 @@ app.config.from_object(DevelopmentConfig)
 register_extensions(app)
 register_cmd(app)
 migrate = Migrate(app, db)
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Logged out successfully!', 'success')
+    return redirect(url_for('index'))
