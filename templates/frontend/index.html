@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <title>Tasty</title>
     <!-- css files -->
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/public.css') }}" />
@@ -13,18 +13,18 @@
 </head>
 
 <body>
-    <!-- Flash messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          {% if category == 'success' %}
-            <div id="success-message" class="alert alert-success flash-message">{{ message }}</div>
-          {% elif category == 'error' %}
-            <div id="error-message" class="alert alert-danger flash-message">{{ message }}</div>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+<!-- Flash messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+    {% if category == 'success' %}
+      <div id="success-message" class="alert alert-success flash-message">{{ message }}</div>
+    {% elif category == 'error' %}
+      <div id="error-message" class="alert alert-danger flash-message">{{ message }}</div>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
 
 <div id="sign-in-panel" class="panel-pop"></div>
 <div class="not-log-in">
@@ -42,7 +42,7 @@
       </div>
 
       <div class="right-header">
-        <button class="sign-up" id="show_login">Sign In</button>
+        <button class="sign-up show_login">Sign In</button>
         <button class="sign-in" id="show_register">Sign Up</button>
 
         <div class="user_pirc">
@@ -56,12 +56,11 @@
   <div class="intro">
     <div class="main-container">
       <div class="intro-content">
-        <h3 class="intro-title">Share & grow the world's knowledge!</h3>
+        <h3 class="intro-title">Explore, Create and Share Delicious Recipes with Our Community!</h3>
         <p class="intro-detail">
-          We want to connect the people who have knowledge to the people who
-          need it, to bring together people with different perspectives so
-          they can understand each other better, and to empower everyone to
-          share their knowledge.
+          Discover mouthwatering recipes from passionate cooks worldwide. Share your own culinary creations,
+          connect with fellow food lovers, and embark on a flavorful journey together. Join us and let's cook
+          up something amazing!
         </p>
       </div>
       <button class="create-acct" id="show_register2">
@@ -108,7 +107,7 @@
               placeholder="Search..."
               value="{{ search_query }}"
             />
-            <button type="submit" class="recipe-search-btn">
+            <button type="submit" class="recipe-search-btn show_login">
               <i class="bi bi-search"></i>
             </button>
           </form>
@@ -119,19 +118,19 @@
             {% for post in posts %}
             <div class="recipe-post-box">
               <div class="recipe-img-box">
-                <a href="{{ url_for('post.read2', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
+                <a href="{{ url_for('read2', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
               </div>
               <div class="recipe-content">
-                <h3 class="recipe-title"><a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a></h3>
+                <h3 class="recipe-title"><a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a></h3>
                 <div class="post-detail">
                   by
                   <span class="post-author">{{ post.user.nickname }}</span>
                   <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
                 </div>
                 <div class="recipe-detail">
-                  <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
+                  <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
                 </div>
-                <button class="continue-reading"><a href="{{ url_for('post.read2', post_id=post.id) }}">CONTINUE READING</a></button>
+                <button class="continue-reading"><a href="{{ url_for('read2', post_id=post.id) }}">CONTINUE READING</a></button>
               </div>
             </div>
             {% else %}
@@ -146,12 +145,12 @@
         <div class="pagination">
           <div class="pagination-box">
             {% if pagination.has_prev %}
-            <a href="{{ url_for('main.index', page=pagination.prev_num, search_query=search_query) }}"><span><  Previous</span></a>
+            <a href="{{ url_for('index', page=pagination.prev_num, search_query=search_query) }}"><span><  Previous</span></a>
             {% endif %}
             {% for page_num in pagination.iter_pages() %}
             {% if page_num %}
             {% if page_num != pagination.page %}
-            <a href="{{ url_for('main.index', page=page_num, search_query=search_query) }}"> <span>{{ page_num }}</span></a>
+            <a href="{{ url_for('index', page=page_num, search_query=search_query) }}"> <span>{{ page_num }}</span></a>
             {% else %}
             <a href="#"><span class="pagination-active">{{ page_num }}</span></a>
             {% endif %}
@@ -160,7 +159,7 @@
             {% endif %}
             {% endfor %}
             {% if pagination.has_next %}
-            <a href="{{ url_for('main.index', page=pagination.next_num, search_query=search_query) }}"> <span>Next  ></span> </a>
+            <a href="{{ url_for('index', page=pagination.next_num, search_query=search_query) }}"> <span>Next  ></span> </a>
             {% endif %}
           </div>
         </div>
@@ -189,7 +188,7 @@
             <div class="popular-top-detail">
               <div class="popular-num">{{ loop.index }}</div>
               <div class="popular-top-title">
-                <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a>
+                <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a>
               </div>
             </div>
 
@@ -211,7 +210,7 @@
                 <div class="popular-item-detail">
                   <div class="popular-num">{{ loop.index }}</div>
                   <div class="popular-item-title">
-                    <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a>
+                    <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a>
                   </div>
                 </div>
                 <div class="popular-com-view">
@@ -234,14 +233,16 @@
     </div>
     <div class="footer">
         <div class="copy">© 2024 Liz. All Rights Reserved</div>
-    </div>
+      </div>
   </div>
+
+
 </div>
 
-<!-- Login and Register -->
+<!-- 登录 注册 -->
 <section class="login_box" id="login">
   <div class="con">
-    <!-- close button -->
+    <!-- 关闭按钮 -->
     <div class="close">
       <?xml version="1.0" encoding="UTF-8"?><svg
         width="24"
@@ -267,27 +268,22 @@
       </svg>
     </div>
     <div class="tit">Sign In</div>
-  
-
-    <form action="{{ url_for('auth.login') }}" method="post">
-      {{ login_form.hidden_tag() }}
+    <form action="/login" method="post">
       <div class="message_box">
-          <span class="t">ERROR:</span>
-          Please insert your name.
+        <span class="t">ERROR:</span>
+        Please insert your name.
       </div>
       <ul>
-          <li class="subtit">Username *</li>
-          <li>{{ login_form.username(class="input_x") }}</li>
-          <li class="subtit">Password *</li>
-          <li>{{ login_form.password(class="input_x") }}</li>
-          <li class="s">
-              <div><input type="checkbox" checked />Remember Me!</div>
-              <a href="">Forgot Password?</a>
-          </li>
-          <li>{{ login_form.submit(class="btn_x") }}</li>
+        <li class="subtit">Username *</li>
+        <li><input class="input_x" type="text" name="username" required/></li>
+        <li class="subtit">Password *</li>
+        <li><input class="input_x" type="password" name="password" required/></li>
+        <li class="s">
+          <div><input type="checkbox" checked />Remember Me!</div>
+        </li>
+        <button class="btn_x" type="submit">Login</button>
       </ul>
-  </form>
-
+    </form>
   </div>
 </section>
 <section class="login_box" id="register">
@@ -318,25 +314,27 @@
     </div>
     <div class="tit">Sign Up</div>
 
-    
-
-    <form action="{{ url_for('auth.register') }}" method="post">
-      {{ registration_form.hidden_tag() }}
+    <form action="/register1" method="post" >
+      <div class="message_box">
+        <span class="t">ERROR:</span>
+        Please insert your name.
+      </div>
       <ul>
-          <li class="subtit">Username *</li>
-          <li>{{ registration_form.username(class="input_x") }}</li>
-          <li class="subtit">Nickname *</li>
-          <li>{{ registration_form.nickname(class="input_x") }}</li>
-          <li class="subtit">Password *</li>
-          <li>{{ registration_form.password(class="input_x") }}</li>
-          <li class="s">
-              <a href="">Having an account?</a>
-          </li>
-          <li>{{ registration_form.submit(class="btn_x") }}</li>
+        <li class="subtit">Username *</li>
+        <li><input class="input_x" type="text" name="username" required/></li>
+        <li class="subtit">Nickname *</li>
+        <li><input class="input_x" type="text" name="nickname" required/></li>
+        <li class="subtit">Password *</li>
+        <li><input class="input_x" type="password" name="password" required/></li>
+        <li class="s">
+          <div>
+            <!-- <input type="checkbox" checked>Remember Me! -->
+          </div>
+          <a href="#" class="havingAccount">Having an account?</a>
+        </li>
+        <button class="btn_x" type="submit">Sign Up</button>
       </ul>
-  </form>
-
-
+    </form>
   </div>
 </section>
 
@@ -441,7 +439,6 @@
     <button class="btn_x">UPLOAD</button>
   </div>
 </section>
-
 
 <script>
   //let register and login flash message disappear after 2s
