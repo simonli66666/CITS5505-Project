@@ -902,14 +902,21 @@
   }
 
 .right-header .logout {
-  text-decoration: none;
-  padding: 5px 10px;
-  background-color: transparent;
-  margin-left: 15px; 
-}
+    position: absolute;
+    right: -60px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    padding: 5px 10px;
+    background-color: transparent;
+  }
+  
 
 .logout a{
   color:orange;
   font-size: 10px;
+}
+  
+.right-header {
+  position: relative;
 }
   
