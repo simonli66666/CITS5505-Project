@@ -900,4 +900,16 @@
     padding: 5px;
     margin-top: 10px;
   }
+
+.right-header .logout {
+  text-decoration: none;
+  padding: 5px 10px;
+  background-color: transparent;
+  margin-left: 15px; 
+}
+
+.logout a{
+  color:orange;
+  font-size: 10px;
+}
   
