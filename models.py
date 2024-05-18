@@ -3,6 +3,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 from bbs.extensions import *
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Association table for many-to-many relationship between users and posts (likes)
 likes_table = db.Table('likes',
@@ -28,7 +29,8 @@ class User(db.Model, UserMixin):
     liked_posts = db.relationship('Post', secondary=likes_table, back_populates='likers', lazy='dynamic')
     user_likes = db.relationship('Like', back_populates='user', lazy='dynamic')
     comments = db.relationship('Comments', back_populates='author')
-
+    
+    
     # Hybrid property for the number of comments made by the user
     @hybrid_property
     def selfcomment_num(self):

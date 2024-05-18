@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, current_app, g, jsonify
+""" from flask import Flask, render_template, request, redirect, url_for, flash, current_app, g, jsonify
 from bbs.extensions import db
 from bbs.setting import *
 from bbs.models import *
@@ -11,6 +11,7 @@ from alembic import op
 import sqlalchemy as sa
 from flask import g
 
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
@@ -88,7 +89,8 @@ def register():
     if registration_form.validate_on_submit():
         username = registration_form.username.data
         nickname = registration_form.nickname.data
-        password = registration_form.password.data
+        password = registration_form.password.data 
+        password = generate_password_hash(password)
         # Create a new user and save to the database
         new_user = User(username=username, nickname=nickname, password=password)
         db.session.add(new_user)
@@ -114,9 +116,8 @@ def login():
         username = login_form.username.data
         password = login_form.password.data
         # Check if the user exists in the database
-        user = User.query.filter_by(username=username, password=password).first()
-        if user:
-            # Log the user in and redirect to the recipes page
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password, password):
             login_user(user, remember=login_form.remember_me.data)
             flash('Logged in successfully!', 'success')
             return redirect(url_for('recipes'))
@@ -177,7 +178,6 @@ def test():
 @app.route('/recipes', methods=['GET', 'POST'])
 @login_required
 def recipes():
-
     # Get the search query from the form if it's a POST request, otherwise from the URL
     search_query = request.form.get('search_query', '') if request.method == 'POST' else request.args.get('search_query', '')
     page = request.args.get('page', 1, type=int)
@@ -376,3 +376,75 @@ register_extensions(app)
 register_cmd(app)
 # Initialize the migration tool
 migrate = Migrate(app, db)
+ """
+
+
+from flask import Flask, render_template, request, redirect, url_for, flash, current_app, g, jsonify
+from bbs.extensions import db
+from flask_migrate import Migrate
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from bbs.models import User, Post
+from bbs.setting import DevelopmentConfig
+from bbs.blueprint.auth import auth_bp
+from bbs.blueprint.main import main_bp
+from bbs.blueprint.post import post_bp
+from bbs.blueprint.user import user_bp
+import click
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(DevelopmentConfig)
+    
+    app.config['SECRET_KEY'] = 'admin'
+    
+    db.init_app(app)
+    migrate = Migrate(app, db)
+    
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(main_bp)
+    app.register_blueprint(post_bp)
+    app.register_blueprint(user_bp)
+
+    @app.context_processor
+    def inject_popular_posts():
+        popular_posts = Post.query.order_by(Post.score.desc()).limit(5).all()
+        return dict(popular_posts=popular_posts)
+
+    login_manager = LoginManager(app)
+    login_manager.login_view = 'auth.login'
+    login_manager.login_message_category = 'info'
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
+    register_error_handlers(app)
+    register_cmd(app)
+
+    return app
+
+def register_error_handlers(app):
+    @app.errorhandler(400)
+    def bad_request(e):
+        return render_template('error/400.html'), 400
+
+    @app.errorhandler(403)
+    def forbidden(e):
+        return render_template('error/403.html'), 403
+
+    @app.errorhandler(404)
+    def not_found(e):
+        return render_template('error/404.html'), 404
+
+    @app.errorhandler(500)
+    def server_error(e):
+        return render_template('error/500.html'), 500
+
+def register_cmd(app):
+    @app.cli.command()
+    def admin():
+        click.confirm('This operation will clear the entire database, do you want to continue?', abort=True)
+        db.drop_all()
+        click.echo('Database cleared!')
+        db.create_all()
+        click.echo('Database initialized!')

@@ -53,7 +53,7 @@
                 </a>
               </li>
               <li>
-                <a href="/badges" class="show_login">
+                <a href="{{url_for('main.badges')}}" class="show_login">
                   <i class="bi bi-award-fill"></i>
                   <span>Badges</span>
                 </a>
@@ -85,24 +85,25 @@
               </form>
             </div>
 
+
             <div class="recipe-section">
               <div class="post-recipes">
                 {% for post in posts %}
                     <div class="recipe-post-box">
                         <div class="recipe-img-box">
-                            <a href="{{ url_for('read', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
+                            <a href="{{ url_for('post.read', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
                         </div>
                         <div class="recipe-content">
-                            <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                            <h3 class="recipe-title"><a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a></h3>
                             <div class="post-detail">
                                 by
                                 <span class="post-author">{{ post.user.nickname }}</span>
                                 <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
                             </div>
                             <div class="recipe-detail">
-                                <a href="{{ url_for('read', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
+                                <a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
                             </div>
-                            <button class="continue-reading"><a href="{{ url_for('read', post_id=post.id) }}">CONTINUE READING</a></button>
+                            <button class="continue-reading"><a href="{{ url_for('post.read', post_id=post.id) }}">CONTINUE READING</a></button>
                         </div>
                     </div>
                 {% else %}
@@ -116,12 +117,12 @@
             <div class="pagination">
               <div class="pagination-box">
               {% if pagination.has_prev %}
-                  <a href="{{ url_for('recipes', page=pagination.prev_num, search_query=search_query) }}"><span><  Previous</span></a>
+                  <a href="{{ url_for('post.recipes', page=pagination.prev_num, search_query=search_query) }}"><span><  Previous</span></a>
               {% endif %}
               {% for page_num in pagination.iter_pages() %}
                   {% if page_num %}
                       {% if page_num != pagination.page %}
-                          <a href="{{ url_for('recipes', page=page_num, search_query=search_query) }}"> <span>{{ page_num }}</span></a>
+                          <a href="{{ url_for('post.recipes', page=page_num, search_query=search_query) }}"> <span>{{ page_num }}</span></a>
                       {% else %}
                           <a href="#"><span class="pagination-active">{{ page_num }}</span></a>
                       {% endif %}
@@ -130,7 +131,7 @@
                   {% endif %}
               {% endfor %}
               {% if pagination.has_next %}
-                  <a href="{{ url_for('recipes', page=pagination.next_num, search_query=search_query) }}"> <span>Next  ></span> </a>
+                  <a href="{{ url_for('post.recipes', page=pagination.next_num, search_query=search_query) }}"> <span>Next  ></span> </a>
               {% endif %}
               </div>
             </div>
@@ -153,14 +154,14 @@
                 {% if loop.index == 1 %}
                 <div class="popular-top-box">
                   <div id="popular-top-demo" class="popular-top-img">
-                    <a href="{{ url_for('read', post_id=post.id) }}">
+                    <a href="{{ url_for('post.read', post_id=post.id) }}">
                       <img src="{{ post.image }}" alt="Top Post Image">
                     </a>
                   </div>
                   <div class="popular-top-detail">
                     <div class="popular-num">{{ loop.index }}</div>
                     <div class="popular-top-title">
-                      <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
+                      <a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a>
                     </div>
                   </div>
 
@@ -182,7 +183,7 @@
                       <div class="popular-item-detail">
                         <div class="popular-num">{{ loop.index }}</div>
                         <div class="popular-item-title">
-                          <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
+                          <a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a>
                         </div>
                       </div>
                       <div class="popular-com-view">
@@ -240,7 +241,7 @@
           </svg>
         </div>
         <div class="title">Share A Recipe</div>
-        <form action="/share" method="post" >
+        <form action="{{url_for('post.share')}}" method="post" >
           <div class="message_box">
             <span class="t">ERROR:</span>
             Please insert your content.
@@ -322,3 +323,5 @@
     <script src="{{ url_for('static', filename='assets/js/login_main.js') }}"></script>
   </body>
 </html>
+
+

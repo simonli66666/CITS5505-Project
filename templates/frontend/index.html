@@ -126,19 +126,19 @@
             {% for post in posts %}
             <div class="recipe-post-box">
               <div class="recipe-img-box">
-                <a href="{{ url_for('read2', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
+                <a href="{{ url_for('post.read2', post_id=post.id) }}"><img src="{{ post.image }}" alt="Recipe Image" class="recipe-img"></a>
               </div>
               <div class="recipe-content">
-                <h3 class="recipe-title"><a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a></h3>
+                <h3 class="recipe-title"><a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a></h3>
                 <div class="post-detail">
                   by
                   <span class="post-author">{{ post.user.nickname }}</span>
                   <span id="date-demo" class="post-date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
                 </div>
                 <div class="recipe-detail">
-                  <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
+                  <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.content|truncate(250, True) }}</a>
                 </div>
-                <button class="continue-reading"><a href="{{ url_for('read2', post_id=post.id) }}">CONTINUE READING</a></button>
+                <button class="continue-reading"><a href="{{ url_for('post.read2', post_id=post.id) }}">CONTINUE READING</a></button>
               </div>
             </div>
             {% else %}
@@ -151,12 +151,12 @@
         <div class="pagination">
           <div class="pagination-box">
             {% if pagination.has_prev %}
-            <a href="{{ url_for('index', page=pagination.prev_num, search_query=search_query) }}"><span><  Previous</span></a>
+            <a href="{{ url_for('main.index', page=pagination.prev_num, search_query=search_query) }}"><span><  Previous</span></a>
             {% endif %}
             {% for page_num in pagination.iter_pages() %}
             {% if page_num %}
             {% if page_num != pagination.page %}
-            <a href="{{ url_for('index', page=page_num, search_query=search_query) }}"> <span>{{ page_num }}</span></a>
+            <a href="{{ url_for('main.index', page=page_num, search_query=search_query) }}"> <span>{{ page_num }}</span></a>
             {% else %}
             <a href="#"><span class="pagination-active">{{ page_num }}</span></a>
             {% endif %}
@@ -165,7 +165,7 @@
             {% endif %}
             {% endfor %}
             {% if pagination.has_next %}
-            <a href="{{ url_for('index', page=pagination.next_num, search_query=search_query) }}"> <span>Next  ></span> </a>
+            <a href="{{ url_for('main.index', page=pagination.next_num, search_query=search_query) }}"> <span>Next  ></span> </a>
             {% endif %}
           </div>
         </div>
@@ -269,9 +269,9 @@
       </svg>
     </div>
     <div class="tit">Sign In</div>
+  
 
-
-    <form action="{{ url_for('login') }}" method="post">
+    <form action="{{ url_for('auth.login') }}" method="post">
       {{ login_form.hidden_tag() }}
       <div class="message_box">
           <span class="t">ERROR:</span>
@@ -289,7 +289,7 @@
           <li>{{ login_form.submit(class="btn_x") }}</li>
       </ul>
   </form>
-  
+
   </div>
 </section>
 <section class="login_box" id="register">
@@ -320,7 +320,9 @@
     </div>
     <div class="tit">Sign Up</div>
 
-    <form action="{{ url_for('register') }}" method="post">
+    
+
+    <form action="{{ url_for('auth.register') }}" method="post">
       {{ registration_form.hidden_tag() }}
       <ul>
           <li class="subtit">Username *</li>

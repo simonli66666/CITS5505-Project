@@ -417,7 +417,7 @@
         <div class="tit">Sign In</div>
 
 
-        <form action="{{ url_for('login') }}" method="post">
+        <form action="{{ url_for('auth.login') }}" method="post">
           {{ login_form.hidden_tag() }}
           <div class="message_box">
               <span class="t">ERROR:</span>
@@ -465,7 +465,7 @@
         </div>
         <div class="tit">Sign Up</div>
 
-        <form action="{{ url_for('register') }}" method="post">
+        <form action="{{ url_for('auth.register') }}" method="post">
           {{ registration_form.hidden_tag() }}
           <ul>
               <li class="subtit">Username *</li>
