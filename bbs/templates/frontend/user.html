@@ -36,6 +36,9 @@
                 <div class="name">{{ current_user.nickname }}</div>
               </div>
             </a>
+            <div class="logout">
+              <a href="{{ url_for('index') }}">Logout</a>
+            </div>
           </div>
         </div>
       </div>
@@ -272,8 +275,10 @@
                 {% if own_posts %}
                 {% for post in own_posts %}
                 <li class="item">
-                  <span class="tit"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></span>
-                  <span class="date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
+                   <div class="recipe-content">
+                    <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                  </div>
+                  <c class="date">{{ post.create_time.strftime('%B %d, %Y') }}</c>
                 </li>
                 {% endfor %}
                 {% else %}
@@ -302,8 +307,10 @@
                 {% if liked_posts %}
                 {% for post in liked_posts %}
                 <li class="item">
-                  <span class="tit"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></span>
-                  <span class="date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                  </div>
+                  <c class="date">{{ post.create_time.strftime('%B %d, %Y') }}</c>
                 </li>
                 {% endfor %}
                  {% else %}
@@ -328,16 +335,27 @@
             
             <div class="nav_box" id="commented-posts" data-index="3">
               <ul class="pl">
-                {% if commented_posts %}
                 {% for post in commented_posts %}
-                <li class="item">
-                  <span class="tit"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></span>
-                  <span class="date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
-                </li>
-                {% endfor %}
-                {% else %}
-                <li class="no-content">You don't have any commented recipes.</li>
-                {% endif %}
+                  <li>
+                      <div class="recipe-content">
+                          <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                      </div>
+                      {% for comment in post.comments %}
+                      {% if comment.author_id == current_user.id %}
+                      <div class="user_comment">
+                        <div class="top">
+                          <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+                          <div class="right">
+                              <div class="comment_name">{{ current_user.nickname }}</div>
+                              <div class="date">{{ comment.timestamps.strftime('%Y-%m-%d %H:%M') }}</div>
+                          </div>
+                        </div>
+                        <div class="c">{{ comment.body }}</div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                  </li>
+                  {% endfor %}
               </ul>
 
               <div class="pagination">
