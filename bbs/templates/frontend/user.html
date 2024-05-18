@@ -15,6 +15,7 @@
   </head>
 
   <body>
+    <div id="sign-in-panel" class="panel-pop"></div>
     <div class="not-log-in">
       <div class="header">
         <div class="main-container header-container">
@@ -36,15 +37,18 @@
                 <div class="name">{{ current_user.nickname }}</div>
               </div>
             </a>
+            <div class="logout">
+              <a href="{{ url_for('index') }}">Logout</a>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="intro my_box">
         <div class="container">
-          <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+                <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
                 <div class="name">{{ current_user.nickname }}</div>
-          <span class="icon Tasting_Novice">Tasting Novice</span>
+                <span class="icon">Tasting Novice</span>
         </div>
       </div>
 
@@ -79,12 +83,12 @@
           <div class="main-inner mys_box">
             <ul class="nav">
               <li class="active">About</li>
-              <li>Posted Recipes</li>
-              <li>Liked Recipes</li>
+              <li>Recipes Posted</li>
+              <li>Recipes Favourites</li>
               <li>My Comments</li>
             </ul>
 
-            <div class="nav_box active" id="user-box" data-index="0">
+            <div class="nav_box active" id="user-box">
               <div class="user-info-display">
                 <div class="personal_signature">
                   {{ current_user.signature }}
@@ -266,100 +270,130 @@
                 }
               }
 
+
+             
+
+              
             </script>
-            <div class="nav_box" id="own-posts" data-index="1">
+            <div class="nav_box" id="own-posts">
               <ul class="pl">
-                {% if own_posts %}
                 {% for post in own_posts %}
                 <li class="item">
-                  <span class="tit"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></span>
-                  <span class="date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                  </div>
+                  <c class="date">{{ post.create_time.strftime('%B %d, %Y') }}</c>
                 </li>
                 {% endfor %}
-                {% else %}
-                <li class="no-content">You don't have any posted recipes.</li>
-                {% endif %}
               </ul>
               <div class="pagination">
-                <div class="pagination-box">
-                  {% if own_posts_pagination.has_prev %}
-                  <a href="{{ url_for('user', own_page=own_posts_pagination.prev_num) }}" class="paginationLink" data-type="own-posts"><span><  Previous</span></a>
-                  {% endif %}
-
-                  <a href="#">
-                    <span class="page-number pagination-active">Page {{ own_posts_pagination.page }} of {{ own_posts_pagination.pages }}</span>
-                  </a>
-
-                  {% if own_posts_pagination.has_next %}
-                  <a href="{{ url_for('user', own_page=own_posts_pagination.next_num) }}" class="paginationLink" data-type="own-posts"><span>Next  ></span></a>
-                  {% endif %}
-                </div>
+                {% if own_posts_pagination.has_prev %}
+                <a href="{{ url_for('user', page=own_posts_pagination.prev_num) }}">Previous</a>
+                {% endif %}
+                <span class="page-number">Page {{ own_posts_pagination.page }} of {{ own_posts_pagination.pages }}</span>
+                {% if own_posts_pagination.has_next %}
+                <a href="{{ url_for('user', page=own_posts_pagination.next_num) }}">Next</a>
+                {% endif %}
               </div>
             </div>
             
-            <div class="nav_box" id="liked-posts" data-index="2">
+            <div class="nav_box" id="liked-posts">
               <ul class="pl">
-                {% if liked_posts %}
                 {% for post in liked_posts %}
                 <li class="item">
-                  <span class="tit"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></span>
-                  <span class="date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                  </div>
+                  <c class="date">{{ post.create_time.strftime('%B %d, %Y') }}</c>
                 </li>
                 {% endfor %}
-                 {% else %}
-                <li class="no-content">You don't have any liked recipes.</li>
-                {% endif %}
               </ul>
-
               <div class="pagination">
-                <div class="pagination-box">
-                  {% if liked_posts_pagination.has_prev %}
-                  <a href="{{ url_for('user', liked_page=liked_posts_pagination.prev_num) }}" class="paginationLink" data-type="liked-posts"><span><  Previous</span></a>
-                  {% endif %}
-                  <a href="#">
-                    <span class="page-number pagination-active">Page {{ liked_posts_pagination.page }} of {{ liked_posts_pagination.pages }}</span>
-                  </a>
-                  {% if liked_posts_pagination.has_next %}
-                  <a href="{{ url_for('user', liked_page=liked_posts_pagination.next_num) }}" class="paginationLink" data-type="liked-posts"><span>Next  ></span></a>
-                  {% endif %}
-                </div>
+                {% if liked_posts_pagination.has_prev %}
+                <a href="{{ url_for('user', page=liked_posts_pagination.prev_num) }}">Previous</a>
+                {% endif %}
+                <span class="page-number">Page {{ liked_posts_pagination.page }} of {{ liked_posts_pagination.pages }}</span>
+                {% if liked_posts_pagination.has_next %}
+                <a href="{{ url_for('user', page=liked_posts_pagination.next_num) }}">Next</a>
+                {% endif %}
               </div>
             </div>
             
-            <div class="nav_box" id="commented-posts" data-index="3">
+            <div class="nav_box" id="commented-posts">
               <ul class="pl">
-                {% if commented_posts %}
-                {% for post in commented_posts %}
-                <li class="item">
-                  <span class="tit"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></span>
-                  <span class="date">{{ post.create_time.strftime('%B %d, %Y') }}</span>
-                </li>
-                {% endfor %}
-                {% else %}
-                <li class="no-content">You don't have any commented recipes.</li>
-                {% endif %}
+                  {% for post in commented_posts %}
+                  <li>
+                      <div class="recipe-content">
+                          <h3 class="recipe-title"><a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                      </div>
+                      {% for comment in post.comments %}
+                      {% if comment.author_id == current_user.id %}
+                      <div class="user_comment">
+                        <div class="top">
+                          <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+                          <div class="right">
+                              <div class="comment_name">{{ current_user.nickname }}</div>
+                              <div class="date">{{ comment.timestamps.strftime('%Y-%m-%d %H:%M') }}</div>
+                          </div>
+                        </div>
+                        <div class="c">{{ comment.body }}</div>
+                      </div>
+                      {% endif %}
+                      {% endfor %}
+                  </li>
+                  {% endfor %}
               </ul>
-
+          
               <div class="pagination">
-                <div class="pagination-box">
-                  {% if commented_posts_pagination.has_prev %}
-                  <a href="{{ url_for('user', commented_page=commented_posts_pagination.prev_num) }}" class="paginationLink" data-type="commented-posts"><span><  Previous</span></a>
-                  {% endif %}
-                  <a href="#">
-                    <span class="page-number pagination-active">Page {{ commented_posts_pagination.page }} of {{ commented_posts_pagination.pages }}</span>
-                  </a>
-                  {% if commented_posts_pagination.has_next %}
-                  <a href="{{ url_for('user', commented_page=commented_posts_pagination.next_num) }}" class="paginationLink" data-type="commented-posts"><span>Next  ></span></a>
-                  {% endif %}
-                </div>
+                {% if commented_posts_pagination.has_prev %}
+                <a href="{{ url_for('user', page=commented_posts_pagination.prev_num) }}">Previous</a>
+                {% endif %}
+                <span class="page-number">Page {{ commented_posts_pagination.page }} of {{ commented_posts_pagination.pages }}</span>
+                {% if commented_posts_pagination.has_next %}
+                <a href="{{ url_for('user', page=commented_posts_pagination.next_num) }}">Next</a>
+                {% endif %}
               </div>
             </div>
+            
+
+          <script>
+            const nav = document.querySelectorAll(".mys_box .nav li");
+            const nav_box = document.querySelectorAll(".nav_box");
+            nav.forEach((item, idx) => {
+              item.addEventListener("click", () => {
+                nav.forEach((item) => item.classList.remove("active"));
+                item.classList.add("active");
+
+                nav_box.forEach((item) => {
+                  item.classList.remove("active");
+                });
+                nav_box[idx].classList.add("active");
+              });
+            });
+
+            const items = document
+              .querySelector(".box1")
+              .querySelectorAll(".item");
+            for (i = 0; i < items.length - 1; i++) {
+              items[i].addEventListener(
+                "click",
+                (function (index) {
+                  return function () {
+                    nav[index + 1].click();
+                  };
+                })(i)
+              );
+            }
+          </script>
+
+
       </div>
 
 
+          <!-- popular-->
           <div class="main-right">
             <div class="share">
-              <button id="openShi" class="show_login">Share A Recipe</button>
+              <button id="openShi">Share A Recipe</button>
             </div>
 
             <!-- popular recipes -->
@@ -373,14 +407,14 @@
                 {% if loop.index == 1 %}
                 <div class="popular-top-box">
                   <div id="popular-top-demo" class="popular-top-img">
-                    <a href="{{ url_for('read', post_id=post.id) }}">
+                    <a href="#">
                       <img src="{{ post.image }}" alt="Top Post Image">
                     </a>
                   </div>
                   <div class="popular-top-detail">
                     <div class="popular-num">{{ loop.index }}</div>
                     <div class="popular-top-title">
-                      <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
+                      <a href="#">{{ post.title }}</a>
                     </div>
                   </div>
 
@@ -402,7 +436,7 @@
                       <div class="popular-item-detail">
                         <div class="popular-num">{{ loop.index }}</div>
                         <div class="popular-item-title">
-                          <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
+                          <a href="#">{{ post.title }}</a>
                         </div>
                       </div>
                       <div class="popular-com-view">
@@ -531,9 +565,7 @@
         <button class="btn_x">UPLOAD</button>
       </div>
     </section>
-    </div>
-    <script src="{{ url_for('static', filename='assets/js/login_main.js') }}"></script>
-    <script src="{{ url_for('static', filename='assets/js/user.js') }}"></script>
 
+    <script src="{{ url_for('static', filename='assets/js/login_main.js') }}"></script>
   </body>
 </html>

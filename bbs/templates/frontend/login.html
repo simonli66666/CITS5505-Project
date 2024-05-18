@@ -37,6 +37,9 @@
                 <div class="name">{{ current_user.nickname }}</div>
               </div>
             </a>
+            <div class="logout">
+              <a href="{{ url_for('index') }}">Logout</a>
+            </div>
           </div>
         </div>
       </div>
@@ -106,10 +109,8 @@
                         </div>
                     </div>
                 {% else %}
-                <div class="no-results">
-                  <img src="{{ url_for('static', filename='./assets/images/no results.png') }}" alt="" />
-                  <p>No results found</p>
-                </div>
+                    <div class="no-results">No results found for your search query.</div>
+                    <a href="/recipes" class="back-button2">← Back</a>
                 {% endfor %}
               </div>
             
