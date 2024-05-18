@@ -45,9 +45,17 @@
 
       <div class="intro my_box">
         <div class="container">
-          <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
-                <div class="name">{{ current_user.nickname }}</div>
-          <span class="icon Tasting_Novice">Tasting Novice</span>
+        < img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+        <div class="name">{{ current_user.nickname }}</div>
+        {% if current_user.badges < 50 %}
+        <span class="icon Tasting_Novice">Tasting Novice</span>
+        {% elif current_user.badges < 100 %}
+        <span class="icon Culinary_Apprentice">Culinary Apprentice</span>
+        {% elif current_user.badges < 200 %}
+        <span class="icon Gastronomic_Explorer">Gastronomic Explorer</span>
+        {% else %}
+        <span class="icon Culinary_Master">Culinary Master</span>
+        {% endif %}
         </div>
       </div>
 
