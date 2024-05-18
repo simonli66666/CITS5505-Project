@@ -1,44 +1,44 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // Controls for displaying and hiding login and registration boxes
+    // Control the display and hiding of the login and register windows
     const loginBox = document.querySelector("#login");
     const registerBox = document.querySelector("#register");
   
-    // Buttons to show the login box
+    // Show login window button
     const showLogins = document.querySelectorAll("#show_login");
     showLogins.forEach(btn => {
         btn.addEventListener("click", () => toggleDisplay(loginBox, true));
     });
   
-    // Another set of buttons to show the login box
+    // Show login window button
     const showLogins2 = document.querySelectorAll("#openShi");
     showLogins2.forEach(btn => {
         btn.addEventListener("click", () => toggleDisplay(loginBox, true));
     });
   
-    // Button to show the registration box
+    // Show register window button
     const showRegister = document.querySelector("#show_register");
     showRegister.addEventListener("click", () => toggleDisplay(registerBox, true));
   
-    // Another button to show the registration box
+    // Show register window button
     const showRegister2 = document.querySelector("#show_register2");
     showRegister2.addEventListener("click", () => toggleDisplay(registerBox, true));
   
-    // Close buttons for login and registration boxes
+    // Close button events for the login and register windows
     const loginCloseBtn = loginBox.querySelector(".close");
     const registerCloseBtn = registerBox.querySelector(".close");
   
     loginCloseBtn.addEventListener("click", () => toggleDisplay(loginBox, false));
     registerCloseBtn.addEventListener("click", () => toggleDisplay(registerBox, false));
   
-    // Event for login form submission
+    // Login form submit event
     const loginBt = document.querySelector("#login .btn_x");
     loginBt.addEventListener("click", handleLogin);
   
-    // Event for registration form submission
+    // Register form submit event
     const registerBt = document.querySelector("#register .btn_x");
     registerBt.addEventListener("click", handleRegister);
   
-    // Function to show or hide an element
+    // Function to show or hide elements
     function toggleDisplay(element, show) {
         if (show) {
             element.classList.add("show");
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
   
-    // Function to handle login logic
+    // Handle login logic
     function handleLogin(event) {
         const username = loginBox.querySelector('input[name="username"]').value;
         const password = loginBox.querySelector('input[name="password"]').value;
@@ -58,10 +58,10 @@ document.addEventListener("DOMContentLoaded", function() {
             return false;
         }
   
-        // Additional logic can be added here
+        // More logic can be added here
     }
   
-    // Function to handle registration logic
+    // Handle register logic
     function handleRegister(event) {
         const username = registerBox.querySelector('input[name="username"]').value;
         const nickname = registerBox.querySelector('input[name="nickname"]').value;
@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", function() {
             return false;
         }
   
-        // Additional logic can be added here
+        // More logic can be added here
     }
   
-    // Function to fade out flash messages
+    // Fade out effect
     fadeOutMessages();
   });
   
@@ -91,4 +91,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }, 4000);
   }
-  

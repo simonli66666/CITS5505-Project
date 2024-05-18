@@ -76,7 +76,7 @@ def share():
         db.session.add(post)
         db.session.commit()
         flash('Recipe posted successfully!', 'success')
-        return redirect(url_for('recipes', post_id=post.id))
+        return redirect(url_for('post.recipes', post_id=post.id))
 
     return render_template('frontend/login.html', error=False, posts=posts, pagination=pagination)
 
@@ -105,7 +105,7 @@ def read2(post_id):
     comments = Comments.query.filter_by(post_id=post_id).order_by(Comments.timestamps.desc()).all()
     return render_template('frontend/postsDetails_notlogin.html', post=post, posts=posts, pagination=pagination, comments=comments, registration_form=registration_form, login_form=login_form)
 
-@post_bp.route('/like/<int:post_id>/', methods=['POST'])
+@post_bp.route('/like/<int:post_id>/', methods=['POST', 'GET'])
 @login_required
 def like(post_id):
     if request.method == 'POST':
@@ -129,7 +129,7 @@ def post_like(post_id):
         db.session.add(c)
         db.session.commit()
         return True, "You have liked the post.", True
-    
+
 def is_post_liked(post_id):
     like = Like.query.filter_by(user_id=current_user.id, post_id=post_id).first()
     return True, bool(like)
@@ -143,11 +143,6 @@ def post_comment():
     post = Post.query.get_or_404(post_id)
     com = Comments(body=comment_content, post_id=post_id, author_id=current_user.id)
     
-    # If the commenting user and the post author are different, send a notification
-    # if current_user.id != post.author_id:
-    #     notice = Notification(target_id=post_id, target_name=post.title, send_user=current_user.username,
-    #                           receive_id=post.author_id, msg=comment_content)
-    #     db.session.add(notice)
     
     post.update_time = datetime.datetime.now()
     db.session.add(com)

@@ -38,7 +38,7 @@
       </div>
 
       <div class="intro posts-details">
-        <a href="{{ url_for('post.recipes') }}" class="back-button">← Back</a>
+        <a href="{{ url_for('main.index') }}" class="back-button">← Back</a>
         <h1>
           {{ post.title }}
         </h1>
@@ -432,7 +432,6 @@
               <li>{{ login_form.password(class="input_x") }}</li>
               <li class="s">
                   <div><input type="checkbox" checked />Remember Me!</div>
-                  <a href="">Forgot Password?</a>
               </li>
               <li>{{ login_form.submit(class="btn_x") }}</li>
           </ul>

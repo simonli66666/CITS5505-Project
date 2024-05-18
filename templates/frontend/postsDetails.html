@@ -62,7 +62,9 @@
         </div>
       </div>
       
+      <script>
       
+      </script>
         
      </div>
 
@@ -84,7 +86,7 @@
                 </a>
               </li>
               <li>
-                <a href="/user" class="side-bar-active">
+                <a href="/user">
                   <i class="bi bi-people-fill"></i>
                   <span>User Profile</span>
                 </a>
@@ -341,8 +343,6 @@
             </div>
           </div>
 
-          
-
           <div class="main-right">
             <div class="share">
               <button id="openShi" class="show_login">Share A Recipe</button>
@@ -388,7 +388,7 @@
                       <div class="popular-item-detail">
                         <div class="popular-num">{{ loop.index }}</div>
                         <div class="popular-item-title">
-                          <a href="#">{{ post.title }}</a>
+                          <a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a>
                         </div>
                       </div>
                       <div class="popular-com-view">
@@ -410,7 +410,13 @@
             </div>
           </div>
         </div>
+
+          
+
+
       </div>
+
+
 
       <div class="footer">
         <div class="copy">© 2024 Liz. All Rights Reserved</div>
@@ -525,21 +531,21 @@
       const comment = document.querySelector("#comment");
       const comment2 = document.querySelector("#comment2");
       const commentForm = document.querySelector("#commentForm");
-  
+    
       if (comment) {
           comment.addEventListener("click", () => {
               comment2.classList.add("show");
               comment.style.display = "none";
           });
       }
-  
+    
       if (commentForm) {
           commentForm.addEventListener("submit", function(event) {
               event.preventDefault(); // 阻止表单的默认提交行为
-  
+    
               const formData = new FormData(commentForm);
-  
-              fetch('/post-comment/', {
+    
+              fetch('/post/post-comment/', {  // 确保路径与蓝图前缀一致
                   method: 'POST',
                   body: formData,
               })

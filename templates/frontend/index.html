@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <title>Tasty</title>
     <!-- css files -->
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/public.css') }}" />
@@ -19,7 +19,15 @@
         {% for category, message in messages %}
           {% if category == 'success' %}
             <div id="success-message" class="alert alert-success flash-message">{{ message }}</div>
-          {% elif category == 'error' %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+    {% if category == 'error' %}
             <div id="error-message" class="alert alert-danger flash-message">{{ message }}</div>
           {% endif %}
         {% endfor %}
@@ -42,7 +50,7 @@
       </div>
 
       <div class="right-header">
-        <button class="sign-up" id="show_login">Sign In</button>
+        <button class="sign-up show_login">Sign In</button>
         <button class="sign-in" id="show_register">Sign Up</button>
 
         <div class="user_pirc">
@@ -56,12 +64,11 @@
   <div class="intro">
     <div class="main-container">
       <div class="intro-content">
-        <h3 class="intro-title">Share & grow the world's knowledge!</h3>
+        <h3 class="intro-title">Explore, Create and Share Delicious Recipes with Our Community!</h3>
         <p class="intro-detail">
-          We want to connect the people who have knowledge to the people who
-          need it, to bring together people with different perspectives so
-          they can understand each other better, and to empower everyone to
-          share their knowledge.
+          Discover mouthwatering recipes from passionate cooks worldwide. Share your own culinary creations,
+          connect with fellow food lovers, and embark on a flavorful journey together. Join us and let's cook
+          up something amazing!
         </p>
       </div>
       <button class="create-acct" id="show_register2">
@@ -108,7 +115,7 @@
               placeholder="Search..."
               value="{{ search_query }}"
             />
-            <button type="submit" class="recipe-search-btn">
+            <button type="submit" class="recipe-search-btn show_login">
               <i class="bi bi-search"></i>
             </button>
           </form>
@@ -282,12 +289,10 @@
           <li>{{ login_form.password(class="input_x") }}</li>
           <li class="s">
               <div><input type="checkbox" checked />Remember Me!</div>
-              <a href="">Forgot Password?</a>
           </li>
           <li>{{ login_form.submit(class="btn_x") }}</li>
       </ul>
   </form>
-
   </div>
 </section>
 <section class="login_box" id="register">

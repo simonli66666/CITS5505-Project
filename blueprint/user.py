@@ -43,6 +43,8 @@ def user():
     commented_posts_pagination = Post.query.join(Comments, Post.id == Comments.post_id).filter(Comments.author_id == user.id).order_by(Post.create_time.desc()).paginate(page=commented_page, per_page=5, error_out=False)
     commented_posts = commented_posts_pagination.items
 
+
+
     return render_template(
         'frontend/user.html', 
         own_posts=own_posts, 

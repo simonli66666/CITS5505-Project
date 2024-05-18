@@ -376,8 +376,8 @@ register_extensions(app)
 register_cmd(app)
 # Initialize the migration tool
 migrate = Migrate(app, db)
-
  """
+
 
 from flask import Flask, render_template, request, redirect, url_for, flash, current_app, g, jsonify
 from bbs.extensions import db
@@ -390,6 +390,13 @@ from bbs.blueprint.main import main_bp
 from bbs.blueprint.post import post_bp
 from bbs.blueprint.user import user_bp
 import click
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_migrate import Migrate
+from alembic import op
+import sqlalchemy as sa
+from flask import g
+
+from werkzeug.security import generate_password_hash, check_password_hash
 
 def create_app():
     app = Flask(__name__)
@@ -402,7 +409,7 @@ def create_app():
     
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
-    app.register_blueprint(post_bp)
+    app.register_blueprint(post_bp, url_prefix='/post')
     app.register_blueprint(user_bp)
 
     @app.context_processor
@@ -413,6 +420,7 @@ def create_app():
     login_manager = LoginManager(app)
     login_manager.login_view = 'auth.login'
     login_manager.login_message_category = 'info'
+    
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -420,8 +428,11 @@ def create_app():
 
     register_error_handlers(app)
     register_cmd(app)
+    
 
     return app
+
+
 
 def register_error_handlers(app):
     @app.errorhandler(400)

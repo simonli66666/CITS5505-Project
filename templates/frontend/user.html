@@ -336,12 +336,13 @@
                     <span class="page-number pagination-active">Page {{ liked_posts_pagination.page }} of {{ liked_posts_pagination.pages }}</span>
                   </a>
                 {% if liked_posts_pagination.has_next %}
-                <a href="{{ url_for('user.user', page=liked_posts_pagination.next_num) }}">Next</a>
+                  <a href="{{ url_for('user.user', liked_page=liked_posts_pagination.next_num) }}" class="paginationLink" data-type="liked-posts"><span>Next  ></span></a>
                 {% endif %}
+                </div>
               </div>
             </div>
             
-            <div class="nav_box" id="commented-posts">
+            <div class="nav_box" id="commented-posts" data-index="3">
               <ul class="pl">
                 {% for post in commented_posts %}
                   <li>
@@ -365,7 +366,9 @@
                 </li>
                 {% endfor %}
               </ul>
+
               <div class="pagination">
+                <div class="pagination-box">
                 {% if commented_posts_pagination.has_prev %}
                   <a href="{{ url_for('user.user', commented_page=commented_posts_pagination.prev_num) }}" class="paginationLink" data-type="commented-posts"><span><  Previous</span></a>
                 {% endif %}
@@ -373,7 +376,7 @@
                     <span class="page-number pagination-active">Page {{ commented_posts_pagination.page }} of {{ commented_posts_pagination.pages }}</span>
                   </a>
                 {% if commented_posts_pagination.has_next %}
-                <a href="{{ url_for('user.user', page=commented_posts_pagination.next_num) }}">Next</a>
+                  <a href="{{ url_for('user.user', commented_page=commented_posts_pagination.next_num) }}" class="paginationLink" data-type="commented-posts"><span>Next  ></span></a>
                 {% endif %}
                 </div>
               </div>

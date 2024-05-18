@@ -10,9 +10,9 @@ recipeClose.addEventListener("click", () => {
   recipe_box.classList.remove("show");
 });
 
-document.querySelector('.recipe-search-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const query = document.querySelector('.recipe-search-input').value;
-    window.location.href = `/recipes?search_query=${query}`;
-});
+//document.querySelector('.recipe-search-form').addEventListener('submit', function(event) {
+//    event.preventDefault();
+//    const query = document.querySelector('.recipe-search-input').value;
+//    window.location.href = `/recipes?search_query=${query}`;
+//});
 
