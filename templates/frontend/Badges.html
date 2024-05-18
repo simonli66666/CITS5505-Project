@@ -13,14 +13,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/login_main.css') }}" />
   </head>
-
+  
   <body>
     <div id="sign-in-panel" class="panel-pop"></div>
     <div class="not-log-in">
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="/recipes" title="tasty">
+            <a href="{{ url_for('post.recipes') }}" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -50,7 +50,7 @@
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="/recipes" class="">
+                <a href="{{ url_for('post.recipes') }}" class="">
                   <i class="bi bi-card-list"></i>
                   <span>Recipes</span>
                 </a>

@@ -20,7 +20,7 @@
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="/recipes" title="tasty">
+            <a href="{{ url_for('post.recipes') }}" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -46,7 +46,7 @@
 
 
       <div class="intro posts-details">
-        <a href="/recipes" class="back-button">← Back</a>
+        <a href="{{ url_for('post.recipes') }}" class="back-button">← Back</a>
         <h1>
           {{ post.title }}
         </h1>
@@ -72,7 +72,7 @@
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="/recipes" class="side-bar-active">
+                <a href="{{ url_for('post.recipes') }}" class="side-bar-active">
                   <i class="bi bi-card-list"></i>
                   <span>Recipes</span>
                 </a>

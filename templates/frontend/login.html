@@ -20,7 +20,7 @@
       <div class="header">
         <div class="main-container header-container">
           <div class="logo-image">
-            <a href="/recipes" title="tasty">
+            <a href="{{ url_for('post.recipes') }}" title="tasty">
               <img
                 width="132"
                 height="45"
@@ -50,7 +50,7 @@
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="/recipes" class="side-bar-active">
+                <a href="{{ url_for('post.recipes') }}" class="side-bar-active">
                   <i class="bi bi-card-list"></i>
                   <span>Recipes</span>
                 </a>
@@ -74,7 +74,7 @@
 
           <div class="main-inner">
             <div class="search">
-              <form action="/recipes" method="post" class="recipe-search-form">
+              <form action="{{ url_for('post.recipes') }}" method="post" class="recipe-search-form">
                 <input
                   type="text"
                   name="search_query"
