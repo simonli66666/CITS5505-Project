@@ -53,12 +53,15 @@
         </div>
         <div class="button-container">
           <button class="like-button" onclick="toggleLike({{ post.id }})">
-            <i class="bi {{ 'bi-heart-fill' if current_user_has_liked else 'bi-heart' }}" id="like-icon-{{ post.id }}"></i>{{ post.likes_num }} Like
+            <i class="bi like-heart {{ 'bi-heart-fill' if current_user_has_liked else 'bi-heart' }}" id="like-icon-{{ post.id }}" style="margin-right: 10px"></i>
+            <span class="like-num">{{ post.likes_num }} Like</span>
           </button>
         </div>
       </div>
       
-      
+      <script>
+
+      </script>
         
      </div>
 
@@ -68,7 +71,7 @@
           <div class="side-bar-l">
             <ul>
               <li>
-                <a href="/recipes">
+                <a href="/recipes" class="side-bar-active">
                   <i class="bi bi-card-list"></i>
                   <span>Recipes</span>
                 </a>
@@ -80,7 +83,7 @@
                 </a>
               </li>
               <li>
-                <a href="/user" class="side-bar-active">
+                <a href="/user">
                   <i class="bi bi-people-fill"></i>
                   <span>User Profile</span>
                 </a>
@@ -339,7 +342,7 @@
 
           <div class="main-right">
             <div class="share">
-              <button id="openShi">Share A Recipe</button>
+              <button id="openShi" class="show_login">Share A Recipe</button>
             </div>
 
             <!-- popular recipes -->
@@ -353,14 +356,14 @@
                 {% if loop.index == 1 %}
                 <div class="popular-top-box">
                   <div id="popular-top-demo" class="popular-top-img">
-                    <a href="#">
+                    <a href="{{ url_for('read', post_id=post.id) }}">
                       <img src="{{ post.image }}" alt="Top Post Image">
                     </a>
                   </div>
                   <div class="popular-top-detail">
                     <div class="popular-num">{{ loop.index }}</div>
                     <div class="popular-top-title">
-                      <a href="#">{{ post.title }}</a>
+                      <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
                     </div>
                   </div>
 
@@ -382,7 +385,7 @@
                       <div class="popular-item-detail">
                         <div class="popular-num">{{ loop.index }}</div>
                         <div class="popular-item-title">
-                          <a href="#">{{ post.title }}</a>
+                          <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
                         </div>
                       </div>
                       <div class="popular-com-view">

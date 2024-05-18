@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const registerBox = document.querySelector("#register");
     const loginClose = loginBox.querySelector(".close");
     const registerClose = registerBox.querySelector(".close");
+    const havingAccount = document.querySelector(".havingAccount");
+    const showRegister2 = document.querySelector("#show_register2");
   
     document.querySelectorAll("#show_login").forEach(btn => {
         btn.addEventListener("click", () => {
@@ -19,10 +21,13 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector("#show_register").addEventListener("click", () => {
         registerBox.classList.add("show");
     });
-  
-    document.querySelector("#show_register2").addEventListener("click", () => {
-        registerBox.classList.add("show");
-    });
+
+    if(showRegister2) {
+        showRegister2.addEventListener("click", () => {
+            registerBox.classList.add("show");
+        });
+    }
+
     loginClose.addEventListener("click", () => {
         loginBox.classList.remove("show");
     });
@@ -30,23 +35,14 @@ document.addEventListener("DOMContentLoaded", function() {
     registerClose.addEventListener("click", () => {
         registerBox.classList.remove("show");
     });
+
+
+    havingAccount.addEventListener("click", () => {
+        registerBox.classList.remove("show");
+        loginBox.classList.add("show");
+    })
   
-    // 表单验证和提交逻辑可以按需添加
-  });
-  
-  function fadeOutMessages() {
-    const messages = document.querySelectorAll('.flash-message');
-    setTimeout(() => {
-        messages.forEach(message => {
-            message.style.opacity = '0';
-            setTimeout(() => {
-                message.style.display = 'none';
-            }, 600);
-        });
-    }, 4000);
-  }
-  
-  // 登录和注册窗口的关闭按钮事件
+    // 登录和注册窗口的关闭按钮事件
   const loginCloseBtn = loginBox.querySelector(".close");
   const registerCloseBtn = registerBox.querySelector(".close");
 
@@ -72,9 +68,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-    document.querySelector('.recipe-search-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const query = document.querySelector('.recipe-search-input').value;
-        window.location.href = `/?search_query=${query}`;
-    });
+//    document.querySelector('.recipe-search-form').addEventListener('submit', function(event) {
+//        event.preventDefault();
+//        const query = document.querySelector('.recipe-search-input').value;
+//        window.location.href = `/?search_query=${query}`;
+//    });
+  });
+
+
+
+  
+
     

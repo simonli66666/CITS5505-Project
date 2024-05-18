@@ -177,17 +177,21 @@ def recipes():
 @login_required
 def user():
     user = current_user
-    
-    page = request.args.get('page', 1, type=int)
 
-    own_posts_pagination = Post.query.filter_by(author_id=user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    own_page = request.args.get('own_page', 1, type=int)
+    liked_page = request.args.get('liked_page', 1, type=int)
+    commented_page = request.args.get('commented_page', 1, type=int)
+
+    own_posts_pagination = Post.query.filter_by(author_id=user.id).order_by(Post.create_time.desc()).paginate(page=own_page, per_page=5, error_out=False)
     own_posts = own_posts_pagination.items
     
-    liked_posts_pagination = Post.query.join(Like, Post.id == Like.post_id).filter(Like.user_id == user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    liked_posts_pagination = Post.query.join(Like, Post.id == Like.post_id).filter(Like.user_id == user.id).order_by(Post.create_time.desc()).paginate(page=liked_page, per_page=5, error_out=False)
     liked_posts = liked_posts_pagination.items
     
-    commented_posts_pagination = Post.query.join(Comments, Post.id == Comments.post_id).filter(Comments.author_id == user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    commented_posts_pagination = Post.query.join(Comments, Post.id == Comments.post_id).filter(Comments.author_id == user.id).order_by(Post.create_time.desc()).paginate(page=commented_page, per_page=5, error_out=False)
     commented_posts = commented_posts_pagination.items
+
+
 
     return render_template(
         'frontend/user.html', 
@@ -224,11 +228,15 @@ def read2(post_id):
 
     return render_template('frontend/postsDetails_notlogin.html', post=post, posts=posts, pagination=pagination, comments=comments)
 
-@app.route('/like/<int:post_id>/', methods=['POST'])
+@app.route('/like/<int:post_id>/', methods=['POST', 'GET'])
 @login_required
 def like(post_id):
-    success, message, is_liked = post_like(post_id)
-    return jsonify(success=success, message=message, isLiked=is_liked)
+    if request.method == 'POST':
+        success, message, is_liked = post_like(post_id)
+        return jsonify(success=success, message=message, isLiked=is_liked)
+    elif request.method == 'GET':
+        success, is_liked = is_post_liked(post_id)
+        return jsonify(success=success, isLiked=is_liked)
 
 def post_like(post_id):
     post = Post.query.get_or_404(post_id)
@@ -244,6 +252,10 @@ def post_like(post_id):
         db.session.add(c)
         db.session.commit()
         return True, "You have liked the post.", True
+
+def is_post_liked(post_id):
+    like = Like.query.filter_by(user_id=current_user.id, post_id=post_id).first()
+    return True, bool(like)
 
 @app.route('/edit-user-info',  methods=['POST','GET'])
 @login_required

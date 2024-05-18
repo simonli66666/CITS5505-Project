@@ -76,10 +76,8 @@
                 Points System
               </div>
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam
-                labore, reprehenderit ut deleniti omnis nisi quaerat assumenda
-                neque eaque incidunt, rem eos nostrum. Ratione recusandae soluta
-                eligendi deserunt error et!
+                Tasty features a rewarding point system, encouraging active participation and valuable contributions from our members.
+                Earn points by sharing recipes, engaging in discussions, and interacting with fellow food enthusiasts!
               </p>
             </div>
 
@@ -133,10 +131,9 @@
                 Badges System
               </div>
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam
-                labore, reprehenderit ut deleniti omnis nisi quaerat assumenda
-                neque eaque incidunt, rem eos nostrum. Ratione recusandae soluta
-                eligendi deserunt error et!
+                Besides gaining reputation with your shared recipes,
+                you receive badges for being especially helpful. Badges appears on
+                your profile page.
               </p>
             </div>
 
@@ -155,10 +152,8 @@
                   </div>
                 </div>
                 <div class="r">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Recusandae ex voluptatum quia id quam repudiandae fugit
-                  corrupti error, quibusdam cupiditate asperiores aliquid velit
-                  rerum animi reiciendis similique dolores unde sit?
+                  The "Tasting Novice" badge is recognition for beginners, indicating that you've started exploring the world of gastronomy.
+                  From trying out new recipes to learning basic cooking techniques, you're taking your first steps on a culinary journey.
                 </div>
               </li>
               <li class="item">
@@ -170,15 +165,14 @@
                   </div>
                   <div class="d">
                     <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
-                    <span class="num">10</span>
+                    <span class="num">50</span>
                     <span class="ms">Points</span>
                   </div>
                 </div>
                 <div class="r">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Recusandae ex voluptatum quia id quam repudiandae fugit
-                  corrupti error, quibusdam cupiditate asperiores aliquid velit
-                  rerum animi reiciendis similique dolores unde sit?
+                  The "Culinary Apprentice" badge is recognition for active learners, indicating that you've gained a
+                  deep understanding of the basics of cooking. You may have mastered some common cooking techniques
+                  and are starting to try more complex dishes.
                 </div>
               </li>
               <li class="item">
@@ -190,15 +184,14 @@
                   </div>
                   <div class="d">
                     <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
-                    <span class="num">10</span>
+                    <span class="num">100</span>
                     <span class="ms">Points</span>
                   </div>
                 </div>
                 <div class="r">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Recusandae ex voluptatum quia id quam repudiandae fugit
-                  corrupti error, quibusdam cupiditate asperiores aliquid velit
-                  rerum animi reiciendis similique dolores unde sit?
+                  The "Gastronomic Explorer" badge is recognition for explorers, indicating that you've
+                  delved into various culinary cultures and cooking techniques. You may have tried a wide
+                  variety of ingredients and dishes, and have a deeper understanding of the breadth and depth of cooking.
                 </div>
               </li>
               <li class="item">
@@ -210,15 +203,15 @@
                   </div>
                   <div class="d">
                     <i class="bi bi-bucket-fill" style="color: #fd7c47"></i>
-                    <span class="num">10</span>
+                    <span class="num">200</span>
                     <span class="ms">Points</span>
                   </div>
                 </div>
                 <div class="r">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Recusandae ex voluptatum quia id quam repudiandae fugit
-                  corrupti error, quibusdam cupiditate asperiores aliquid velit
-                  rerum animi reiciendis similique dolores unde sit?
+                  The "Culinary Master" badge is the highest honor for outstanding contributors, indicating that you've
+                  become an expert in the culinary field and have a profound understanding and influence in the world of
+                  gastronomy. You may have become a leading figure in the community, inspiring and guiding other members,
+                  and collectively driving the development of culinary culture.
                 </div>
               </li>
             </ul>
@@ -226,7 +219,7 @@
 
           <div class="main-right">
             <div class="share">
-              <button id="openShi">Share A Recipe</button>
+              <button id="openShi" class="show_login">Share A Recipe</button>
             </div>
 
             <!-- popular recipes -->
@@ -240,14 +233,14 @@
                 {% if loop.index == 1 %}
                 <div class="popular-top-box">
                   <div id="popular-top-demo" class="popular-top-img">
-                    <a href="#">
+                    <a href="{{ url_for('read', post_id=post.id) }}">
                       <img src="{{ post.image }}" alt="Top Post Image">
                     </a>
                   </div>
                   <div class="popular-top-detail">
                     <div class="popular-num">{{ loop.index }}</div>
                     <div class="popular-top-title">
-                      <a href="#">{{ post.title }}</a>
+                      <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
                     </div>
                   </div>
 
@@ -269,7 +262,7 @@
                       <div class="popular-item-detail">
                         <div class="popular-num">{{ loop.index }}</div>
                         <div class="popular-item-title">
-                          <a href="#">{{ post.title }}</a>
+                          <a href="{{ url_for('read', post_id=post.id) }}">{{ post.title }}</a>
                         </div>
                       </div>
                       <div class="popular-com-view">

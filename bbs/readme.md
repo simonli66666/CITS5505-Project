@@ -2,7 +2,7 @@
 1.配置虚拟环境
 terminal输入
 python3 -m venv venv
-source venv/bin/activate
+source venv/bin/activate  venv\Scripts\activate
 2.装些库
 pip install -r requirements.txt
 3.导入配置py

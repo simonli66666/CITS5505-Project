@@ -378,6 +378,11 @@
     margin-bottom: 12px;
     height: 5em;
   }
+
+  #commentForm #commentContent {
+    padding: 5px;
+
+  }
   
   .rewards {
     padding: 20px;
@@ -441,7 +446,7 @@
     margin-right: 0 !important;
   }
   .rewards .pm .item .l {
-    width: 500px;
+    flex: 1;
     border-right: 1px solid #ccc;
     padding: 20px 10px;
   }
@@ -469,6 +474,7 @@
     height: auto;
   }
   .rewards .pm .item .r {
+    flex: 3;
     color: #777676;
     padding: 20px;
     line-height: 1.5em;
@@ -498,11 +504,27 @@
     font-size: 18px;
   }
   .my_box .icon {
-    background-color: var(--color);
     color: #fff;
     padding: 2px 10px;
     font-size: 14px;
   }
+
+  .my_box .Tasting_Novice{
+    background-color: #000;
+  }
+
+  .my_box .Culinary_Apprentice{
+    background-color: #3f0edf;
+  }
+
+  .my_box .Gastronomic_Explorer {
+    background-color: #50da19;
+  }
+
+  .my_box .Culinary_Master {
+    background-color: #d27373;
+  }
+
   
   .mys_box {
     background: transparent;
@@ -533,6 +555,14 @@
     padding-top: 40px;
     height: 1000px;
   }
+
+  .mys_box .nav_box .no-content {
+  background-color: #fff7ae;
+  padding: 10px 10px;
+  color: #ffa630;
+  font-weight: bold;
+  }
+
   .mys_box .nav_box.active {
     display: block;
   }
@@ -821,7 +851,7 @@
     line-height: 1.5em;
   }
   
-  .nav_box .pl li {
+  .nav_box .pl .item {
     border-bottom: 1px solid #ccc;
     padding-bottom: 20px;
     margin-bottom: 40px;

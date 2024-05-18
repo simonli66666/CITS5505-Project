@@ -106,8 +106,10 @@
                         </div>
                     </div>
                 {% else %}
-                    <div class="no-results">No results found for your search query.</div>
-                    <a href="/recipes" class="back-button2">← Back</a>
+                <div class="no-results">
+                  <img src="{{ url_for('static', filename='./assets/images/no results.png') }}" alt="" />
+                  <p>No results found</p>
+                </div>
                 {% endfor %}
               </div>
             

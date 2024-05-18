@@ -49,7 +49,7 @@
       </div>
 
       <div class="right-header">
-        <button class="sign-up" id="show_login">Sign In</button>
+        <button class="sign-up show_login">Sign In</button>
         <button class="sign-in" id="show_register">Sign Up</button>
 
         <div class="user_pirc">
@@ -63,12 +63,11 @@
   <div class="intro">
     <div class="main-container">
       <div class="intro-content">
-        <h3 class="intro-title">Share & grow the world's knowledge!</h3>
+        <h3 class="intro-title">Explore, Create and Share Delicious Recipes with Our Community!</h3>
         <p class="intro-detail">
-          We want to connect the people who have knowledge to the people who
-          need it, to bring together people with different perspectives so
-          they can understand each other better, and to empower everyone to
-          share their knowledge.
+          Discover mouthwatering recipes from passionate cooks worldwide. Share your own culinary creations,
+          connect with fellow food lovers, and embark on a flavorful journey together. Join us and let's cook
+          up something amazing!
         </p>
       </div>
       <button class="create-acct" id="show_register2">
@@ -115,7 +114,7 @@
               placeholder="Search..."
               value="{{ search_query }}"
             />
-            <button type="submit" class="recipe-search-btn">
+            <button type="submit" class="recipe-search-btn show_login">
               <i class="bi bi-search"></i>
             </button>
           </form>
@@ -142,8 +141,10 @@
               </div>
             </div>
             {% else %}
-              <div class="no-results">No results found for your search query.</div>
-              <a href="/" class="back-button2">← Back</a>
+              <div class="no-results">
+                  <img src="{{ url_for('static', filename='./assets/images/no results.png') }}" alt="" />
+                  <p>No results found</p>
+                </div>
             {% endfor %}
           </div>
         </div>
@@ -194,7 +195,7 @@
             <div class="popular-top-detail">
               <div class="popular-num">{{ loop.index }}</div>
               <div class="popular-top-title">
-                <a href="#">{{ post.title }}</a>
+                <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a>
               </div>
             </div>
 
@@ -216,7 +217,7 @@
                 <div class="popular-item-detail">
                   <div class="popular-num">{{ loop.index }}</div>
                   <div class="popular-item-title">
-                    <a href="#">{{ post.title }}</a>
+                    <a href="{{ url_for('read2', post_id=post.id) }}">{{ post.title }}</a>
                   </div>
                 </div>
                 <div class="popular-com-view">
@@ -237,7 +238,12 @@
         </div>
       </div>
     </div>
+    <div class="footer">
+        <div class="copy">© 2024 Liz. All Rights Reserved</div>
+      </div>
   </div>
+
+
 </div>
 
 <!-- 登录 注册 -->
@@ -281,7 +287,6 @@
         <li><input class="input_x" type="password" name="password" required/></li>
         <li class="s">
           <div><input type="checkbox" checked />Remember Me!</div>
-          <a href="">Forgot Password?</a>
         </li>
         <button class="btn_x" type="submit">Login</button>
       </ul>
@@ -332,9 +337,9 @@
           <div>
             <!-- <input type="checkbox" checked>Remember Me! -->
           </div>
-          <a href="">Having an account?</a>
+          <a href="#" class="havingAccount">Having an account?</a>
         </li>
-        <button class="btn_x"type="submit">Sign Up</button>
+        <button class="btn_x" type="submit">Sign Up</button>
       </ul>
     </form>
   </div>
@@ -459,12 +464,10 @@
     const observer = new MutationObserver(callback);
     observer.observe(targetNode, config);
 
-
     document.querySelector('.recipe-search-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const query = document.querySelector('.recipe-search-input').value;
-    window.location.href = `/recipes?search_query=${query}`;
-});
+        event.preventDefault();
+    });
+
 </script>
 
 <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
