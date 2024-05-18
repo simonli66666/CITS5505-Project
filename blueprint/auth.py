@@ -25,16 +25,27 @@ def register():
     pagination = Post.query.order_by(Post.id.desc()).paginate(page=page, per_page=5, error_out=False)
     posts = pagination.items
 
-    if registration_form.validate_on_submit():
-        username = registration_form.username.data
-        nickname = registration_form.nickname.data
-        password = registration_form.password.data 
-        password = generate_password_hash(password)
-        new_user = User(username=username, nickname=nickname, password=password)
-        db.session.add(new_user)
-        db.session.commit()
-        flash('User created successfully!', 'success')
-        return redirect(url_for('auth.login'))
+    if request.method == 'POST':
+        if registration_form.validate_on_submit():
+            username = registration_form.username.data
+            nickname = registration_form.nickname.data
+            password = registration_form.password.data 
+            
+            password = generate_password_hash(password)
+            # 检查用户名和昵称是否已存在
+            if User.query.filter_by(username=username).first():
+                flash('Username already exists!', 'error')
+                return render_template('frontend/index.html', error=True, registration_form=registration_form, login_form=login_form, posts=posts, pagination=pagination)
+            if User.query.filter_by(nickname=nickname).first():
+                flash('Nickname already exists!', 'error')
+                return render_template('frontend/index.html', error=True, registration_form=registration_form, login_form=login_form, posts=posts, pagination=pagination)
+            
+        
+            new_user = User(username=username, nickname=nickname, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            flash('User created successfully!', 'success')
+            return redirect(url_for('auth.login'))
 
     return render_template('frontend/index.html', registration_form=registration_form, login_form=login_form, error=False, posts=posts, pagination=pagination)
 
@@ -50,6 +61,7 @@ def login():
         username = login_form.username.data
         password = login_form.password.data
         user = User.query.filter_by(username=username).first()
+        
         if user and check_password_hash(user.password, password):
             login_user(user, remember=login_form.remember_me.data)
             flash('Logged in successfully!', 'success')

@@ -13,25 +13,18 @@
 </head>
 
 <body>
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-  {% for category, message in messages %}
-    {% if category == 'success' %}
-      <div id="success-message" class="alert alert-success flash-message">{{ message }}</div>
-    {% endif %}
-  {% endfor %}
-{% endif %}
-{% endwith %}
-
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-  {% for category, message in messages %}
-    {% if category == 'error' %}
-      <div id="error-message" class="alert alert-danger flash-message">{{ message }}</div>
-    {% endif %}
-  {% endfor %}
-{% endif %}
-{% endwith %}
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          {% if category == 'success' %}
+            <div id="success-message" class="alert alert-success flash-message">{{ message }}</div>
+          {% elif category == 'error' %}
+            <div id="error-message" class="alert alert-danger flash-message">{{ message }}</div>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
 <div id="sign-in-panel" class="panel-pop"></div>
 <div class="not-log-in">
@@ -142,8 +135,10 @@
               </div>
             </div>
             {% else %}
-              <div class="no-results">No results found for your search query.</div>
-              <a href="/" class="back-button2">← Back</a>
+              <div class="no-results">
+                  <img src="{{ url_for('static', filename='./assets/images/no results.png') }}" alt="" />
+                  <p>No results found</p>
+                </div>
             {% endfor %}
           </div>
         </div>
@@ -194,7 +189,7 @@
             <div class="popular-top-detail">
               <div class="popular-num">{{ loop.index }}</div>
               <div class="popular-top-title">
-                <a href="#">{{ post.title }}</a>
+                <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a>
               </div>
             </div>
 
@@ -216,7 +211,7 @@
                 <div class="popular-item-detail">
                   <div class="popular-num">{{ loop.index }}</div>
                   <div class="popular-item-title">
-                    <a href="#">{{ post.title }}</a>
+                    <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a>
                   </div>
                 </div>
                 <div class="popular-com-view">
@@ -236,6 +231,9 @@
           {% endfor %}
         </div>
       </div>
+    </div>
+    <div class="footer">
+        <div class="copy">© 2024 Liz. All Rights Reserved</div>
     </div>
   </div>
 </div>
@@ -443,6 +441,9 @@
     <button class="btn_x">UPLOAD</button>
   </div>
 </section>
+
+
+
 
 <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 

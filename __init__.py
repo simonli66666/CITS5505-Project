@@ -376,8 +376,8 @@ register_extensions(app)
 register_cmd(app)
 # Initialize the migration tool
 migrate = Migrate(app, db)
- """
 
+ """
 
 from flask import Flask, render_template, request, redirect, url_for, flash, current_app, g, jsonify
 from bbs.extensions import db

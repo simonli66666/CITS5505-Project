@@ -108,8 +108,12 @@ def read2(post_id):
 @post_bp.route('/like/<int:post_id>/', methods=['POST'])
 @login_required
 def like(post_id):
-    success, message, is_liked = post_like(post_id)
-    return jsonify(success=success, message=message, isLiked=is_liked)
+    if request.method == 'POST':
+        success, message, is_liked = post_like(post_id)
+        return jsonify(success=success, message=message, isLiked=is_liked)
+    elif request.method == 'GET':
+        success, is_liked = is_post_liked(post_id)
+        return jsonify(success=success, isLiked=is_liked)
 
 def post_like(post_id):
     post = Post.query.get_or_404(post_id)
@@ -125,6 +129,10 @@ def post_like(post_id):
         db.session.add(c)
         db.session.commit()
         return True, "You have liked the post.", True
+    
+def is_post_liked(post_id):
+    like = Like.query.filter_by(user_id=current_user.id, post_id=post_id).first()
+    return True, bool(like)
 
 @post_bp.route('/post-comment/', methods=['POST'])
 @login_required

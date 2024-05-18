@@ -29,15 +29,18 @@ user_bp = Blueprint('user', __name__)
 @login_required
 def user():
     user = current_user
-    page = request.args.get('page', 1, type=int)
 
-    own_posts_pagination = Post.query.filter_by(author_id=user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    own_page = request.args.get('own_page', 1, type=int)
+    liked_page = request.args.get('liked_page', 1, type=int)
+    commented_page = request.args.get('commented_page', 1, type=int)
+
+    own_posts_pagination = Post.query.filter_by(author_id=user.id).order_by(Post.create_time.desc()).paginate(page=own_page, per_page=5, error_out=False)
     own_posts = own_posts_pagination.items
-
-    liked_posts_pagination = Post.query.join(Like, Post.id == Like.post_id).filter(Like.user_id == user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    
+    liked_posts_pagination = Post.query.join(Like, Post.id == Like.post_id).filter(Like.user_id == user.id).order_by(Post.create_time.desc()).paginate(page=liked_page, per_page=5, error_out=False)
     liked_posts = liked_posts_pagination.items
-
-    commented_posts_pagination = Post.query.join(Comments, Post.id == Comments.post_id).filter(Comments.author_id == user.id).order_by(Post.create_time.desc()).paginate(page=page, per_page=10, error_out=False)
+    
+    commented_posts_pagination = Post.query.join(Comments, Post.id == Comments.post_id).filter(Comments.author_id == user.id).order_by(Post.create_time.desc()).paginate(page=commented_page, per_page=5, error_out=False)
     commented_posts = commented_posts_pagination.items
 
     return render_template(

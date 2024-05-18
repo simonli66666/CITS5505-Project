@@ -37,6 +37,9 @@
                 <div class="name">{{ current_user.nickname }}</div>
               </div>
             </a>
+            <div class="logout">
+              <a href="{{ url_for('main.index') }}">Logout</a>
+            </div>
           </div>
         </div>
       </div>
@@ -107,8 +110,10 @@
                         </div>
                     </div>
                 {% else %}
-                    <div class="no-results">No results found for your search query.</div>
-                    <a href="/recipes" class="back-button2">← Back</a>
+                <div class="no-results">
+                  <img src="{{ url_for('static', filename='./assets/images/no results.png') }}" alt="" />
+                  <p>No results found</p>
+                </div>
                 {% endfor %}
               </div>
             
@@ -319,6 +324,13 @@
         <button class="btn_x" type="submit">UPLOAD</button>
       </div>
     </section>
+    <script>
+      document.querySelector('.recipe-search-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const query = document.querySelector('.recipe-search-input').value;
+      window.location.href = `/recipes?search_query=${query}`;
+});
+    </script>
 
     <script src="{{ url_for('static', filename='assets/js/login_main.js') }}"></script>
   </body>

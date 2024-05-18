@@ -74,4 +74,6 @@ document.addEventListener("DOMContentLoaded", function() {
         const query = document.querySelector('.recipe-search-input').value;
         window.location.href = `/?search_query=${query}`;
     });
+
+    
     

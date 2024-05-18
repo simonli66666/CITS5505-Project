@@ -47,14 +47,15 @@
           {{ post.user.nickname }}/ <span>{{ post.create_time.strftime('%Y-%m-%d') }}</span>
         </div>
         <div class="button-container">
-              <i class="bi bi-heart"></i> {{ post.likes_num }}Like
-          
+            <button class="like-button">
+              <i class="bi bi-heart" style="margin-right: 10px"></i> <span class="like-num">{{ post.likes_num }} Like</span>
+            </button>
         </div>
       </div>
 
       <div class="main-content">
         <div class="main-container">
-          <!-- side bar -->
+          <!-- sidebar -->
           <div class="side-bar-l">
             <ul>
               <li>
@@ -279,6 +280,7 @@
                 <div class="item">
                   <input type="reset" value="" />
                   {{ post.ingredient4 }}
+                </div>
                 <div class="item">
                   <input type="reset" value="" />
                   {{ post.ingredient5 }}
@@ -335,14 +337,14 @@
                   <div class="popular-top-detail">
                     <div class="popular-num">{{ loop.index }}</div>
                     <div class="popular-top-title">
-                      <a href="#">{{ post.title }}</a>
+                      <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a>
                     </div>
                   </div>
 
                   <div class="popular-com-view">
                     <span class="com">
                       <i class="bi bi-chat-fill"></i>
-                      <span class="comment-num">{{ post.comment_num }}</span> Comments
+                      <span class="comment-num">{{ post.likes_num }}</span> Likes
                     </span>
                     <span class="view">
                       <i class="bi bi-eye-fill"></i>
@@ -357,14 +359,14 @@
                       <div class="popular-item-detail">
                         <div class="popular-num">{{ loop.index }}</div>
                         <div class="popular-item-title">
-                          <a href="#">{{ post.title }}</a>
+                          <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a>
                         </div>
                       </div>
                       <div class="popular-com-view">
                         <span class="com">
                           <i class="bi bi-chat-fill"></i>
-                          <span id="comment-num" class="comment-num"> {{ post.comment_num }} </span
-                          > Comments
+                          <span id="comment-num" class="comment-num"> {{ post.likes_num }} </span
+                          > Likes
                         </span>
                         <span class="view">
                           <i class="bi bi-eye-fill"></i>
