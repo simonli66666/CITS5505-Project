@@ -443,7 +443,28 @@
 </section>
 
 
+<script>
+  //let register and login flash message disappear after 2s
+  const targetNode = document.body;
+  const config = { childList: true, subtree: true };
+  const callback = function(mutationsList, observer) {
+      const flashMessages = document.querySelectorAll('.flash-message');
+      flashMessages.forEach(flashMessage => {
+        setTimeout(() => {
+                    flashMessage.remove();
+                }, 2000);
+    });
 
+
+    };
+    const observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+
+    document.querySelector('.recipe-search-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+    });
+
+</script>
 
 <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 
