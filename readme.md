@@ -42,7 +42,7 @@ This food forum aims to create an engaging community where users can share their
 | 22853272   | Xiheng Li          | simonli66666     |
 | 23892376   | Kexin Jiang        | kjiang001        |
 | 23930318   | Wenxin Li.         | Chiaraliz.       |
-| 23945949   | Yisong Zhang       | markzhang.       |
+| 23945949   | Yisong Zhang       | markzhhang.       |
 
 ## Instructions for Launching the Application
 
