@@ -2,7 +2,38 @@
 
 ## Description
 
-This web application is a food forum where users can register, log in, and share their favorite recipes. Once logged in, users can create posts, like other users' posts, and engage with the .....
+### Purpose of the Application
+
+Our group has developed a food forum web application where users can share and discover recipes. After registering and logging in, users can engage with the community by sharing their favorite recipes, liking posts, and leaving comments.
+
+### Design and Use
+
+#### User Registration and Login
+- Users need to register and log in to access the full features of the forum.
+
+#### Sharing Recipes
+- On the homepage, users can share their recipes by clicking the "Share a Recipe" button.
+- They can fill out a form with details such as ingredients, preparation time, calories, cooking process, and a URL for an image of the finished dish.
+- This information is used to create a new post.
+
+#### Viewing Recipes
+- Users can view all posted recipes in the "Recipe" section on the left side of the homepage.
+
+#### Liking and Commenting
+- Users can like and comment on other users' posts.
+- Recipes with high numbers of likes appear in the "Popular" section on the right side of the homepage.
+
+#### Points System
+- The forum features a points system where users can earn points by registering, posting recipes, and receiving likes on their posts.
+- Users start with 20 points upon registration.
+- Additional points can be earned by posting recipes and getting likes on their posts.
+- As users accumulate points, they can achieve different ranks or titles.
+
+#### User Profile
+- Users can view their liked posts and comments in the "User Profile" section on the left side.
+- Users can also edit their personal information in this section.
+
+This food forum aims to create an engaging community where users can share their culinary creations, discover new recipes, and interact with fellow food enthusiasts.
 
 ## Group Members
 
