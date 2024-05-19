@@ -5,17 +5,25 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <title>posts</title>
     <!-- css files -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/login_main.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/login_main.css') }}"
+    />
   </head>
 
   <body>
-    <div id="sign-in-panel" class="panel-pop"></div>
     <div class="not-log-in">
       <div class="header">
         <div class="main-container header-container">
@@ -33,7 +41,10 @@
           <div class="right-header">
             <a href="/user" class="user">
               <div class="user_pirc">
-                <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+                <img
+                  src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}"
+                  alt=""
+                />
                 <div class="name">{{ current_user.nickname }}</div>
               </div>
             </a>
@@ -44,29 +55,28 @@
         </div>
       </div>
 
-
       <div class="intro posts-details">
         <a href="{{ url_for('post.recipes') }}" class="back-button">← Back</a>
-        <h1>
-          {{ post.title }}
-        </h1>
+        <h1>{{ post.title }}</h1>
         <div class="b">
-          <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
-          {{ post.user.nickname }}/ <span>{{ post.create_time.strftime('%Y-%m-%d') }}</span>
+          <img
+            src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}"
+            alt=""
+          />
+          {{ post.user.nickname }}/
+          <span>{{ post.create_time.strftime('%Y-%m-%d') }}</span>
         </div>
         <div class="button-container">
           <button class="like-button" onclick="toggleLike({{ post.id }})">
-            <i class="bi like-heart {{ 'bi-heart-fill' if current_user_has_liked else 'bi-heart' }}" id="like-icon-{{ post.id }}" style="margin-right: 10px"></i>
+            <i
+              class="bi like-heart {{ 'bi-heart-fill' if current_user_has_liked else 'bi-heart' }}"
+              id="like-icon-{{ post.id }}"
+              style="margin-right: 10px"
+            ></i>
             <span class="like-num">{{ post.likes_num }} Like</span>
           </button>
         </div>
       </div>
-      
-      <script>
-
-      </script>
-        
-     </div>
 
       <div class="main-content">
         <div class="main-container">
@@ -100,17 +110,14 @@
             <div class="contents">
               {{ post.content }}
 
-              <img
-                src="{{ post.image }}"
-                alt=""
-              />
+              <img src="{{ post.image }}" alt="" />
 
               <h1>{{ post.title }}</h1>
               <p>Recipe by {{ post.user.nickname }}</p>
               <div class="iconlist">
                 <div class="item">
                   <div>
-                    <?xml version="1.0" encoding="UTF-8"?><svg
+                    <svg
                       width="24"
                       height="24"
                       viewBox="0 0 48 48"
@@ -154,7 +161,7 @@
                 </div>
                 <div class="item">
                   <div>
-                    <?xml version="1.0" encoding="UTF-8"?><svg
+                    <svg
                       width="24"
                       height="24"
                       viewBox="0 0 48 48"
@@ -196,7 +203,7 @@
                 </div>
                 <div class="item">
                   <div>
-                    <?xml version="1.0" encoding="UTF-8"?><svg
+                    <svg
                       width="24"
                       height="24"
                       viewBox="0 0 48 48"
@@ -248,7 +255,7 @@
                 </div>
                 <div class="item">
                   <div>
-                    <?xml version="1.0" encoding="UTF-8"?><svg
+                    <svg
                       width="24"
                       height="24"
                       viewBox="0 0 48 48"
@@ -294,14 +301,15 @@
                 </div>
                 <div class="item">
                   <input type="reset" value="" />
-                  {{ post.ingredient4 }}</div>
+                  {{ post.ingredient4 }}
+                </div>
                 <div class="item">
                   <input type="reset" value="" />
                   {{ post.ingredient5 }}
                 </div>
                 <div class="item">
                   <input type="reset" value="" />
-                  {{ post.ingredient6 }}  
+                  {{ post.ingredient6 }}
                 </div>
               </div>
             </div>
@@ -311,15 +319,20 @@
                 {% for comment in comments %}
                 <li>
                   <div class="top">
-                    <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+                    <img
+                      src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}"
+                      alt=""
+                    />
                     <div class="right">
-                      <div class="comment_name">{{ comment.author.nickname }}</div>
-                      <div class="date">{{ comment.timestamps.strftime('%Y-%m-%d') }}</div>
+                      <div class="comment_name">
+                        {{ comment.author.nickname }}
+                      </div>
+                      <div class="date">
+                        {{ comment.timestamps.strftime('%Y-%m-%d') }}
+                      </div>
                     </div>
                   </div>
-                  <div class="c">
-                    {{ comment.body }}
-                  </div>
+                  <div class="c">{{ comment.body }}</div>
                 </li>
                 {% endfor %}
               </ul>
@@ -327,7 +340,6 @@
 
               <div class="submit-tj" id="comment2">
                 <form id="commentForm" action="">
-
                   <textarea
                     name="commentContent"
                     id="commentContent"
@@ -336,7 +348,7 @@
                     class="input_x"
                     placeholder="Please enter a comment"
                   ></textarea>
-                  <input type="hidden" name="postId" value="{{ post.id }}">
+                  <input type="hidden" name="postId" value="{{ post.id }}" />
                   <button class="btn_x">Submit</button>
                 </form>
               </div>
@@ -355,68 +367,69 @@
                 <i class="bi bi-person-hearts"></i>
                 <span>Popular</span>
               </div>
-              {% for post in popular_posts %}
-                {% if loop.index == 1 %}
-                <div class="popular-top-box">
-                  <div id="popular-top-demo" class="popular-top-img">
-                    <a href="{{ url_for('post.read', post_id=post.id) }}">
-                      <img src="{{ post.image }}" alt="Top Post Image">
-                    </a>
+              {% for post in popular_posts %} {% if loop.index == 1 %}
+              <div class="popular-top-box">
+                <div id="popular-top-demo" class="popular-top-img">
+                  <a href="{{ url_for('post.read', post_id=post.id) }}">
+                    <img src="{{ post.image }}" alt="Top Post Image" />
+                  </a>
+                </div>
+                <div class="popular-top-detail">
+                  <div class="popular-num">{{ loop.index }}</div>
+                  <div class="popular-top-title">
+                    <a href="{{ url_for('post.read', post_id=post.id) }}"
+                      >{{ post.title }}</a
+                    >
                   </div>
-                  <div class="popular-top-detail">
-                    <div class="popular-num">{{ loop.index }}</div>
-                    <div class="popular-top-title">
-                      <a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a>
-                    </div>
-                  </div>
+                </div>
 
-                  <div class="popular-com-view">
-                    <span class="com">
-                      <i class="bi bi-chat-fill"></i>
-                      <span class="comment-num">{{ post.likes_num }}</span> Likes
-                    </span>
-                    <span class="view">
-                      <i class="bi bi-eye-fill"></i>
-                      <span class="view-num">{{ post.read_times }}</span> Views
-                    </span>
-                  </div>
+                <div class="popular-com-view">
+                  <span class="com">
+                    <i class="bi bi-chat-fill"></i>
+                    <span class="comment-num">{{ post.likes_num }}</span> Likes
+                  </span>
+                  <span class="view">
+                    <i class="bi bi-eye-fill"></i>
+                    <span class="view-num">{{ post.read_times }}</span> Views
+                  </span>
                 </div>
-                {% else %}
-                <div class="popular-item">
-                  <ul>
-                    <li>
-                      <div class="popular-item-detail">
-                        <div class="popular-num">{{ loop.index }}</div>
-                        <div class="popular-item-title">
-                          <a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a>
-                        </div>
+              </div>
+              {% else %}
+              <div class="popular-item">
+                <ul>
+                  <li>
+                    <div class="popular-item-detail">
+                      <div class="popular-num">{{ loop.index }}</div>
+                      <div class="popular-item-title">
+                        <a href="{{ url_for('post.read', post_id=post.id) }}"
+                          >{{ post.title }}</a
+                        >
                       </div>
-                      <div class="popular-com-view">
-                        <span class="com">
-                          <i class="bi bi-chat-fill"></i>
-                          <span id="comment-num" class="comment-num"> {{ post.likes_num }} </span
-                          > Likes
+                    </div>
+                    <div class="popular-com-view">
+                      <span class="com">
+                        <i class="bi bi-chat-fill"></i>
+                        <span id="comment-num" class="comment-num">
+                          {{ post.likes_num }}
                         </span>
-                        <span class="view">
-                          <i class="bi bi-eye-fill"></i>
-                          <span id="view-num" class="view-num"> {{ post.read_times }}</span> Views
-                        </span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                {% endif %}
-              {% endfor %}
+                        Likes
+                      </span>
+                      <span class="view">
+                        <i class="bi bi-eye-fill"></i>
+                        <span id="view-num" class="view-num">
+                          {{ post.read_times }}</span
+                        >
+                        Views
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              {% endif %} {% endfor %}
             </div>
           </div>
         </div>
-
-          
-
-
       </div>
-
-
 
       <div class="footer">
         <div class="copy">© 2024 Liz. All Rights Reserved</div>
@@ -424,10 +437,10 @@
     </div>
 
     <!-- recipe input box -->
-    <section class="recipe_box">
+    <div class="recipe_box">
       <div class="wrap">
         <div class="close_svg">
-          <?xml version="1.0" encoding="UTF-8"?><svg
+          <svg
             width="24"
             height="24"
             viewBox="0 0 48 48"
@@ -454,36 +467,60 @@
         <ul>
           <li class="long">
             <span class="tit long-tit">Title</span>
-            <input class="input_x" type="text" name="title" required/>
+            <input class="input_x" type="text" name="title" required />
           </li>
 
           <li class="long">
             <span class="tit long-tit">Image URL</span>
-            <input class="input_x" type="text" name="image" required/>
+            <input class="input_x" type="text" name="image" required />
           </li>
 
           <li>
             <span class="tit">Servings</span>
-            <input class="input_x" type="number" name="servings" required step="1" />
+            <input
+              class="input_x"
+              type="number"
+              name="servings"
+              required
+              step="1"
+            />
           </li>
 
           <li>
             <span class="tit">Prep time</span>
-            <input class="input_x" type="number" name="prep_time" required step="0.1" />
+            <input
+              class="input_x"
+              type="number"
+              name="prep_time"
+              required
+              step="0.1"
+            />
           </li>
 
           <li>
             <span class="tit">Cooking time</span>
-            <input class="input_x" type="number" name="cooking_time" required step="0.1" />
+            <input
+              class="input_x"
+              type="number"
+              name="cooking_time"
+              required
+              step="0.1"
+            />
           </li>
 
           <li>
             <span class="tit">Calories</span>
-            <input class="input_x" type="number" name="calories" required step="1" />
+            <input
+              class="input_x"
+              type="number"
+              name="calories"
+              required
+              step="1"
+            />
           </li>
           <li>
             <span class="tit">Ingredient1</span>
-            <input class="input_x" type="text" name="ingredient1" required/>
+            <input class="input_x" type="text" name="ingredient1" required />
           </li>
           <li>
             <span class="tit">Ingredient2</span>
@@ -511,19 +548,16 @@
             <textarea
               class="input_x"
               name="content"
-              type="text"
               required
               cols="30"
               rows="10"
             ></textarea>
           </li>
-            
-
         </ul>
 
         <button class="btn_x">UPLOAD</button>
       </div>
-    </section>
+    </div>
 
     <script src="{{ url_for('static', filename='assets/js/login_main.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/like.js') }}"></script>
@@ -531,38 +565,37 @@
       const comment = document.querySelector("#comment");
       const comment2 = document.querySelector("#comment2");
       const commentForm = document.querySelector("#commentForm");
-  
+
       if (comment) {
-          comment.addEventListener("click", () => {
-              comment2.classList.add("show");
-              comment.style.display = "none";
-          });
+        comment.addEventListener("click", () => {
+          comment2.classList.add("show");
+          comment.style.display = "none";
+        });
       }
-  
+
       if (commentForm) {
-          commentForm.addEventListener("submit", function(event) {
-              event.preventDefault(); // 阻止表单的默认提交行为
-  
-              const formData = new FormData(commentForm);
-  
-              fetch('/post-comment/', {
-                  method: 'POST',
-                  body: formData,
-              })
-              .then(response => response.json())
-              .then(data => {
-                  if (data.tag === 1) {
-                      alert('Comment posted successfully!');
-                      // 这里可以刷新页面或者动态更新评论列表
-                      location.reload(); // 刷新页面以显示新评论
-                  } else {
-                      alert('Failed to post comment.');
-                  }
-              })
-              .catch(error => console.error('Error:', error));
-          });
+        commentForm.addEventListener("submit", function (event) {
+          event.preventDefault(); // 阻止表单的默认提交行为
+
+          const formData = new FormData(commentForm);
+
+          fetch("/post-comment/", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.tag === 1) {
+                alert("Comment posted successfully!");
+                // 这里可以刷新页面或者动态更新评论列表
+                location.reload(); // 刷新页面以显示新评论
+              } else {
+                alert("Failed to post comment.");
+              }
+            })
+            .catch((error) => console.error("Error:", error));
+        });
       }
     </script>
-  
   </body>
 </html>

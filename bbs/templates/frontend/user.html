@@ -5,13 +5,22 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
     <title>User Profile</title>
     <!-- css files -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/login_main.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='assets/css/login_main.css') }}"
+    />
   </head>
 
   <body>
@@ -32,12 +41,15 @@
           <div class="right-header">
             <a href="/user" class="user">
               <div class="user_pirc">
-                <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+                <img
+                  src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}"
+                  alt=""
+                />
                 <div class="name">{{ current_user.nickname }}</div>
               </div>
             </a>
             <div class="logout">
-              <a href="{{ url_for('main.index') }}">Logout</a>  
+              <a href="{{ url_for('main.index') }}">Logout</a>
             </div>
           </div>
         </div>
@@ -45,19 +57,22 @@
 
       <div class="intro my_box">
         <div class="container">
-        <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
-        <div class="name">{{ current_user.nickname }}</div>
-        {% if current_user.badges < 50 %}
-        <span class="icon Tasting_Novice">Tasting Novice</span>
-        {% elif current_user.badges < 100 %}
-        <span class="icon Culinary_Apprentice">Culinary Apprentice</span>
-        {% elif current_user.badges < 200 %}
-        <span class="icon Gastronomic_Explorer">Gastronomic Explorer</span>
-        {% else %}
-        <span class="icon Culinary_Master">Culinary Master</span>
-        {% endif %}
+          <img
+            src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}"
+            alt=""
+          />
+          <div class="name">{{ current_user.nickname }}</div>
+          {% if current_user.badges < 50 %}
+          <span class="icon Tasting_Novice">Tasting Novice</span>
+          {% elif current_user.badges < 100 %}
+          <span class="icon Culinary_Apprentice">Culinary Apprentice</span>
+          {% elif current_user.badges < 200 %}
+          <span class="icon Gastronomic_Explorer">Gastronomic Explorer</span>
+          {% else %}
+          <span class="icon Culinary_Master">Culinary Master</span>
+          {% endif %}
         </div>
-        </div>
+      </div>
 
       <div class="main-content">
         <div class="main-container">
@@ -180,7 +195,11 @@
                     <span class="female">FEMALE</span>
                   </div>
                 </div>
-                <form action="{{ url_for('user.edit_user_info') }}" method="post" id="userinfoForm">
+                <form
+                  action="{{ url_for('user.edit_user_info') }}"
+                  method="post"
+                  id="userinfoForm"
+                >
                   <label for="age">Age:</label><br />
                   <input
                     type="number"
@@ -191,11 +210,23 @@
                     max="120"
                   /><br /><br />
                   <label for="mobile">Mobile:</label><br />
-                  <input type="tel" id="mobile" name="mobile" value="{{ current_user.mobile }}" /><br /><br />
+                  <input
+                    type="tel"
+                    id="mobile"
+                    name="mobile"
+                    value="{{ current_user.mobile }}"
+                  /><br /><br />
                   <label for="email">Email:</label><br />
-                  <input type="email" id="email" name="email" value="{{ current_user.email or ''}}" /><br /><br />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ current_user.email or ''}}"
+                  /><br /><br />
                   <label for="signature">Personal Signature:</label><br />
-                  <textarea id="signature" name="signature" draggable="false" >{{ current_user.signature }}</textarea>
+                  <textarea id="signature" name="signature" draggable="false">
+{{ current_user.signature }}</textarea
+                  >
                   <br /><br />
                   <button type="submit" class="save-btn">Save</button>
                 </form>
@@ -253,18 +284,16 @@
                 genderInput.value = "female";
               });
 
-
               editBtn.addEventListener("click", function () {
                 updateForm();
                 userDisplay.style.display = "none";
                 userEdit.style.display = "block";
-
               });
 
               saveBtn.addEventListener("click", function (e) {
                 userEdit.style.display = "none";
                 userDisplay.style.display = "block";
-                document.getElementById('userinfoForm').submit();
+                document.getElementById("userinfoForm").submit();
               });
 
               function updateForm() {
@@ -276,52 +305,72 @@
                   maleDiv.click();
                 }
               }
-
             </script>
             <div class="nav_box" id="own-posts" data-index="1">
               <ul class="pl">
-                {% if own_posts %}
-                {% for post in own_posts %}
+                {% if own_posts %} {% for post in own_posts %}
                 <li class="item">
-                   <div class="recipe-content">
-                    <h3 class="recipe-title"><a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title">
+                      <a href="{{ url_for('post.read', post_id=post.id) }}"
+                        >{{ post.title }}</a
+                      >
+                    </h3>
                   </div>
-                  <c class="date">{{ post.create_time.strftime('%B %d, %Y') }}</c>
+                  <span class="date"
+                    >{{ post.create_time.strftime('%B %d, %Y') }}</span
+                  >
                 </li>
-                {% endfor %}
-                {% else %}
+                {% endfor %} {% else %}
                 <li class="no-content">You don't have any posted recipes.</li>
                 {% endif %}
               </ul>
               <div class="pagination">
                 <div class="pagination-box">
                   {% if own_posts_pagination.has_prev %}
-                  <a href="{{ url_for('user.user', own_page=own_posts_pagination.prev_num) }}" class="paginationLink" data-type="own-posts"><span>< Previous</span></a>
+                  <a
+                    href="{{ url_for('user.user', own_page=own_posts_pagination.prev_num) }}"
+                    class="paginationLink"
+                    data-type="own-posts"
+                    ><span>&lt; Previous</span></a
+                  >
                   {% endif %}
 
                   <a href="#">
-                    <span class="page-number pagination-active">Page {{ own_posts_pagination.page }} of {{ own_posts_pagination.pages }}</span>
+                    <span class="page-number pagination-active"
+                      >Page {{ own_posts_pagination.page }} of {{
+                      own_posts_pagination.pages }}</span
+                    >
                   </a>
 
                   {% if own_posts_pagination.has_next %}
-                  <a href="{{ url_for('user.user', own_page=own_posts_pagination.next_num) }}" class="paginationLink" data-type="own-posts"><span>Next ></span></a>
+                  <a
+                    href="{{ url_for('user.user', own_page=own_posts_pagination.next_num) }}"
+                    class="paginationLink"
+                    data-type="own-posts"
+                    ><span>Next ></span></a
+                  >
                   {% endif %}
                 </div>
               </div>
             </div>
-            
+
             <div class="nav_box" id="liked-posts" data-index="2">
               <ul class="pl">
-                {% if liked_posts %}
-                {% for post in liked_posts %}
+                {% if liked_posts %} {% for post in liked_posts %}
                 <li class="item">
                   <div class="recipe-content">
-                    <h3 class="recipe-title"><a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a></h3>
+                    <h3 class="recipe-title">
+                      <a href="{{ url_for('post.read', post_id=post.id) }}"
+                        >{{ post.title }}</a
+                      >
+                    </h3>
                   </div>
-                  <c class="date">{{ post.create_time.strftime('%B %d, %Y') }}</c>
+                  <span class="date"
+                    >{{ post.create_time.strftime('%B %d, %Y') }}</span
+                  >
                 </li>
-                {% endfor %}
-                 {% else %}
+                {% endfor %} {% else %}
                 <li class="no-content">You don't have any liked recipes.</li>
                 {% endif %}
               </ul>
@@ -329,59 +378,94 @@
               <div class="pagination">
                 <div class="pagination-box">
                   {% if liked_posts_pagination.has_prev %}
-                  <a href="{{ url_for('user.user', liked_page=liked_posts_pagination.prev_num) }}" class="paginationLink" data-type="liked-posts"><span>< Previous</span></a>
+                  <a
+                    href="{{ url_for('user.user', liked_page=liked_posts_pagination.prev_num) }}"
+                    class="paginationLink"
+                    data-type="liked-posts"
+                    ><span>&lt; Previous</span></a
+                  >
                   {% endif %}
                   <a href="#">
-                    <span class="page-number pagination-active">Page {{ liked_posts_pagination.page }} of {{ liked_posts_pagination.pages }}</span>
+                    <span class="page-number pagination-active"
+                      >Page {{ liked_posts_pagination.page }} of {{
+                      liked_posts_pagination.pages }}</span
+                    >
                   </a>
                   {% if liked_posts_pagination.has_next %}
-                  <a href="{{ url_for('user.user', liked_page=liked_posts_pagination.next_num) }}" class="paginationLink" data-type="liked-posts"><span>Next  ></span></a>
+                  <a
+                    href="{{ url_for('user.user', liked_page=liked_posts_pagination.next_num) }}"
+                    class="paginationLink"
+                    data-type="liked-posts"
+                    ><span>Next ></span></a
+                  >
                   {% endif %}
                 </div>
               </div>
             </div>
-            
+
             <div class="nav_box" id="commented-posts" data-index="3">
               <ul class="pl">
                 {% for post in commented_posts %}
-                  <li>
-                      <div class="recipe-content">
-                        <h3 class="recipe-title"><a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a></h3>
-                      </div>
-                      {% for comment in post.comments %}
-                      {% if comment.author_id == current_user.id %}
-                      <div class="user_comment">
-                        <div class="top">
-                          <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
-                          <div class="right">
-                              <div class="comment_name">{{ current_user.nickname }}</div>
-                              <div class="date">{{ comment.timestamps.strftime('%Y-%m-%d %H:%M') }}</div>
-                          </div>
+                <li>
+                  <div class="recipe-content">
+                    <h3 class="recipe-title">
+                      <a href="{{ url_for('post.read', post_id=post.id) }}"
+                        >{{ post.title }}</a
+                      >
+                    </h3>
+                  </div>
+                  {% for comment in post.comments %} {% if comment.author_id ==
+                  current_user.id %}
+                  <div class="user_comment">
+                    <div class="top">
+                      <img
+                        src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}"
+                        alt=""
+                      />
+                      <div class="right">
+                        <div class="comment_name">
+                          {{ current_user.nickname }}
                         </div>
-                        <div class="c">{{ comment.body }}</div>
+                        <div class="date">
+                          {{ comment.timestamps.strftime('%Y-%m-%d %H:%M') }}
+                        </div>
                       </div>
-                      {% endif %}
-                      {% endfor %}
-                  </li>
-                  {% endfor %}
+                    </div>
+                    <div class="c">{{ comment.body }}</div>
+                  </div>
+                  {% endif %} {% endfor %}
+                </li>
+                {% endfor %}
               </ul>
 
               <div class="pagination">
                 <div class="pagination-box">
                   {% if commented_posts_pagination.has_prev %}
-                  <a href="{{ url_for('user.user', commented_page=commented_posts_pagination.prev_num) }}" class="paginationLink" data-type="commented-posts"><span><  Previous</span></a>
+                  <a
+                    href="{{ url_for('user.user', commented_page=commented_posts_pagination.prev_num) }}"
+                    class="paginationLink"
+                    data-type="commented-posts"
+                    ><span>&lt; Previous</span></a
+                  >
                   {% endif %}
                   <a href="#">
-                    <span class="page-number pagination-active">Page {{ commented_posts_pagination.page }} of {{ commented_posts_pagination.pages }}</span>
+                    <span class="page-number pagination-active"
+                      >Page {{ commented_posts_pagination.page }} of {{
+                      commented_posts_pagination.pages }}</span
+                    >
                   </a>
                   {% if commented_posts_pagination.has_next %}
-                  <a href="{{ url_for('user.user', commented_page=commented_posts_pagination.next_num) }}" class="paginationLink" data-type="commented-posts"><span>Next  ></span></a>
+                  <a
+                    href="{{ url_for('user.user', commented_page=commented_posts_pagination.next_num) }}"
+                    class="paginationLink"
+                    data-type="commented-posts"
+                    ><span>Next ></span></a
+                  >
                   {% endif %}
                 </div>
               </div>
             </div>
-      </div>
-
+          </div>
 
           <div class="main-right">
             <div class="share">
@@ -395,171 +479,198 @@
                 <i class="bi bi-person-hearts"></i>
                 <span>Popular</span>
               </div>
-              {% for post in popular_posts %}
-                {% if loop.index == 1 %}
-                <div class="popular-top-box">
-                  <div id="popular-top-demo" class="popular-top-img">
-                    <a href="{{ url_for('post.read', post_id=post.id) }}">
-                      <img src="{{ post.image }}" alt="Top Post Image">
-                    </a>
+              {% for post in popular_posts %} {% if loop.index == 1 %}
+              <div class="popular-top-box">
+                <div id="popular-top-demo" class="popular-top-img">
+                  <a href="{{ url_for('post.read', post_id=post.id) }}">
+                    <img src="{{ post.image }}" alt="Top Post Image" />
+                  </a>
+                </div>
+                <div class="popular-top-detail">
+                  <div class="popular-num">{{ loop.index }}</div>
+                  <div class="popular-top-title">
+                    <a href="{{ url_for('post.read', post_id=post.id) }}"
+                      >{{ post.title }}</a
+                    >
                   </div>
-                  <div class="popular-top-detail">
-                    <div class="popular-num">{{ loop.index }}</div>
-                    <div class="popular-top-title">
-                      <a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a>
-                    </div>
-                  </div>
+                </div>
 
-                  <div class="popular-com-view">
-                    <span class="com">
-                      <i class="bi bi-chat-fill"></i>
-                      <span class="comment-num">{{ post.likes_num }}</span> Likes
-                    </span>
-                    <span class="view">
-                      <i class="bi bi-eye-fill"></i>
-                      <span class="view-num">{{ post.read_times }}</span> Views
-                    </span>
-                  </div>
+                <div class="popular-com-view">
+                  <span class="com">
+                    <i class="bi bi-chat-fill"></i>
+                    <span class="comment-num">{{ post.likes_num }}</span> Likes
+                  </span>
+                  <span class="view">
+                    <i class="bi bi-eye-fill"></i>
+                    <span class="view-num">{{ post.read_times }}</span> Views
+                  </span>
                 </div>
-                {% else %}
-                <div class="popular-item">
-                  <ul>
-                    <li>
-                      <div class="popular-item-detail">
-                        <div class="popular-num">{{ loop.index }}</div>
-                        <div class="popular-item-title">
-                          <a href="{{ url_for('post.read', post_id=post.id) }}">{{ post.title }}</a>
-                        </div>
+              </div>
+              {% else %}
+              <div class="popular-item">
+                <ul>
+                  <li>
+                    <div class="popular-item-detail">
+                      <div class="popular-num">{{ loop.index }}</div>
+                      <div class="popular-item-title">
+                        <a href="{{ url_for('post.read', post_id=post.id) }}"
+                          >{{ post.title }}</a
+                        >
                       </div>
-                      <div class="popular-com-view">
-                        <span class="com">
-                          <i class="bi bi-chat-fill"></i>
-                          <span id="comment-num" class="comment-num"> {{ post.likes_num }} </span
-                          > Likes
+                    </div>
+                    <div class="popular-com-view">
+                      <span class="com">
+                        <i class="bi bi-chat-fill"></i>
+                        <span id="comment-num" class="comment-num">
+                          {{ post.likes_num }}
                         </span>
-                        <span class="view">
-                          <i class="bi bi-eye-fill"></i>
-                          <span id="view-num" class="view-num"> {{ post.read_times }}</span> Views
-                        </span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                {% endif %}
-              {% endfor %}
+                        Likes
+                      </span>
+                      <span class="view">
+                        <i class="bi bi-eye-fill"></i>
+                        <span id="view-num" class="view-num">
+                          {{ post.read_times }}</span
+                        >
+                        Views
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              {% endif %} {% endfor %}
             </div>
           </div>
         </div>
 
-      <div class="footer">
-        <div class="copy">© 2024 Liz. All Rights Reserved</div>
-      </div>
-    </div>
-
-    <!-- recipe input box -->
-    <section class="recipe_box">
-      <div class="wrap">
-        <div class="close_svg">
-          <?xml version="1.0" encoding="UTF-8"?><svg
-            width="24"
-            height="24"
-            viewBox="0 0 48 48"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 8L40 40"
-              stroke="#000"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M8 40L40 8"
-              stroke="#000"
-              stroke-width="4"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+        <div class="footer">
+          <div class="copy">© 2024 Liz. All Rights Reserved</div>
         </div>
-        <div class="title">Share A Recipe</div>
-        <ul>
-          <li class="long">
-            <span class="tit long-tit">Title</span>
-            <input class="input_x" type="text" name="title" required/>
-          </li>
-
-          <li class="long">
-            <span class="tit long-tit">Image URL</span>
-            <input class="input_x" type="text" name="image" required/>
-          </li>
-
-          <li>
-            <span class="tit">Servings</span>
-            <input class="input_x" type="number" name="servings" required step="1" />
-          </li>
-
-          <li>
-            <span class="tit">Prep time</span>
-            <input class="input_x" type="number" name="prep_time" required step="0.1" />
-          </li>
-
-          <li>
-            <span class="tit">Cooking time</span>
-            <input class="input_x" type="number" name="cooking_time" required step="0.1" />
-          </li>
-
-          <li>
-            <span class="tit">Calories</span>
-            <input class="input_x" type="number" name="calories" required step="1" />
-          </li>
-          <li>
-            <span class="tit">Ingredient1</span>
-            <input class="input_x" type="text" name="ingredient1" required/>
-          </li>
-          <li>
-            <span class="tit">Ingredient2</span>
-            <input class="input_x" type="text" name="ingredient2" />
-          </li>
-          <li>
-            <span class="tit">Ingredient3</span>
-            <input class="input_x" type="text" name="ingredient3" />
-          </li>
-          <li>
-            <span class="tit">Ingredient4</span>
-            <input class="input_x" type="text" name="ingredient4" />
-          </li>
-          <li>
-            <span class="tit">Ingredient5</span>
-            <input class="input_x" type="text" name="ingredient5" />
-          </li>
-          <li>
-            <span class="tit">Ingredient6</span>
-            <input class="input_x" type="text" name="ingredient6" />
-          </li>
-
-          <li class="con">
-            <span class="tit">Content</span>
-            <textarea
-              class="input_x"
-              name="content"
-              type="text"
-              required
-              cols="30"
-              rows="10"
-            ></textarea>
-          </li>
-            
-
-        </ul>
-
-        <button class="btn_x">UPLOAD</button>
       </div>
-    </section>
+
+      <!-- recipe input box -->
+      <div class="recipe_box">
+        <div class="wrap">
+          <div class="close_svg">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 8L40 40"
+                stroke="#000"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M8 40L40 8"
+                stroke="#000"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <div class="title">Share A Recipe</div>
+          <ul>
+            <li class="long">
+              <span class="tit long-tit">Title</span>
+              <input class="input_x" type="text" name="title" required />
+            </li>
+
+            <li class="long">
+              <span class="tit long-tit">Image URL</span>
+              <input class="input_x" type="text" name="image" required />
+            </li>
+
+            <li>
+              <span class="tit">Servings</span>
+              <input
+                class="input_x"
+                type="number"
+                name="servings"
+                required
+                step="1"
+              />
+            </li>
+
+            <li>
+              <span class="tit">Prep time</span>
+              <input
+                class="input_x"
+                type="number"
+                name="prep_time"
+                required
+                step="0.1"
+              />
+            </li>
+
+            <li>
+              <span class="tit">Cooking time</span>
+              <input
+                class="input_x"
+                type="number"
+                name="cooking_time"
+                required
+                step="0.1"
+              />
+            </li>
+
+            <li>
+              <span class="tit">Calories</span>
+              <input
+                class="input_x"
+                type="number"
+                name="calories"
+                required
+                step="1"
+              />
+            </li>
+            <li>
+              <span class="tit">Ingredient1</span>
+              <input class="input_x" type="text" name="ingredient1" required />
+            </li>
+            <li>
+              <span class="tit">Ingredient2</span>
+              <input class="input_x" type="text" name="ingredient2" />
+            </li>
+            <li>
+              <span class="tit">Ingredient3</span>
+              <input class="input_x" type="text" name="ingredient3" />
+            </li>
+            <li>
+              <span class="tit">Ingredient4</span>
+              <input class="input_x" type="text" name="ingredient4" />
+            </li>
+            <li>
+              <span class="tit">Ingredient5</span>
+              <input class="input_x" type="text" name="ingredient5" />
+            </li>
+            <li>
+              <span class="tit">Ingredient6</span>
+              <input class="input_x" type="text" name="ingredient6" />
+            </li>
+
+            <li class="con">
+              <span class="tit">Content</span>
+              <textarea
+                class="input_x"
+                name="content"
+                required
+                cols="30"
+                rows="10"
+              ></textarea>
+            </li>
+          </ul>
+
+          <button class="btn_x">UPLOAD</button>
+        </div>
+      </div>
     </div>
     <script src="{{ url_for('static', filename='assets/js/login_main.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/user.js') }}"></script>
-
   </body>
 </html>
