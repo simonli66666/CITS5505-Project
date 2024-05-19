@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <title>posts</title>
+    <!-- css files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/login_main.css') }}" />
+  </head>
+
+  <body>
+    <div id="sign-in-panel" class="panel-pop"></div>
+    <div class="not-log-in">
+      <div class="header">
+        <div class="main-container header-container">
+          <div class="logo-image">
+            <a href="/" title="tasty">
+              <img
+                width="132"
+                height="45"
+                src="{{ url_for('static', filename='assets/images/logo.svg') }}"
+                alt=""
+              />
+            </a>
+          </div>
+
+          <div class="right-header">
+            <button class="sign-up" id="show_login">Sign In</button>
+            <button class="sign-in" id="show_register">Sign Up</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro posts-details">
+        <a href="{{ url_for('post.recipes') }}" class="back-button">← Back</a>
+        <h1>
+          {{ post.title }}
+        </h1>
+        <div class="b">
+          <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+          {{ post.user.nickname }}/ <span>{{ post.create_time.strftime('%Y-%m-%d') }}</span>
+        </div>
+        <div class="button-container">
+            <button class="like-button">
+              <i class="bi bi-heart" style="margin-right: 10px"></i> <span class="like-num">{{ post.likes_num }} Like</span>
+            </button>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="main-container">
+          <!-- sidebar -->
+          <div class="side-bar-l">
+            <ul>
+              <li>
+                <a href="/" class="side-bar-active">
+                  <i class="bi bi-card-list"></i>
+                  <span>Recipes</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="show_login">
+                  <i class="bi bi-award-fill"></i>
+                  <span>Badges</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="show_login">
+                  <i class="bi bi-people-fill"></i>
+                  <span>User Profile</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- recipe details -->
+
+          <div class="main-inner details-con">
+            <div class="contents">
+              {{ post.content }}
+
+              <img
+                src="{{ post.image }}"
+                alt=""
+              />
+
+              <h1>{{ post.title }}</h1>
+              <p>Recipe by {{ post.user.nickname }}</p>
+              <div class="iconlist">
+                <div class="item">
+                  <div>
+                    <?xml version="1.0" encoding="UTF-8"?><svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M10 44H38V20.9474C38 14.9013 31.732 10 24 10C16.268 10 10 14.9013 10 20.9474V44Z"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M38 22.0437C38 21.8001 38 21.4346 38 20.9474C38 14.9013 31.732 10 24 10C16.268 10 10 14.9013 10 20.9474C10 21.4332 10 21.7975 10 22.0404L38 22.0437Z"
+                        fill="none"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M4 22H44"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M21 4H27"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="tit">Servings</div>
+                  <div class="ms">{{ post.servings }} servings</div>
+                </div>
+                <div class="item">
+                  <div>
+                    <?xml version="1.0" encoding="UTF-8"?><svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M23.9998 44.3332C34.1251 44.3332 42.3332 36.1251 42.3332 25.9999C42.3332 15.8747 34.1251 7.66656 23.9998 7.66656C13.8746 7.66656 5.6665 15.8747 5.6665 25.9999C5.6665 36.1251 13.8746 44.3332 23.9998 44.3332Z"
+                        fill="none"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M23.7594 15.3536L23.7582 26.3624L31.5305 34.1347"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M4 9.00001L11 4.00001"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M44 9.00001L37 4.00001"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="tit">Prep time</div>
+                  <div class="ms">{{ post.prep_time }} minutes</div>
+                </div>
+                <div class="item">
+                  <div>
+                    <?xml version="1.0" encoding="UTF-8"?><svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M2 20C2 32.1503 8 42 20 42C32 42 38 32.1503 38 20H2Z"
+                        fill="none"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M20 14V6"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M30 14V10"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M10 14V10"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M36.1904 30.6229C37.1802 28.039 37.764 25.1374 37.9417 22.0511C38.2868 22.0174 38.6402 22 39 22C42.866 22 46 24.0147 46 26.5C46 28.9853 42.866 31 39 31C38.0007 31 37.0504 30.8654 36.1904 30.6229Z"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="tit">Cooking time</div>
+                  <div class="ms">{{ post.cooking_time }} minutes</div>
+                </div>
+                <div class="item">
+                  <div>
+                    <?xml version="1.0" encoding="UTF-8"?><svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 48 48"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M23.1466 44C31.2933 44 40 43.0106 40 30.1802C40 23.9643 38.5085 18.9042 35.5256 15C32.7392 19.6667 30.674 22 29.3299 22C27.3139 22 29.3299 15.9107 26.9987 11.2914C25.4445 8.21194 22.6879 5.78146 18.7289 4C19.2794 8.43691 19.1603 11.6554 18.3715 13.6554C17.1882 16.6554 7.15114 21.91 8.05783 30.9349C8.96453 39.9599 15 44 23.1466 44Z"
+                        fill="none"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M21.7076 24.0083C17.9028 27.4666 16.2811 30.6674 16.8427 33.6109C17.3261 36.1448 19.2487 37.3764 20.6969 37.7735C21.8196 38.0814 23.7635 38.2536 25.5004 36.7067C27.3402 35.0682 26.6071 32.7388 23.9392 29.8571C22.8138 28.6415 22.0699 26.6919 21.7076 24.0083Z"
+                        fill="none"
+                        stroke="#979ca2"
+                        stroke-width="4"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div class="tit">Calories</div>
+                  <div class="ms">{{ post.calories }} kcal</div>
+                </div>
+              </div>
+
+              <div class="forms">
+                <div class="tit">Ingredients</div>
+                <div class="item">
+                  <input type="reset" value="" />
+                  {{ post.ingredient1 }}
+                </div>
+                <div class="item">
+                  <input type="reset" value="" />
+                  {{ post.ingredient2 }}
+                </div>
+                <div class="item">
+                  <input type="reset" value="" />
+                  {{ post.ingredient3 }}
+                </div>
+                <div class="item">
+                  <input type="reset" value="" />
+                  {{ post.ingredient4 }}
+                </div>
+                <div class="item">
+                  <input type="reset" value="" />
+                  {{ post.ingredient5 }}
+                </div>
+                <div class="item">
+                  <input type="reset" value="" />
+                  {{ post.ingredient6 }}  
+                </div>
+              </div>
+            </div>
+
+            <div class="pl">
+              <ul class="comments-list">
+                {% for comment in comments %}
+                <li>
+                  <div class="top">
+                    <img src="{{ url_for('static', filename='assets/images/13_Food_Servant-512.webp') }}" alt="" />
+                    <div class="right">
+                      <div class="comment_name">{{ comment.author.nickname }}</div>
+                      <div class="date">{{ comment.timestamps.strftime('%Y-%m-%d') }}</div>
+                    </div>
+                  </div>
+                  <div class="c">
+                    {{ comment.body }}
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="main-right">
+            <div class="share">
+              <button id="openShi" class="show_login">Share A Recipe</button>
+            </div>
+
+            <!-- popular recipes -->
+
+            <div class="popular popular-posts">
+              <div class="popular-bar">
+                <i class="bi bi-person-hearts"></i>
+                <span>Popular</span>
+              </div>
+              {% for post in popular_posts %}
+                {% if loop.index == 1 %}
+                <div class="popular-top-box">
+                  <div id="popular-top-demo" class="popular-top-img">
+                    <a href="#">
+                      <img src="{{ post.image }}" alt="Top Post Image">
+                    </a>
+                  </div>
+                  <div class="popular-top-detail">
+                    <div class="popular-num">{{ loop.index }}</div>
+                    <div class="popular-top-title">
+                      <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a>
+                    </div>
+                  </div>
+
+                  <div class="popular-com-view">
+                    <span class="com">
+                      <i class="bi bi-chat-fill"></i>
+                      <span class="comment-num">{{ post.likes_num }}</span> Likes
+                    </span>
+                    <span class="view">
+                      <i class="bi bi-eye-fill"></i>
+                      <span class="view-num">{{ post.read_times }}</span> Views
+                    </span>
+                  </div>
+                </div>
+                {% else %}
+                <div class="popular-item">
+                  <ul>
+                    <li>
+                      <div class="popular-item-detail">
+                        <div class="popular-num">{{ loop.index }}</div>
+                        <div class="popular-item-title">
+                          <a href="{{ url_for('post.read2', post_id=post.id) }}">{{ post.title }}</a>
+                        </div>
+                      </div>
+                      <div class="popular-com-view">
+                        <span class="com">
+                          <i class="bi bi-chat-fill"></i>
+                          <span id="comment-num" class="comment-num"> {{ post.likes_num }} </span
+                          > Likes
+                        </span>
+                        <span class="view">
+                          <i class="bi bi-eye-fill"></i>
+                          <span id="view-num" class="view-num"> {{ post.read_times }}</span> Views
+                        </span>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+
+        </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="copy">© 2024 Liz. All Rights Reserved</div>
+      </div>
+    </div>
+
+    <!-- 登录 注册 -->
+    <section class="login_box" id="login">
+      <div class="con">
+        <!-- 关闭按钮 -->
+        <div class="close">
+          <?xml version="1.0" encoding="UTF-8"?><svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 8L40 40"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 40L40 8"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="tit">Sign In</div>
+        <form action="{{ url_for('auth.login') }}" method="post">
+          {{ login_form.hidden_tag() }}
+          <div class="message_box">
+              <span class="t">ERROR:</span>
+              Please insert your name.
+          </div>
+          <ul>
+              <li class="subtit">Username *</li>
+              <li>{{ login_form.username(class="input_x") }}</li>
+              <li class="subtit">Password *</li>
+              <li>{{ login_form.password(class="input_x") }}</li>
+              <li class="s">
+                  <div><input type="checkbox" checked />Remember Me!</div>
+              </li>
+              <li>{{ login_form.submit(class="btn_x") }}</li>
+          </ul>
+      </form>
+      </div>
+    </section>
+    <section class="login_box" id="register">
+      <div class="con">
+        <div class="close">
+          <?xml version="1.0" encoding="UTF-8"?><svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 8L40 40"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 40L40 8"
+              stroke="#fff"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="tit">Sign Up</div>
+
+        <form action="{{ url_for('auth.register') }}" method="post">
+          {{ registration_form.hidden_tag() }}
+          <ul>
+              <li class="subtit">Username *</li>
+              <li>{{ registration_form.username(class="input_x") }}</li>
+              <li class="subtit">Nickname *</li>
+              <li>{{ registration_form.nickname(class="input_x") }}</li>
+              <li class="subtit">Password *</li>
+              <li>{{ registration_form.password(class="input_x") }}</li>
+              <li class="s">
+                <a href="#" class="havingAccount">Having an account?</a>
+              </li>
+              <li>{{ registration_form.submit(class="btn_x") }}</li>
+          </ul>
+      </form>
+      </div>
+    </section>
+    
+    <!-- Recipe input -->
+    <section class="recipe_box">
+      <div class="wrap">
+        <div class="close_svg">
+          <?xml version="1.0" encoding="UTF-8"?><svg
+            width="24"
+            height="24"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 8L40 40"
+              stroke="#000"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M8 40L40 8"
+              stroke="#000"
+              stroke-width="4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="title">Share A Recipe</div>
+        <ul>
+          <li class="long">
+            <span class="tit long-tit">Title</span>
+            <input class="input_x" type="text" name="title" required/>
+          </li>
+
+          <li class="long">
+            <span class="tit long-tit">Image URL</span>
+            <input class="input_x" type="text" name="image" required/>
+          </li>
+
+          <li>
+            <span class="tit">Servings</span>
+            <input class="input_x" type="number" name="servings" required step="1" />
+          </li>
+
+          <li>
+            <span class="tit">Prep time</span>
+            <input class="input_x" type="number" name="prep_time" required step="0.1" />
+          </li>
+
+          <li>
+            <span class="tit">Cooking time</span>
+            <input class="input_x" type="number" name="cooking_time" required step="0.1" />
+          </li>
+
+          <li>
+            <span class="tit">Calories</span>
+            <input class="input_x" type="number" name="calories" required step="1" />
+          </li>
+          <li>
+            <span class="tit">Ingredient1</span>
+            <input class="input_x" type="text" name="ingredient1" required/>
+          </li>
+          <li>
+            <span class="tit">Ingredient2</span>
+            <input class="input_x" type="text" name="ingredient2" />
+          </li>
+          <li>
+            <span class="tit">Ingredient3</span>
+            <input class="input_x" type="text" name="ingredient3" />
+          </li>
+          <li>
+            <span class="tit">Ingredient4</span>
+            <input class="input_x" type="text" name="ingredient4" />
+          </li>
+          <li>
+            <span class="tit">Ingredient5</span>
+            <input class="input_x" type="text" name="ingredient5" />
+          </li>
+          <li>
+            <span class="tit">Ingredient6</span>
+            <input class="input_x" type="text" name="ingredient6" />
+          </li>
+
+          <li class="con">
+            <span class="tit">Content</span>
+            <textarea
+              class="input_x"
+              name="content"
+              type="text"
+              required
+              cols="30"
+              rows="10"
+            ></textarea>
+          </li>
+            
+
+        </ul>
+
+        <button class="btn_x">UPLOAD</button>
+      </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
+  </body>
+</html>
